@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: 'San Francisco', system-ui;
+    background-color: #1b2838;
+    color: #fff;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar div"
+        "footer footer";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #171a21;
+    padding: 10px 20px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #2a475e;
+    padding: 15px;
+}
+
+main {
+    grid-area: main;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.install {
+    background-color: #5c7e10;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.install:hover {
+    background-color: #4b6b0f;
+}
+
+
+a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+footer {
+    grid-area: footer;
+    padding: 10px;
+    background-color: rgb(2, 0, 24);
+    border: none;
+    font-size: 14px;
+    line-height: 0.01;
+}
+
+#greatest {
+    text-align: center;
+    margin: 250px 0px 350px;
+    font-size: 5rem;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-areas:
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
