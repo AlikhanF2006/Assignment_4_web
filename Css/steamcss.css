@@ -283,3 +283,34 @@ footer {
   scrollbar-color:#33485f transparent;
 }
 
+@media (min-width: 769px) {
+  .row.g-0 {
+    display: grid !important;
+    grid-template-columns: 250px 1fr;
+    grid-gap: 0;
+  }
+
+  .sidebar {
+    height: auto;
+  }
+
+  main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .row.g-0 {
+    display: block !important;
+  }
+
+  .sidebar {
+    width: 100%;
+    background-color: #2a475e;
+    padding: 15px;
+  }
+
+  main {
+    width: 100%;
+  }
+}
