@@ -1,4 +1,3 @@
-/* === Base === */
 * { box-sizing: border-box; }
 body{
   margin:0;
@@ -7,59 +6,123 @@ body{
   color:#fff;
 }
 
-/* Skip link (fixed) */
 .skip-link{
-  position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+  position:absolute; 
+  left:-9999px; 
+  top:auto; 
+  width:1px; 
+  height:1px; 
+  overflow:hidden;
 }
 .skip-link:focus{
-  position:fixed; left:12px; top:12px; background:#0d6efd; color:#fff;
-  padding:8px 12px; border-radius:6px; z-index:9999;
+  position:fixed; 
+  left:12px; 
+  top:12px; 
+  background:#0d6efd; 
+  color:#fff;
+  padding:8px 12px; 
+  border-radius:6px; 
+  z-index:9999;
 }
 
-/* Header */
 header{
-  display:flex; justify-content:space-between; align-items:center;
-  background:#171a21; padding:10px 20px;
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+  background:#171a21; 
+  padding:10px 20px;
 }
-.logo{ font-size:24px; font-weight:700; }
-.top-menu a{ color:#c7d5e0; text-decoration:none; margin:0 8px; }
-.top-menu a:hover{ color:#fff; }
-.install{ background:#5c7e10; color:#fff; border:0; padding:5px 12px; cursor:pointer; border-radius:3px; }
-.install:hover{ background:#4b6b0f; }
-.actions a{ color:#c7d5e0; text-decoration:none; margin-left:10px; }
-.actions a:hover{ color:#fff; }
 
-/* Footer */
-footer{ padding:10px; background:rgb(2,0,24); font-size:14px; line-height:.01; }
+.logo{ 
+  font-size:24px; 
+  font-weight:700; 
+}
 
-/* Page layout */
+.top-menu a{ 
+  color:#c7d5e0; 
+  text-decoration:none; 
+  margin:0 8px;
+}
+
+.top-menu a:hover{ 
+  color:#fff;
+
+}
+
+.install{ 
+  background:#5c7e10; 
+  color:#fff; 
+  border:0; 
+  padding:5px 12px; 
+  cursor:pointer; 
+  border-radius:3px;
+}
+
+.install:hover{ 
+  background:#4b6b0f;
+}
+
+.actions a{ 
+  color:#c7d5e0; 
+  text-decoration:none; 
+  margin-left:10px;
+}
+
+.actions a:hover{ 
+  color:#fff;
+}
+
+footer{ 
+  padding:10px; 
+  background:rgb(2,0,24); 
+  font-size:14px; 
+  line-height:.01;
+}
+
 .page-container{
-  display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;
-  max-width:1200px; margin:0 auto; padding:0 20px;
+  display:flex; 
+  gap:20px; 
+  align-items:flex-start; 
+  flex-wrap:wrap;
+  max-width:1200px; 
+  margin:0 auto; 
+  padding:0 20px;
 }
-.col.main{ flex:2; min-width:56%; }
-.col.side{ width:18%; }
-.col.info{ flex:1; min-width:0; }
 
-/* Recommended section */
+.col.main{ 
+  flex:2; 
+  min-width:56%;
+}
+
+.col.side{ 
+  width:18%; 
+}
+
+.col.info{
+  flex:1; 
+  min-width:0; 
+}
+
 .recommended{
-  max-width:1140px; width:100%;
-  margin:0 auto; padding:20px 24px; text-align:center;
+  max-width:1140px;
+  width:100%;
+  margin:0 auto; 
+  padding:20px 24px; 
+  text-align:center;
 }
-.recommended h1{ margin:10px 0 24px; }
 
-/* =========================
-   Карточки: фикс-размеры + переменные
-   ========================= */
+.recommended h1{ 
+  margin:10px 0 24px; 
+}
+
 :root{
-  --card-w: 300px;   /* ширина карточки */
-  --card-h: 500px;   /* высота карточки */
-  --poster-h: 150px; /* высота постера */
-  --gap-x: 56px;     /* горизонтальный зазор */
-  --gap-y: 24px;     /* вертикальный зазор */
+  --card-w: 300px;  
+  --card-h: 500px;  
+  --poster-h: 150px;
+  --gap-x: 56px;    
+  --gap-y: 24px;    
 }
 
-/* Сетка: 3 фиксированных колонки (центрируем) */
 .card-container{
   display:grid;
   grid-template-columns: repeat(3, var(--card-w));
@@ -69,44 +132,90 @@ footer{ padding:10px; background:rgb(2,0,24); font-size:14px; line-height:.01; }
   align-items:stretch;
 }
 
-/* Карточка = ссылка */
 .card{
-  display:flex; flex-direction:column;
-  width:var(--card-w); height:var(--card-h);
-  background:#2a475e; color:#fff; text-decoration:none;
-  border-radius:12px; padding:16px;
+  display:flex; 
+  flex-direction:column;
+  width:var(--card-w); 
+  height:var(--card-h);
+  background:#2a475e; 
+  color:#fff; 
+  text-decoration:none;
+  border-radius:12px; 
+  padding:16px;
   transition:transform .2s ease, box-shadow .2s ease;
   cursor:pointer;
 }
-.card:hover{ transform:scale(1.03); box-shadow:0 0 15px rgba(255,255,255,.3); }
-.card:focus-visible{ outline:3px solid #0d6efd; outline-offset:4px; }
 
-/* Постер */
-.image-container{ position:relative; width:100%; }
+.card:hover{ 
+  transform:scale(1.03); 
+  box-shadow:0 0 15px rgba(255,255,255,.3); 
+}
+
+.card:focus-visible{ 
+  outline:3px solid #0d6efd; 
+  outline-offset:4px; 
+}
+
+.image-container{ 
+  position:relative; 
+  width:100%; 
+}
+
 .image-container img{
-  display:block; width:100%; height:var(--poster-h);
-  object-fit:cover; border-radius:8px;
+  display:block; 
+  width:100%;
+  height:var(--poster-h);
+  object-fit:cover; 
+  border-radius:8px;
 }
 
-/* Жанр */
+
 .genre{
-  position:absolute; left:8px; bottom:8px;
-  background:rgba(0,0,0,.7); color:#ffcc66; font-weight:700; font-size:14px;
-  padding:3px 8px; border-radius:6px; opacity:0; transition:opacity .3s ease;
+  position:absolute; 
+  left:8px; 
+  bottom:8px;
+  background:rgba(0,0,0,.7); 
+  color:#ffcc66; 
+  font-weight:700; 
+  font-size:14px;
+  padding:3px 8px; 
+  border-radius:6px; 
+  opacity:0; 
+  transition:opacity .3s ease;
 }
+
 .card:hover .genre,
 .card:focus-visible .genre,
-.card:focus-within .genre{ opacity:1; }
-
-/* Текст */
-.card h3{ margin:12px 0 8px; font-size:20px; text-align:center; line-height:1.25; }
-.card .desc{ color:#c7d5e0; line-height:1.5; margin:0; }
-
-/* Адаптив: 2 → 1 колонка, размеры те же */
-@media (max-width: 992px){
-  .card-container{ grid-template-columns: repeat(2, var(--card-w)); }
+.card:focus-within .genre{ 
+  opacity:1; 
 }
+
+.card h3{ 
+  margin:12px 0 8px;
+  font-size:20px; 
+  text-align:center; 
+  line-height:1.25; 
+}
+
+.card .desc{ 
+  color:#c7d5e0; 
+  line-height:1.5; 
+  margin:0; 
+}
+
+
+@media (max-width: 992px){
+  .card-container{ 
+   grid-template-columns: repeat(2, var(--card-w)); 
+  }
+}
+
 @media (max-width: 600px){
-  .card-container{ grid-template-columns: var(--card-w); }
-  .recommended h1{ font-size:1.6rem; }
+  .card-container{ 
+  grid-template-columns: var(--card-w);
+  }
+
+  .recommended h1{ 
+    font-size:1.6rem; 
+  }
 }
