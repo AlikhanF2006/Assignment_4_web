@@ -168,14 +168,6 @@ main {
   .tight-right {
      margin-right: -24px;
   }
-    .sidebar {
-    order: 2;              /* переносим после main */
-    width: 100%;
-  }
-  main {
-    order: 1;              /* контент первым */
-    width: 100%;
-  }
 }
 
 @media (min-width: 1200px) {
