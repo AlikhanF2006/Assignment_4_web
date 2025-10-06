@@ -315,12 +315,39 @@ footer {
 
 @media (max-width: 992px) {
   .sidebar {
-    display: none; /* Скрываем обычный сайдбар */
+    display: none;
   }
 }
 
-.offcanvas {
-  background-color: #2a475e !important;
-  max-height: 70vh; /* чтобы не перекрывал экран полностью */
-  border-top: 2px solid #1b2838;
+@media (max-width: 992px) {
+  #categoriesDropdown{
+    background-color:#171a21!important;
+    color:#c7d5e0!important;
+    border:none!important;
+    border-radius:0!important;
+    width:100%;
+    padding:.6rem .75rem;
+    font-weight:600;
+    text-transform:uppercase;
+  }
+  #categoriesDropdown:hover{
+    color:#fff!important;
+    background-color:#1b2838!important;
+  }
+  .dropdown-menu-dark{
+    background-color:#2a475e!important;
+    border:none!important;
+    border-top:1px solid #1b2838!important;
+    border-radius:0!important;
+    margin-top:0!important;
+  }
+  .dropdown-item{font-size:14px;}
+  .dropdown-item:hover{background-color:#1b2838!important;}
+  .dropdown-header{
+    color:#66c0f4!important;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .dropdown-divider{border-top:1px solid #1b2838!important;}
 }

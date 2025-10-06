@@ -46,47 +46,43 @@
 
 <div class="container-fluid px-0">
   <div class="row g-0">
-    
 
-    <button class="btn btn-outline-light d-lg-none w-100 mb-2" 
-        type="button" 
-        data-bs-toggle="offcanvas" 
-        data-bs-target="#sidebarOffcanvas" 
-        aria-controls="sidebarOffcanvas">
-  ☰ Categories
-</button>
+<div class="dropdown d-lg-none text-center w-100" style="background:#171a21; border-bottom:1px solid #2a475e;">
+  <button class="btn btn-dark dropdown-toggle w-100 py-2 fw-semibold border-0 rounded-0"
+          type="button"
+          id="categoriesDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+    ☰ Categories
+  </button>
 
-<!-- Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-bottom bg-dark text-light" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Categories</h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <h3 class="mt-2 mb-2">RECOMMENDED</h3>
-    <a href="#" class="d-block mb-1 text-light">By Friends</a>
-    <a href="#" class="d-block mb-1 text-light">By Curators</a>
-    <a href="#" class="d-block mb-3 text-light">Tags</a>
+  <ul class="dropdown-menu dropdown-menu-dark w-100 text-center" aria-labelledby="categoriesDropdown">
+    <li><h6 class="dropdown-header">RECOMMENDED</h6></li>
+    <li><a class="dropdown-item" href="#">By Friends</a></li>
+    <li><a class="dropdown-item" href="#">By Curators</a></li>
+    <li><a class="dropdown-item" href="#">Tags</a></li>
 
-    <h3 class="mt-3 mb-2">BROWSE CATEGORIES</h3>
-    <a href="#" class="d-block mb-1 text-light">Top Sellers</a>
-    <a href="#" class="d-block mb-1 text-light">New Releases</a>
-    <a href="#" class="d-block mb-1 text-light">Upcoming</a>
-    <a href="#" class="d-block mb-1 text-light">Specials</a>
-    <a href="#" class="d-block mb-1 text-light">VR Titles</a>
-    <a href="#" class="d-block mb-3 text-light">Great on Deck</a>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header">BROWSE CATEGORIES</h6></li>
+    <li><a class="dropdown-item" href="#">Top Sellers</a></li>
+    <li><a class="dropdown-item" href="#">New Releases</a></li>
+    <li><a class="dropdown-item" href="#">Upcoming</a></li>
+    <li><a class="dropdown-item" href="#">Specials</a></li>
+    <li><a class="dropdown-item" href="#">VR Titles</a></li>
+    <li><a class="dropdown-item" href="#">Controller-Friendly</a></li>
+    <li><a class="dropdown-item" href="#">Great on Deck</a></li>
 
-    <h3 class="mt-3 mb-2">GENRES</h3>
-    <a href="#" class="d-block mb-1 text-light">Free To Play</a>
-    <a href="#" class="d-block mb-1 text-light">Early Access</a>
-    <a href="#" class="d-block mb-1 text-light">Action</a>
-    <a href="#" class="d-block mb-1 text-light">Adventure</a>
-    <a href="#" class="d-block mb-1 text-light">Indie</a>
-    <a href="#" class="d-block mb-1 text-light">RPG</a>
-    <a href="#" class="d-block mb-1 text-light">Simulation</a>
-    <a href="#" class="d-block mb-1 text-light">Strategy</a>
-  </div>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header">GENRES</h6></li>
+    <li><a class="dropdown-item" href="#">Free To Play</a></li>
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Adventure</a></li>
+    <li><a class="dropdown-item" href="#">RPG</a></li>
+    <li><a class="dropdown-item" href="#">Simulation</a></li>
+    <li><a class="dropdown-item" href="#">Strategy</a></li>
+  </ul>
 </div>
+
      
 
       <main class="col-lg-10 col-12 ps-5 pe-lg-5 py-4">
