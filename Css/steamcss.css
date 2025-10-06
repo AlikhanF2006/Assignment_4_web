@@ -351,3 +351,19 @@ footer {
   }
   .dropdown-divider{border-top:1px solid #1b2838!important;}
 }
+
+@media (max-width: 992px) {
+  .sidebar {
+    display: none !important; /* убирает серый блок */
+  }
+
+  .container-fluid > .row {
+    display: block !important; /* отключает сетку с двумя колонками */
+  }
+
+  main {
+    width: 100% !important; /* растягивает контент на всю ширину */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
