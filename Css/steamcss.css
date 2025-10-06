@@ -278,19 +278,35 @@ footer {
 
 
 @media (max-width: 768px) {
+ 
   .row.g-0 {
-    display: block !important;
+    display: flex;
+    flex-direction: column;
   }
 
+ 
   .sidebar {
     width: 100%;
     background-color: #2a475e;
     padding: 15px;
+    margin-bottom: 15px;
   }
 
+ 
   main {
     width: 100%;
     padding: 15px;
     box-sizing: border-box;
+  }
+
+ 
+  .games-grid img {
+    width: 100%;
+    height: auto;
+  }
+
+ 
+  body {
+    overflow-x: hidden;
   }
 }
