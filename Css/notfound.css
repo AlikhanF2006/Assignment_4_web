@@ -54,7 +54,6 @@ main {
     background-color: #4b6b0f;
 }
 
-
 a {
     color: #c7d5e0;
     text-decoration: none;
@@ -71,6 +70,8 @@ footer {
     border: none;
     font-size: 14px;
     line-height: 0.01;
+    margin-top: 40px;
+    /* добавлен верхний отступ */
 }
 
 #greatest {

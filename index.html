@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1280, initial-scale=0.5">
   <title>Steam</title>
-
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="Css/steamcss.css?" />
 </head>
+
 <body>
 
   <a class="visually-hidden-focusable" href="#store">Skip to main content</a>
 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background:#171a21">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="#">STEAM</a>
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">STEAM</a>
 
-    <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#topNav"
-            aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav"
+        aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="topNav">
-      <ul class="navbar-nav mx-auto ps-50 pe-50 ps-lg-5 mb-2 mb-lg-0 gap-lg-3">
-        <li class="nav-item"><a class="nav-link" href="#store">STORE</a></li>
-        <li class="nav-item"><a class="nav-link" href="recommendation.html">RECOMMENDATIONS</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://steamcommunity.com/">COMMUNITY</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://store.steampowered.com/about/">ABOUT</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://help.steampowered.com/en/">SUPPORT</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav mx-auto ps-5 pe-5 ps-lg-5 mb-2 mb-lg-0 gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#store">STORE</a></li>
+          <li class="nav-item"><a class="nav-link" href="recommendation.html">RECOMMENDATIONS</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://steamcommunity.com/">COMMUNITY</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://store.steampowered.com/about/">ABOUT</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://help.steampowered.com/en/">SUPPORT</a></li>
+        </ul>
 
-      <div class="d-flex ms-lg-auto gap-2">
-        <a class="btn btn-success btn-sm" href="https://store.steampowered.com/about/">Install Steam</a>
-        <a class="btn btn-outline-light btn-sm" href="https://store.steampowered.com/login/">Login</a>
+        <div class="d-flex ms-lg-auto gap-2">
+          <a class="btn btn-success btn-sm" href="https://store.steampowered.com/about/">Install Steam</a>
+          <a class="btn btn-outline-light btn-sm" href="https://store.steampowered.com/login/">Login</a>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 
   <div class="container-fluid px-0">
@@ -80,24 +76,12 @@
       <main class="col-lg-10 col-12 ps-5 pe-lg-5 py-4">
         <h2 id="store" class="text-center mb-4">Games</h2>
 
-        <form
-          id="filters"
-          class="row g-3 align-items-end mb-3"
-          role="search"
-          aria-label="Game search and filters"
-          action="recommendation.html"
-          method="get"
-        >
+        <form id="filters" class="row g-3 align-items-end mb-3" role="search" aria-label="Game search and filters"
+          action="recommendation.html" method="get">
           <div class="col-12 col-lg-6">
             <label for="q" class="form-label mb-1">Search</label>
             <div class="input-group">
-              <input
-                id="q"
-                name="q"
-                type="search"
-                class="form-control"
-                placeholder="Search games…"
-              />
+              <input id="q" name="q" type="search" class="form-control" placeholder="Search games…" />
               <button type="submit" class="btn btn-primary">Search</button>
             </div>
           </div>
@@ -107,25 +91,12 @@
               <legend class="form-label mb-1">Price</legend>
 
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="price"
-                  id="priceFree"
-                  value="free"
-                  checked
-                />
+                <input class="form-check-input" type="radio" name="price" id="priceFree" value="free" checked />
                 <label class="form-check-label" for="priceFree">Free</label>
               </div>
 
               <div class="form-check form-check-inline">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  name="price"
-                  id="pricePaid"
-                  value="paid"
-                />
+                <input class="form-check-input" type="radio" name="price" id="pricePaid" value="paid" />
                 <label class="form-check-label" for="pricePaid">Paid</label>
               </div>
             </fieldset>
@@ -133,31 +104,33 @@
 
           <div class="col-6 col-lg-4">
             <label for="genreStrip" class="form-label mb-1">Quick genres</label>
-            <div
-              id="genreStrip"
-              class="genre-strip-compact d-flex flex-nowrap overflow-auto gap-2 py-1"
-              role="group"
-              aria-label="Quick genres"
-            >
-              <input type="checkbox" class="btn-check" id="gAction"  name="quick_genres[]" value="action"  autocomplete="off" />
+            <div id="genreStrip" class="genre-strip-compact d-flex flex-nowrap overflow-auto gap-2 py-1" role="group"
+              aria-label="Quick genres">
+              <input type="checkbox" class="btn-check" id="gAction" name="quick_genres[]" value="action"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gAction">Action</label>
 
-              <input type="checkbox" class="btn-check" id="gIndie"   name="quick_genres[]" value="indie"   autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gIndie" name="quick_genres[]" value="indie"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gIndie">Indie</label>
 
-              <input type="checkbox" class="btn-check" id="gRPG"     name="quick_genres[]" value="rpg"     autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gRPG" name="quick_genres[]" value="rpg" autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gRPG">RPG</label>
 
-              <input type="checkbox" class="btn-check" id="gRacing"  name="quick_genres[]" value="racing"  autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gRacing" name="quick_genres[]" value="racing"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gRacing">Racing</label>
 
-              <input type="checkbox" class="btn-check" id="gStrat"   name="quick_genres[]" value="strategy" autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gStrat" name="quick_genres[]" value="strategy"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gStrat">Strategy</label>
 
-              <input type="checkbox" class="btn-check" id="gSurv"    name="quick_genres[]" value="survival" autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gSurv" name="quick_genres[]" value="survival"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gSurv">Survival</label>
 
-              <input type="checkbox" class="btn-check" id="gHorror"  name="quick_genres[]" value="horror"  autocomplete="off" />
+              <input type="checkbox" class="btn-check" id="gHorror" name="quick_genres[]" value="horror"
+                autocomplete="off" />
               <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gHorror">Horror</label>
             </div>
           </div>
@@ -166,7 +139,8 @@
         <div class="mb-4">
           <div id="gameCarousel" class="carousel slide w-100" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#gameCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#gameCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#gameCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#gameCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
               <button type="button" data-bs-target="#gameCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
@@ -223,23 +197,13 @@
                 </a>
               </div>
             </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#gameCarousel"
-              data-bs-slide="prev"
-              aria-label="Previous slide"
-            >
+            <button class="carousel-control-prev" type="button" data-bs-target="#gameCarousel" data-bs-slide="prev"
+              aria-label="Previous slide">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#gameCarousel"
-              data-bs-slide="next"
-              aria-label="Next slide"
-            >
+            <button class="carousel-control-next" type="button" data-bs-target="#gameCarousel" data-bs-slide="next"
+              aria-label="Next slide">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
@@ -264,4 +228,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

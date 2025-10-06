@@ -5,18 +5,16 @@ body {
   color: #fff;
 }
 
-
 .grid-container {
   display: grid;
   grid-template-areas:
     "header header"
     "sidebar div"
     "footer footer";
-  grid-template-columns: 200px 1fr; 
+  grid-template-columns: 200px 1fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
 }
-
 
 header {
   grid-area: header;
@@ -42,7 +40,6 @@ main {
   padding: 20px;
 }
 
-
 .logo {
   font-size: 24px;
   font-weight: bold;
@@ -62,27 +59,26 @@ main {
 }
 
 a {
-    color: #c7d5e0;
-    text-decoration: none;
+  color: #c7d5e0;
+  text-decoration: none;
 }
 
 a:hover {
-    color: white;
+  color: white;
 }
 
 .sidebar {
-    background-color: #2a475e;
-    padding: 15px;
-    width: 200px;
+  background-color: #2a475e;
+  padding: 15px;
+  width: 200px;
 }
 
 .game-card {
-    background-color: #2a475e;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
+  background-color: #2a475e;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
 }
-
 
 footer {
   grid-area: footer;
@@ -91,6 +87,8 @@ footer {
   border: none;
   font-size: 14px;
   line-height: 0.2;
+  margin-top: 40px;
+  /* добавлен отступ футера вниз по заданию 4 */
 }
 
 @media (max-width: 768px) {
@@ -100,11 +98,11 @@ footer {
       "main"
       "sidebar"
       "footer";
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 
   .games-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 
   img {
@@ -113,32 +111,31 @@ footer {
   }
 }
 
-
 .page-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 20px;
 }
 
 .col p,
 footer p {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .col.side {
-    width: 20%;
+  width: 20%;
 }
 
 .col.space {
-    width: 15%;
+  width: 15%;
 }
 
 .col.main {
   flex: 1;
-  max-width: 38%; 
+  max-width: 38%;
   padding-right: 5px;
 }
 
@@ -154,114 +151,114 @@ footer p {
 }
 
 .photo1 {
-    margin-bottom: 20px;
-    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
 }
 
 .photo2 {
-    margin-top: 128px;
-    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 128px;
+  /* увеличен отступ второй картинки по заданию 4 */
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
 }
 
-
 .column3 {
-    width: 350px;
+  width: 350px;
 }
 
 .requirements {
-    border: 2px solid orange;
-    padding: 15px;
-    margin-top: 20px;
-    width: 490px;
-    background-color: #2a475e;
-    border-radius: 5px;
+  border: 2px solid orange;
+  padding: 15px;
+  margin-top: 20px;
+  width: 490px;
+  background-color: #2a475e;
+  border-radius: 5px;
 }
 
 .system-req {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .req-block {
-    width: 48%;
+  width: 48%;
 }
 
 .req-block h3 {
-    margin-top: 0;
-    color: #ffcc66;
+  margin-top: 0;
+  color: #ffcc66;
 }
 
 .req-block ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .req-block li {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 3px;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 10px;
-    background-color: #5c7e10;
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 3px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #5c7e10;
 }
 
 .btn2 {
-    display: inline-block;
-    padding: 5px 10px;
-    margin: 2px;
-    color: rgb(115, 115, 115);
-    font-size: 12px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 10px;
-    background-color: #ffffff;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 2px;
+  color: rgb(115, 115, 115);
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #ffffff;
 }
 
 .comments {
-    margin-top: 20px;
-    padding: 15px;
-    background: #1b1b1b;
-    color: white;
-    border-radius: 10px;
-    width: 320px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #1b1b1b;
+  color: white;
+  border-radius: 10px;
+  width: 320px;
 }
 
 .comment {
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid gray;
-    padding: 8px 0;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid gray;
+  padding: 8px 0;
 }
 
 .comment p {
-    margin: 0;
+  margin: 0;
 }
 
 .comment p::before {
-    content: "“";
-    color: #ffcc66;
-    margin-right: 6px;
-    font-size: 18px;
-    line-height: 0;
+  content: "“";
+  color: #ffcc66;
+  margin-right: 6px;
+  font-size: 18px;
+  line-height: 0;
 }
 
 .comments h2::after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 120px;
-    background: #ffcc66;
-    margin-top: 6px;
-    border-radius: 9999px;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 120px;
+  background: #ffcc66;
+  margin-top: 6px;
+  border-radius: 9999px;
 }
 
 input {
