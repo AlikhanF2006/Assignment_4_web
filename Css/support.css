@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -46,8 +47,7 @@ footer {
   background: #2a475e;
   padding: 70px 80px;
   border-radius: 25px;
-  box-shadow: 0 0 45px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.6);
   min-height: 500px;
 }
 
@@ -58,15 +58,14 @@ footer {
   letter-spacing: 1px;
   margin-bottom: 40px;
   text-align: center;
-  text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.4)
+  text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.4);
 }
 
 .accordion-item {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  overflow: hidden;
 }
-
 
 .accordion-header {
   background: #90afd5;
@@ -77,9 +76,10 @@ footer {
   padding: 15px 20px;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 6px;
-  margin-bottom: 10px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -89,31 +89,33 @@ footer {
 }
 
 
+.accordion-header::after {
+  content: "▼";
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.open .accordion-header::after {
+  transform: rotate(180deg);
+}
+
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  background: #90afd5;
-  color: #c7d5e0;
-  border-radius: 6px;
-  margin-top: -5px;
-  margin-bottom: 5px;
-  padding: 0 20px;
-  transition: max-height 0.4s ease, padding 0.3s ease, background 0.3s ease;
-}
-
-.accordion-content.open {
-  max-height: 200px;
-  padding: 15px 20px;
+  padding: 0 0px;
   background: #cadef7;
+  color: #0a0b0c;
+  transition: max-height 0.4s ease, padding 0.3s ease;
 }
 
 .accordion-content p {
-  background: transparent !important;
-  color: #0a0b0c;
   margin: 0;
   line-height: 1.6;
 }
 
+.accordion-item.open .accordion-content {
+  padding: 14px 19px;
+  max-height: 200px;
+}
 
 .popup {
   display: none;
@@ -122,7 +124,7 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -136,7 +138,7 @@ footer {
   width: 350px;
   text-align: center;
   position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
 #Subscribe {

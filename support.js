@@ -55,12 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
-const accordionHeaders = document.querySelectorAll(".accordion-header");
-
-accordionHeaders.forEach(header => {
-  header.addEventListener("click", () => {
-    const content = header.nextElementSibling;
-    content.classList.toggle("open");
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.parentElement; 
+    item.classList.toggle('open');    
   });
 });
