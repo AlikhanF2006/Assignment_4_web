@@ -217,7 +217,7 @@
     }
   }
 
-  /* ======== SIDEBAR — базовый (для ПК) ======== */
+ 
 .sidebar {
   background: #2a475e;
   height: 100%;
@@ -225,21 +225,26 @@
   padding: 1rem;
 }
 
-/* ====== ДЛЯ ПК ====== */
+
 @media (min-width: 992px) {
   .sidebar {
-    position: static;     /* возвращаем обычное поведение Bootstrap */
-    width: auto;          /* пусть ширину контролирует col-lg-2 */
-    transform: none;      /* отменяем сдвиг за экран */
-    box-shadow: none;     /* без теней */
+    position: static;    
+    width: auto;         
+    transform: none;     
+    box-shadow: none;  
+    min-height: 163vh;  
   }
 
   .sidebar-overlay {
-    display: none;        /* overlay не нужен на ПК */
+    display: none;       
+  }
+
+  main {
+    padding-left: 2rem; 
+    padding-right: 2rem;
   }
 }
 
-/* ====== ДЛЯ ТЕЛЕФОНОВ ====== */
 @media (max-width: 991px) {
   .sidebar {
     position: fixed;
@@ -250,7 +255,7 @@
     z-index: 1055;
     background: #2a475e;
     transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out; 
   }
 
   .sidebar.active {
@@ -275,5 +280,31 @@
     opacity: 1;
     visibility: visible;
   }
+
+    .page-content {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
+
+@media (min-width: 992px) {
+  .sidebar {
+    position: static;
+    width: auto;
+    transform: none;
+    box-shadow: none;
+    min-height: 163vh;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+
+ 
+  main.col-lg-10 {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
 
