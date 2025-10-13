@@ -1,60 +1,85 @@
-function updateClock() {
-  const now = new Date();
-  let hh = now.getHours();
-  let mm = now.getMinutes();
-  let ss = now.getSeconds();
-  let date = now.getDate();
-  const month = now.toLocaleString("en-US", { month: "long" });
-  const year = now.getFullYear();
+document.addEventListener("DOMContentLoaded", () => {
+  // ----- Clock -----
+  function updateClock() {
+    const now = new Date();
+    let hh = String(now.getHours()).padStart(2, "0");
+    let mm = String(now.getMinutes()).padStart(2, "0");
+    let ss = String(now.getSeconds()).padStart(2, "0");
+    const date = now.getDate();
+    const month = now.toLocaleString("en-US", { month: "long" });
+    const year = now.getFullYear();
+    const timeString = `${hh}:${mm}:${ss}         ${date} ${month} ${year}`;
+    const clockEl = document.getElementById("clock");
+    if (clockEl) clockEl.innerHTML = timeString;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
 
-  hh = (hh < 10) ? "0" + hh : hh;
-  mm = (mm < 10) ? "0" + mm : mm;
-  ss = (ss < 10) ? "0" + ss : ss;
+  // ----- Popup (с защитой, если элементов нет) -----
+  const openPopup = document.getElementById("openPopup");
+  const closePopup = document.getElementById("closePopup");
+  const popup = document.getElementById("popup");
 
-  const timeString =`${hh}:${mm}:${ss}         ${date} ${month} ${year}`;
-  document.getElementById("clock").innerHTML = timeString;
-}
+  if (openPopup && popup && closePopup) {
+    const open = () => {
+      popup.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    };
+    const close = () => {
+      popup.style.display = "none";
+      document.body.style.overflow = "";
+    };
+    openPopup.addEventListener("click", open);
+    closePopup.addEventListener("click", close);
+    window.addEventListener("click", (e) => {
+      if (e.target === popup) close();
+    });
+  }
 
-updateClock();
-setInterval(updateClock, 1000);
+  // ----- Sidebar (мобильное меню) -----
+  const sideBar = document.getElementById("appSidebar");
+  const sideBarOverlay = document.getElementById("sidebarOverlay");
+  const sideBarToggle = document.getElementById("sidebarToggle");
+  const sideBarCloseBtn = document.getElementById("sidebarCloseBtn");
 
+  if (sideBar && sideBarOverlay && sideBarToggle && sideBarCloseBtn) {
+    const open = () => {
+      sideBar.classList.add("active");
+      sideBarOverlay.classList.add("active");
+      sideBar.setAttribute("aria-hidden", "false");
+      sideBarToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden"; // блокируем скролл фона
+    };
+    const close = () => {
+      sideBar.classList.remove("active");
+      sideBarOverlay.classList.remove("active");
+      sideBar.setAttribute("aria-hidden", "true");
+      sideBarToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = ""; // возвращаем скролл
+    };
 
-const openPopup = document.getElementById("openPopup");
-const closePopup = document.getElementById("closePopup");
-const popup = document.getElementById("popup");
+    sideBarToggle.addEventListener("click", () => {
+      if (sideBar.classList.contains("active")) {
+        close();
+      } else {
+        open();
+      }
+    });
 
-openPopup.addEventListener("click", () => {
-  popup.style.display = "flex";
-});
+    sideBarOverlay.addEventListener("click", close);
+    sideBarCloseBtn.addEventListener("click", close);
 
-closePopup.addEventListener("click", () => {
-  popup.style.display = "none";
-});
+    // Закрытие по Esc
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sideBar.classList.contains("active")) close();
+    });
+  }
 
-window.addEventListener("click", (e) => {
-  if (e.target === popup) {
-    popup.style.display = "none";
+  // Подсказка в консоль, если каких-то id нет
+  if (!openPopup || !popup || !closePopup) {
+    console.log("[INFO] Попап-элементы (popup/closePopup) не найдены — пропускаю инициализацию попапа.");
+  }
+  if (!sideBar || !sideBarOverlay || !sideBarToggle || !sideBarCloseBtn) {
+    console.warn("[WARN] Sidebar элементы не найдены. Проверь id: appSidebar, sidebarOverlay, sidebarToggle, sidebarCloseBtn.");
   }
 });
-
-
-const sideBar = document.getElementById('appSidebar');
-const sideBarOverlay = document.getElementById('sidebarOverlay');
-const sideBarToggle = document.getElementById('sidebarToggle');
-const sideBarCloseBtn = document.getElementById('sidebarCloseBtn');
-
-toggle.addEventListener('click', () => {
-  sideBar.classList.toggle('active');
-  sideBarOverlay.classList.toggle('active');
-});
-
-overlay.addEventListener('click', () => {
-  sideBar.classList.remove('active');
-  sideBarOverlay.classList.remove('active');
-});
-
-closeBtn.addEventListener('click', () => {
-  sideBar.classList.remove('active');
-  sideBarOverlay.classList.remove('active');
-});
-
