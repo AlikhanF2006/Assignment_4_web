@@ -1,19 +1,21 @@
-const sidebar = document.getElementById('appSidebar');
-const overlay = document.getElementById('sidebarOverlay');
-const toggle = document.getElementById('sidebarToggle');
-const closeBtn = document.getElementById('sidebarCloseBtn');
+const sideBar = document.getElementById('appSidebar');
+const sideBarOverlay = document.getElementById('sidebarOverlay');
+const sideBarToggle = document.getElementById('sidebarToggle');
+const sideBarCloseBtn = document.getElementById('sidebarCloseBtn');
 
 toggle.addEventListener('click', () => {
-  sidebar.classList.toggle('active');
-  overlay.classList.toggle('active');
+  sideBar.classList.toggle('active');
+  sideBarOverlay.classList.toggle('active');
 });
 
 overlay.addEventListener('click', () => {
-  sidebar.classList.remove('active');
-  overlay.classList.remove('active');
+  sideBar.classList.remove('active');
+  sideBarOverlay.classList.remove('active');
 });
 
 closeBtn.addEventListener('click', () => {
-  sidebar.classList.remove('active');
-  overlay.classList.remove('active');
+  sideBar.classList.remove('active');
+  sideBarOverlay.classList.remove('active');
 });
+
+
