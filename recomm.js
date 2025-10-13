@@ -43,3 +43,49 @@ window.addEventListener("click", (e) => {
     popup.style.display = "none";
   }
 });
+
+const form = document.getElementById("subscribeForm");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const error = document.getElementById("error");
+
+  if (name === "" || email === "") {
+    error.textContent = "Please fill in all fields!";
+    error.style.color = "red";
+  } else if (!email.includes("@")) {
+    error.textContent = "Enter a valid email address!";
+    error.style.color = "red";
+  } else {
+    error.textContent = "Form submitted successfully!";
+    error.style.color = "green";
+    form.reset();
+  }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+      const buttons = document.querySelectorAll(".btn-group .btn");
+      const cards = document.querySelectorAll(".card");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          const filter = button.getAttribute("data-filter");
+
+          buttons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          cards.forEach(card => {
+            const type = card.getAttribute("data-type");
+            if (filter === "All" || type === filter) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+    });

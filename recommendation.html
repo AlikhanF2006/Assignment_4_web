@@ -11,31 +11,6 @@
 
 <body>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const buttons = document.querySelectorAll(".btn-group .btn");
-      const cards = document.querySelectorAll(".card");
-
-      buttons.forEach(button => {
-        button.addEventListener("click", () => {
-          const filter = button.getAttribute("data-filter");
-
-          buttons.forEach(btn => btn.classList.remove("active"));
-          button.classList.add("active");
-
-          cards.forEach(card => {
-            const type = card.getAttribute("data-type");
-            if (filter === "All" || type === filter) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
-    });
-  </script>
-
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="d-flex justify-content-between align-items-center px-3 py-2" style="background:#171a21">
@@ -180,7 +155,7 @@
     </main>
   </div>
 
-  <button id="openPopup"><b>Subscribe</b></button>
+  
 
   <div id="popup" class="popup">
     <div class="popup-content">
@@ -196,6 +171,7 @@
 
   <footer class="footer mt-5 p-3" style="background:rgb(2,0,24)">
     <span class="name">Team members: Safaryan Artyom, Faizrakhman Alikhan</span>
+    <button id="openPopup"><b>Subscribe</b></button>
     <span id="Clock"><span id="clock"></span></span>
   </footer>
 

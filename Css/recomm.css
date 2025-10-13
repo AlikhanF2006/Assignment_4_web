@@ -301,6 +301,7 @@ footer {
   font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
   color: white;
   background-color: transparent;
+  border-color: transparent;
   font-size: 15px;
   width: 100px;
   justify-content: center;
@@ -330,6 +331,9 @@ footer {
   #Sub {
     background-color: white;
     border-radius: 15px;
+  }
+  #Subcribe {
+    border-radius: 10px;
   }
 }
 
