@@ -226,6 +226,8 @@ footer {
   height: 100%;
   color: #c7d5e0;
   padding: 1rem;
+  overflow-y: auto;     
+  overscroll-behavior: contain;
 }
 
 
