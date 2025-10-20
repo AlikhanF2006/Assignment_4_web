@@ -162,6 +162,9 @@ function getGreeting() {
   return greetingText;
 }
 
+const greetingElement = document.getElementById("greeting");
+greetingElement.textContent = getGreeting();
+
 
 const cards = document.querySelectorAll(".card-container .card");
 let currentIndex = 0;
