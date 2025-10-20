@@ -21,6 +21,7 @@
       <a href="https://steamcommunity.com/" class="mx-2">COMMUNITY</a>
       <a href="https://store.steampowered.com/about/" class="mx-2">ABOUT</a>
       <a href="support.html" class="mx-2">SUPPORT</a>
+      <a class="openPopup mx-2">SUBSCRIBE</a>
     </nav>
 
     <label class="switch">
@@ -35,6 +36,8 @@
     </div>
   </header>
 
+  <h2 id="greeting"></h2>
+
   <div class="page-container d-flex flex-wrap align-items-start gap-3 px-3 mx-auto">
     <div class="col side"></div>
 
@@ -42,7 +45,7 @@
       <section class="recommended container text-center px-4 py-3">
         <h1 class="my-3">Recommended Games</h1>
 
-        <div class="btn-group mb-4" role="group" aria-label="Filter by type">
+        <div class="btn-group mb-4" role="group" aria-label="Filter by type" style="z-index: 2;">
           <button type="button" class="btn btn-outline-danger" data-filter="All">All</button>
           <button type="button" class="btn btn-outline-danger" data-filter="Solo">Solo</button>
           <button type="button" class="btn btn-outline-danger" data-filter="With Multiplayer">With Multiplayer</button>
@@ -155,23 +158,21 @@
     </main>
   </div>
 
-  
-
   <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close">&times;</span>
       <h3>Subscribe to our site</h3>
-      <form>
-        <input id="Sub" type="text" placeholder="Your Name" required> <br>
-        <input id="Sub" type="email" placeholder="Your Email" required> <br>
-        <button id="Subscribe" type="submit">Subscribe</button>
+      <form id="subscribeForm">
+        <input id="subName" type="text" placeholder="Your Name"> <br>
+        <input id="subEmail" type="email" placeholder="Your Email"> <br>
+        <button id="subscribe" type="submit">Subscribe</button>
+        <button id="resetBtn" type="button">Reset</button>
       </form>
     </div>
   </div>
 
   <footer class="footer mt-5 p-3" style="background:rgb(2,0,24)">
     <span class="name">Team members: Safaryan Artyom, Faizrakhman Alikhan</span>
-    <button id="openPopup"><b>Subscribe</b></button>
     <span id="Clock"><span id="clock"></span></span>
   </footer>
 
