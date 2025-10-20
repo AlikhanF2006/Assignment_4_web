@@ -1,10 +1,15 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  font-family: 'San Francisco', system-ui;
+  padding: 0;
   background-color: #1b2838;
   color: #fff;
+  font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow-x: hidden; /* ✅ оставляем, чтобы точно не было горизонтального скролла */
 }
 
+
+/* === HEADER / NAV === */
 header {
   display: flex;
   justify-content: space-between;
@@ -12,10 +17,7 @@ header {
   background-color: #171a21;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
+.logo { font-size: 24px; font-weight: bold; }
 
 .install {
   background-color: #5c7e10;
@@ -25,23 +27,13 @@ header {
   border-radius: 3px;
 }
 
-.install:hover {
-  background-color: #4b6b0f;
-}
+.install:hover { background-color: #4b6b0f; }
 
-a {
-  color: #c7d5e0;
-  text-decoration: none;
-}
+a { color: #c7d5e0; text-decoration: none; }
+a:hover { color: white; }
 
-a:hover {
-  color: white;
-}
-
-footer {
-  font-size: 14px;
-  line-height: 0.2;
-}
+/* === LAYOUT (DESKTOP) === */
+footer { font-size: 14px; line-height: 0.2; }
 
 .page-container {
   display: flex;
@@ -49,39 +41,25 @@ footer {
   align-items: flex-start;
   width: 100%;
   gap: 20px;
+  padding: 0 50px;
 }
 
-.col.side {
-  width: 20%;
-}
+.col.side { width: 20%; }
+.col.main { flex: 1; max-width: 38%; }
+.col.info { flex: 1; max-width: 27%; }
 
-.col.main {
-  flex: 1;
-  max-width: 38%;
-}
+/* === IMAGES === */
+.col img { max-width: 100%; height: auto; display: block; }
+.photo1, .photo2 { box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3); }
 
-.col.info {
-  flex: 1;
-  max-width: 27%;
-}
-
-.col img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.photo1 {
-  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
-}
-
-.photo2 {
-  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
-}
-
+/* === REQUIREMENTS === */
 .requirements {
   background-color: #2a475e;
-  border-radius: 5px;
+  border: 2px solid orange;
+  border-radius: 8px;
+  padding: 15px 20px;
+  width: 480px;
+  margin-top: 0;
 }
 
 .system-req {
@@ -90,15 +68,11 @@ footer {
   gap: 20px;
 }
 
-.req-block h3 {
-  color: #ffcc66;
-}
+.req-block h3 { color: #ffcc66; }
+.req-block ul { list-style: none; }
 
-.req-block ul {
-  list-style: none;
-}
-
-.btn {
+/* === BUTTONS === */
+.main .btn, .page-container .btn {
   display: inline-block;
   color: white;
   font-size: 15px;
@@ -108,7 +82,7 @@ footer {
   background-color: #5c7e10;
 }
 
-.btn2 {
+.main .btn2, .page-container .btn2 {
   display: inline-block;
   color: rgb(115, 115, 115);
   font-size: 12px;
@@ -118,9 +92,8 @@ footer {
   background-color: #ffffff;
 }
 
-.comments {
-  color: white;
-}
+/* === COMMENTS === */
+.comments { color: white; }
 
 .comment img.avatar {
   width: 40px;
@@ -147,8 +120,321 @@ footer {
   border-radius: 9999px;
 }
 
+/* === INPUTS === */
 input {
   border-radius: 15px;
   background-color: #f0f0f0;
   border-color: #ffffff;
+}
+
+/* === SMALL PHONES (≤ 576px) === */
+@media (max-width: 576px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1rem; }
+  p { font-size: 14px; }
+  .btn, .btn2 { font-size: 14px; padding: 6px 10px; }
+}
+
+/* === DESKTOP: HIDE MOBILE CAROUSEL === */
+@media (min-width: 993px) {
+  #genshinCarousel { display: none !important; }
+}
+
+/* === ADAPTIVE (MOBILE ≤ 992px) === */
+@media (max-width: 992px) {
+  html, body { overflow-x: hidden; }
+
+.page-container {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 94%;
+  margin: 0 auto;
+  padding: 0;
+  gap: 0; /* ✅ отключаем зазор, он ломал симметрию */
+  box-sizing: border-box;
+}
+
+
+  .col.side { display: none; }
+  .col.main, .col.info { width: 100%; max-width: 100%; padding: 0; }
+
+  /* === КАРУСЕЛЬ === */
+  #genshinCarousel {
+    width: 100%;
+    max-width: 94%;
+    margin: 0 auto 8px; /* 🔹 меньше отступ */
+    box-sizing: border-box;
+  }
+  #genshinCarousel .carousel-inner {
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  #genshinCarousel .carousel-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(1);
+  }
+
+  /* === ТЕКСТ === */
+  .col.info p {
+    text-align: justify;
+    line-height: 1.55;
+    font-size: 15px;
+    width: 100%;
+    max-width: 94%;
+    margin: 0 auto 16px;
+    padding: 0 2px; /* 🔹 чтобы не прилипал к краю */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+
+  /* === КНОПКИ === */
+  .col.info .btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  /* === КОММЕНТАРИИ === */
+  .comments {
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  /* === СИСТЕМНЫЕ ТРЕБОВАНИЯ === */
+  .requirements {
+    background-color: #2a475e;
+    border: 2px solid orange;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 25px;
+  }
+}
+
+
+
+
+/* === GLOBAL FIX: полностью симметричные отступы на мобильных === */
+@media (max-width: 992px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Убираем внутренние отступы у всех контейнеров Bootstrap */
+  .container,
+  .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Карусель и текст ровно по центру */
+  #genshinCarousel,
+  .col.info p {
+    width: calc(100% - 12px); /* 🔹 универсальная ширина без вылазания */
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* Уменьшаем зазор между каруселью и текстом */
+  #genshinCarousel {
+    margin-bottom: 8px;
+  }
+
+  /* Без вылазания слов */
+  .col.info p {
+    text-align: justify;
+    line-height: 1.55;
+    font-size: 15px;
+    padding: 0 3px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+
+
+
+
+@media (max-width: 992px) {
+  /* Ровные боковые отступы у текста, чтобы не упирался в края */
+  .col.info p {
+    text-align: justify;
+    line-height: 1.55;
+    font-size: 15px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    padding: 0 12px; /* 🔹 одинаковый внутренний отступ слева и справа */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+}
+
+
+@media (max-width: 992px) {
+  /* Уменьшаем расстояние между каруселью и текстом */
+  #genshinCarousel {
+    margin-bottom: 8px !important; /* 🔹 было ~16px, теперь в 2 раза меньше */
+  }
+
+  .col.info p:first-of-type {
+    margin-top: 0 !important; /* 🔹 убираем лишний верхний отступ у текста */
+  }
+}
+
+
+
+
+/* === NAVBAR MOBILE FIX === */
+@media (max-width: 992px) {
+  .navbar .container-fluid {
+    padding-left: 16px !important;  /* 🔹 отступ слева для логотипа */
+    padding-right: 16px !important; /* 🔹 отступ справа для меню */
+  }
+
+  .navbar-brand {
+    margin-left: 2px; /* чтобы “STEAM” выглядел ровнее */
+  }
+
+  .navbar-toggler {
+    margin-right: 2px; /* лёгкий отступ от правого края */
+  }
+}
+
+
+
+/* === MOBILE SYSTEM REQUIREMENTS: две узкие колонки === */
+@media (max-width: 992px) {
+  .requirements {
+    background-color: #2a475e;
+    border: 2px solid orange;
+    border-radius: 10px;
+    padding: 10px 12px;       /* 🔹 меньше внутренние отступы */
+    margin-top: 16px;         /* 🔹 меньше отступ сверху */
+    width: calc(100% - 20px); /* 🔹 не прилипает к краям */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  .requirements h2 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .system-req {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;                 /* 🔹 уменьшен промежуток между колонками */
+  }
+
+  .req-block {
+    width: 48%;               /* 🔹 две узкие колонки */
+    font-size: 13.5px;        /* 🔹 уменьшен размер шрифта */
+    line-height: 1.4;
+  }
+
+  .req-block h3 {
+    color: #ffcc66;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .req-block ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .req-block li {
+    margin-bottom: 4px;
+  }
+}
+
+
+
+
+/* === DESKTOP FIX FOR COMMENTS AND BUTTONS === */
+@media (min-width: 993px) {
+  /* Контейнер комментариев */
+  .comments {
+    width: 100%;                /* 🔹 растягиваем на всю ширину колонки */
+    max-width: 350px;           /* 🔹 ограничиваем, чтобы не было слишком широко */
+    margin-top: 20px;
+    background-color: #1b1b1b;  /* 🔹 фон как раньше */
+    border-radius: 10px;
+    padding: 15px 15px 18px 15px;
+    box-sizing: border-box;
+  }
+
+  /* Кнопки под текстом */
+  .col.info .btn {
+    display: block;
+    width: 100%;
+    max-width: 350px;           /* 🔹 совпадает с блоком комментариев */
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  /* Ровный внешний вид */
+  .btn {
+    background-color: #5c7e10;
+    color: white;
+    font-weight: bold;
+    transition: background 0.2s ease-in-out;
+  }
+
+  .btn:hover {
+    background-color: #4b6b0f;
+  }
+}
+
+
+
+/* === NAVBAR BUTTON FIX: одинаковый стиль на ПК и мобильных === */
+.navbar .btn-success {
+  background-color: #009879 !important; /* насыщенный зелёный, как на телефоне */
+  color: #fff !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 14px;
+  transition: background 0.2s ease-in-out;
+}
+
+.navbar .btn-success:hover {
+  background-color: #00846b !important; /* чуть темнее при наведении */
+}
+
+.navbar .btn-outline-light {
+  background-color: #0e141b !important; /* чёрный фон как у Steam */
+  color: #fff !important;
+  border: 1px solid #8b929a !important;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 6px 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .btn-outline-light:hover {
+  background-color: #1b2838 !important;
+  border-color: #fff !important;
 }

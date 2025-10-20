@@ -2,28 +2,39 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Genshin impact</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="Css/genshin.css" />
 </head>
 
 <body>
-  <header class="d-flex justify-content-between align-items-center px-3 py-2" style="background:#171a21">
-    <div class="logo" style="width: 100px">STEAM</div>
-    <nav class="top-menu">
-      <a href="index.html" class="mx-2">STORE</a>
-      <a href="recommendation.html" class="mx-2">RECOMENDATIONS</a>
-      <a href="https://steamcommunity.com/" class="mx-2">COMMUNITY</a>
-      <a href="https://store.steampowered.com/about/" class="mx-2">ABOUT</a>
-      <a href="support.html" class="mx-2">SUPPORT</a>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#171a21">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">STEAM</a>
 
-    <div class="actions">
-      <button class="install px-3 py-1"
-        onclick="location.href='https://store.steampowered.com/about/?snr=1_4_4__global-header'">Install Steam</button>
-      <a href="https://store.steampowered.com/login/?redir=&redir_ssl=1&snr=1_4_4__global-header" class="ms-2">login</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav"
+        aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav mx-auto ps-5 pe-5 ps-lg-5 mb-2 mb-lg-0 gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">STORE</a></li>
+          <li class="nav-item"><a class="nav-link" href="recommendation.html">RECOMMENDATIONS</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://steamcommunity.com/">COMMUNITY</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://store.steampowered.com/about/">ABOUT</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">SUPPORT</a></li>
+        </ul>
+
+        <div class="d-flex ms-lg-auto gap-2">
+          <a class="btn btn-success btn-sm" href="https://store.steampowered.com/about/">Install Steam</a>
+          <a class="btn btn-outline-light btn-sm" href="https://store.steampowered.com/login/">Login</a>
+        </div>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <div class="page-container d-flex justify-content-between align-items-start gap-3">
     <div class="col side"></div>
@@ -31,9 +42,36 @@
     <div class="col main pe-2">
       <h1>Genshin Impact</h1>
       <h3>Developer: Mihoyo</h3>
-      <img class="photo1 mb-3 shadow" src="Photos/genshin_photo1.jpg" width="582" height="350" />
 
-      <div class="requirements p-3 mt-3 rounded" style="width:490px; background:#2a475e; border:2px solid orange;">
+
+
+
+      <!-- === КАРУСЕЛЬ ТОЛЬКО ДЛЯ МОБИЛЬНЫХ === -->
+<div id="genshinCarousel" class="carousel slide d-lg-none mb-4" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="Photos/genshin_photo1.jpg" class="d-block w-100 rounded" alt="Genshin Impact 1">
+    </div>
+    <div class="carousel-item">
+      <img src="Photos/genshin_photo2.jpg" class="d-block w-100 rounded" alt="Genshin Impact 2">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#genshinCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#genshinCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+      <img class="photo1 mb-3 shadow d-none d-lg-block" src="Photos/genshin_photo1.jpg" width="582" height="350" />
+
+      <div id="req-anchor"></div> <!-- якорь должен быть только один -->
+
+      <div class="requirements p-3 mt-3 rounded">
         <h2>System Requirements</h2>
         <div class="system-req d-flex justify-content-between gap-3">
           <div class="req-block w-50">
@@ -66,9 +104,9 @@
     </div>
 
     <div class="col info">
-      <img class="photo2 shadow" src="Photos/genshin_photo2.jpg" style="margin-top:98px" width="350" />
+      <img class="photo2 shadow d-none d-lg-block" src="Photos/genshin_photo2.jpg" style="margin-top:98px" width="350" />
 
-      <div class="column3" style="width:350px;">
+      <div class="column3">
         <p>
           Genshin Impact – Epic fantasy brought to life! Breathtaking open
           world, elemental magic, seamless character switching, and
@@ -82,7 +120,7 @@
         <a href="https://genshin.hoyoverse.com/ru/" class="btn px-4 py-2 m-1">Download for free</a>
         <a href="https://genshin.hoyoverse.com/ru/" class="btn px-4 py-2 m-1">Donation</a>
 
-        <div class="comments mt-3 p-3 rounded" style="width:320px; background:#1b1b1b;">
+        <div class="comments mt-3 p-3 rounded">
           <h2>Comments</h2>
 
           <div class="comment d-flex align-items-start border-bottom border-secondary py-2">
@@ -105,10 +143,14 @@
     <div class="col side"></div>
   </div>
 
-  <footer class="mt-5 p-3" style="background:rgb(2,0,24)">
-    <p>Team members: Safaryan Artyom , Faizrakhman Alikhan</p> <br>
-    <p>SE-2408</p>
+  <footer class="footer p-3">
+    <span class="name">Team members: Safaryan Artyom, Faizrakhman Alikhan</span>
+    <button id="openPopup"><b>Subscribe</b></button>
+    <span id="Clock"><span id="clock"></span></span>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="genshin.js"></script>
 
 </body>
 
