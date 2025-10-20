@@ -46,7 +46,6 @@
 
 
 
-      <!-- === КАРУСЕЛЬ ТОЛЬКО ДЛЯ МОБИЛЬНЫХ === -->
 <div id="genshinCarousel" class="carousel slide d-lg-none mb-4" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -69,7 +68,7 @@
 
       <img class="photo1 mb-3 shadow d-none d-lg-block" src="Photos/genshin_photo1.jpg" width="582" height="350" />
 
-      <div id="req-anchor"></div> <!-- якорь должен быть только один -->
+      <div id="req-anchor"></div> 
 
       <div class="requirements p-3 mt-3 rounded">
         <h2>System Requirements</h2>
@@ -111,10 +110,8 @@
       </div>
         <p id="ratingValue">Your rating: 0 / 5</p>
 
-          <!-- 🔹 Новая кнопка -->
 <button id="rateBtn" class="btn px-3 py-1 mt-2">Rate Game</button>
 
-<!-- 🔹 Текст, который появится после клика -->
 <p id="rateMessage" style="margin-top:8px;"></p>
      </div>
 
@@ -148,9 +145,13 @@
             <p class="m-0"><b>ATAR:</b> I love the soundtrack 🎶</p>
           </div>
 
-          <label>Nickname </label><input type="text" class="mb-2"> <br>
-          <label>Comment </label><input type="text" class="mb-2"> <br>
-          <button class="btn2 px-2 py-1">Submit</button>
+            <form id="contactForm">
+                <input type="email" name="email" placeholder="Your email">
+                <textarea name="message" placeholder="Your message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+            
+            <p id="status" style="margin-top:8px; font-weight:600;"></p>
         </div>
       </div>
     </div>
@@ -164,7 +165,6 @@
     <span id="Clock"><span id="clock"></span></span>
   </footer>
 
-    <!-- === POPUP SUBSCRIBE WINDOW === -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close">&times;</span>
@@ -183,3 +183,5 @@
 </body>
 
 </html>
+
+
