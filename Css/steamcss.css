@@ -10,61 +10,6 @@
     overflow-x: hidden;
   }
 
-  header {
-    background-color: #171a21;
-    display: flex;
-    align-items: center;
-  }
-
-  .logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .top-menu {
-    flex-grow: 1;
-    text-align: center;
-  }
-
-  .top-menu a {
-    color: #c7d5e0;
-    text-decoration: none;
-    font-size: 14px;
-
-  }
-
-  .top-menu a:hover {
-    color: #fff;
-  }
-
-  .actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  .install {
-    background: #5c7e10;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    border-radius: 3px;
-  }
-
-  .install:hover {
-    background: #4b6b0f;
-  }
-
-  .login-link {
-    color: #c7d5e0;
-    text-decoration: none;
-    font-size: 14px;
-  }
-
-  .login-link:hover {
-    color: #fff;
-  }
-
   .sidebar {
     background: #2a475e;
   }

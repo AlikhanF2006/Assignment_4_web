@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ----- Clock -----
   function updateClock() {
     const now = new Date();
     let hh = String(now.getHours()).padStart(2, "0");
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateClock();
   setInterval(updateClock, 1000);
 
-  // ----- Popup (с защитой, если элементов нет) -----
   const openPopup = document.getElementById("openPopup");
   const closePopup = document.getElementById("closePopup");
   const popup = document.getElementById("popup");
@@ -36,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----- Sidebar (мобильное меню) -----
   const sideBar = document.getElementById("appSidebar");
   const sideBarOverlay = document.getElementById("sidebarOverlay");
   const sideBarToggle = document.getElementById("sidebarToggle");
@@ -48,14 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
       sideBarOverlay.classList.add("active");
       sideBar.setAttribute("aria-hidden", "false");
       sideBarToggle.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden"; // блокируем скролл фона
+      document.body.style.overflow = "hidden"; 
     };
     const close = () => {
       sideBar.classList.remove("active");
       sideBarOverlay.classList.remove("active");
       sideBar.setAttribute("aria-hidden", "true");
       sideBarToggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = ""; // возвращаем скролл
+      document.body.style.overflow = ""; 
     };
 
     sideBarToggle.addEventListener("click", () => {
@@ -69,13 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sideBarOverlay.addEventListener("click", close);
     sideBarCloseBtn.addEventListener("click", close);
 
-    // Закрытие по Esc
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && sideBar.classList.contains("active")) close();
     });
   }
 
-  // Подсказка в консоль, если каких-то id нет
   if (!openPopup || !popup || !closePopup) {
     console.log("[INFO] Попап-элементы (popup/closePopup) не найдены — пропускаю инициализацию попапа.");
   }
