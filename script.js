@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
       sideBarOverlay.classList.add("active");
       sideBar.setAttribute("aria-hidden", "false");
       sideBarToggle.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
     };
     const close = () => {
       sideBar.classList.remove("active");
       sideBarOverlay.classList.remove("active");
       sideBar.setAttribute("aria-hidden", "true");
       sideBarToggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = ""; 
+      document.body.style.overflow = "";
     };
 
     sideBarToggle.addEventListener("click", () => {
@@ -77,4 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!sideBar || !sideBarOverlay || !sideBarToggle || !sideBarCloseBtn) {
     console.warn("[WARN] Sidebar элементы не найдены. Проверь id: appSidebar, sidebarOverlay, sidebarToggle, sidebarCloseBtn.");
   }
+});
+
+
+const quackBtn = document.getElementById("quackButton");
+const quackSound = document.getElementById("quackSound");
+
+quackBtn.addEventListener("click", () => {
+  quackSound.currentTime = 0;
+  quackSound.play();
 });

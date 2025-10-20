@@ -388,3 +388,22 @@ footer {
 #filters {
   margin-bottom: 1.5rem !important;
 }
+
+#quackButton {
+  width: 100%;
+  background-color: #ffcc00;
+  color: #222;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin: 20px 0;
+}
+
+#quackButton:hover {
+  background-color: #ffe066;
+  transform: scale(1.05);
+}
