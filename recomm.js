@@ -22,10 +22,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-const themeSwitch = document.getElementById("themeSwitch");
-themeSwitch.addEventListener("change", () => {
-  document.body.classList.toggle("light-theme", themeSwitch.checked);
-});
+
 
 
 // === Popup subscription form ===
@@ -152,3 +149,30 @@ document.addEventListener("keydown", (e) => {
 });
 
 if (cards.length) updateActiveCard();
+
+
+
+
+
+
+
+const themeManager = {
+  isLight: false,
+  toggleTheme() {
+    this.isLight = !this.isLight;
+    document.body.classList.toggle("light-theme", this.isLight);
+  },
+  getStatus() {
+    return this.isLight ? "Light Mode" : "Dark Mode";
+  }
+};
+
+document.getElementById("themeSwitch").addEventListener("change", () => {
+  themeManager.toggleTheme();
+  console.log("Current theme:", themeManager.getStatus());
+});
+
+
+
+
+
