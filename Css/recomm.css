@@ -16,12 +16,10 @@ body.light-theme {
 }
 
 .switch {
-  position: absolute;
-  top: 10px;
-  right: 200px;
   width: 60px;
   height: 34px;
 }
+
 
 .switch input {
   opacity: 0;
@@ -410,4 +408,50 @@ footer {
 .achievement.show {
   bottom: 50px;
   opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* === MOBILE: Theme switch right after SUBSCRIBE === */
+@media (max-width: 991.98px) {
+  .theme-toggle-item {
+    order: 99; /* идёт после SUBSCRIBE */
+    width: 100%;
+    display: flex !important;
+    justify-content: flex-start; /* выравниваем по левому краю, как пункты меню */
+    align-items: center;
+    margin: 10px 0 12px 1.25rem; /* чтобы совпадало с отступом nav-link */
+  }
+
+  .theme-toggle-item .switch {
+    position: relative !important;
+    margin: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  /* убираем надпись Theme: */
+  .theme-toggle-item::before {
+    content: none !important;
+  }
+}
+
+/* === DESKTOP: keep original top-right placement === */
+@media (min-width: 992px) {
+  .switch {
+    position: absolute !important;
+    top: 10px;
+    right: 200px;
+  }
 }
