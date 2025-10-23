@@ -26,6 +26,7 @@
           <li class="nav-item"><a class="nav-link" href="https://steamcommunity.com/">COMMUNITY</a></li>
           <li class="nav-item"><a class="nav-link" href="https://store.steampowered.com/about/">ABOUT</a></li>
           <li class="nav-item"><a class="nav-link" href="support.html">SUPPORT</a></li>
+          <li class="nav-item"><a class="nav-link openPopup" style="cursor:pointer;">SUBSCRIBE</a></li>
         </ul>
 
         <div class="d-flex ms-lg-auto gap-2">
@@ -161,20 +162,28 @@
 
   <footer class="footer p-3">
     <span class="name">Team members: Safaryan Artyom, Faizrakhman Alikhan</span>
-    <button id="openPopup"><b>Subscribe</b></button>
     <span id="Clock"><span id="clock"></span></span>
   </footer>
 
-  <div id="popup" class="popup">
-    <div class="popup-content">
+    <div id="popup" class="popup">
+     <div class="popup-content">
       <span id="closePopup" class="close">&times;</span>
       <h3>Subscribe to our site</h3>
-      <form id="subscribeForm">
-        <input type="text" placeholder="Your Name" required><br><br>
-        <input type="email" placeholder="Your Email" required><br><br>
-        <button id="Subscribe" type="submit">Subscribe</button>
-      </form>
+        <form id="subscribeForm">
+        <input id="subName" type="text" placeholder="Your Name" required><br>
+        <input id="subEmail" type="email" placeholder="Your Email" required><br>
+        <button id="subscribe" type="submit">Subscribe</button>
+        <button id="resetBtn" type="button">Reset</button>
+       </form>
+      </div>
     </div>
+
+<div id="achievement" class="achievement">
+  <div class="achievement-icon">🏆</div>
+  <div class="achievement-text">
+    <strong>Achievement Unlocked!</strong><br>
+    You joined the club 
+    <audio id="achievementSound" src="Sounds/3283ff775b4b474.mp3" preload="auto"></audio>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

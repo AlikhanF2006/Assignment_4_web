@@ -124,46 +124,78 @@
 
     
     const subForm = document.getElementById("subscribeForm");
-    let subMsg = document.createElement("p");
-    subMsg.id = "formMessage";
-    subMsg.style.marginTop = "10px";
-    subMsg.style.fontWeight = "600";
-    subMsg.style.transition = "opacity 0.3s ease";
-    subMsg.style.opacity = "0";
-    subForm.appendChild(subMsg);
+const resetBtn = document.getElementById("resetBtn");
 
-    subForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+subForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-      const nameInput = subForm.querySelector('input[type="text"]');
-      const emailInput = subForm.querySelector('input[type="email"]');
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
+  const nameInput = subForm.querySelector('input[type="text"]');
+  const emailInput = subForm.querySelector('input[type="email"]');
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
 
-      subMsg.style.opacity = "0";
-      subMsg.textContent = "";
-      nameInput.style.borderColor = "#5c7e10";
-      emailInput.style.borderColor = "#5c7e10";
+  // Удаляем старое сообщение
+  const oldMsg = document.getElementById("error");
+  if (oldMsg) oldMsg.remove();
 
-      if (name.length < 2 || !/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(name)) {
-        subMsg.textContent = "❌ Please enter a valid name (letters only, min 2 chars).";
-        subMsg.style.color = "#ff4444";
-        nameInput.style.borderColor = "#ff4444";
-      } 
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        subMsg.textContent = "❌ Please enter a valid email address.";
-        subMsg.style.color = "#ff4444";
-        emailInput.style.borderColor = "#ff4444";
-      } 
-      else {
-        subMsg.textContent = "✅ Subscription successful!";
-        subMsg.style.color = "lightgreen";
-        subForm.reset();
-        setTimeout(() => popup.style.display = "none", 2000);
-      }
+  const msg = document.createElement("p");
+  msg.id = "error";
+  msg.style.marginTop = "10px";
+  msg.style.fontWeight = "600";
 
-      setTimeout(() => subMsg.style.opacity = "1", 100);
-    });
+  // Проверка имени
+  if (name.length < 2 || !/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(name)) {
+    msg.textContent = "❌ Please enter a valid name (letters only, min 2 chars).";
+    msg.style.color = "#ff4444";
+    subForm.appendChild(msg);
+    return;
+  }
+
+  // Проверка email
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    msg.textContent = "❌ Please enter a valid email address.";
+    msg.style.color = "#ff4444";
+    subForm.appendChild(msg);
+    return;
+  }
+
+  // Успешно
+  msg.textContent = "✅ Subscription successful!";
+  msg.style.color = "lightgreen";
+  subForm.appendChild(msg);
+  subForm.reset();
+
+  // Achievement (анимация + звук)
+  const achievement = document.getElementById("achievement");
+  const sound = document.getElementById("achievementSound");
+  if (achievement && sound) {
+    sound.currentTime = 0;
+    sound.play();
+    achievement.classList.add("show");
+    setTimeout(() => achievement.classList.remove("show"), 4000);
+  }
+
+  // Закрыть popup через 2 сек
+  setTimeout(() => popup.style.display = "none", 2000);
+});
+
+// === RESET BUTTON ===
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    subForm.querySelectorAll("input").forEach(i => i.value = "");
+    const old = document.getElementById("error");
+    if (old) old.remove();
+
+    const info = document.createElement("p");
+    info.id = "error";
+    info.style.marginTop = "10px";
+    info.textContent = "Form cleared!";
+    info.style.color = "#00bfff";
+    subForm.appendChild(info);
+  });
+}
+
 
     
     const rating = document.querySelector('.rating');
