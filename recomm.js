@@ -25,7 +25,7 @@ setInterval(updateClock, 1000);
 
 
 
-// === Popup subscription form ===
+
 const openPopupButtons = document.getElementsByClassName("openPopup");
 const closePopup = document.getElementById("closePopup");
 
@@ -73,7 +73,7 @@ form.addEventListener("submit", (e) => {
   form.appendChild(message);
   form.reset();
   
-  // === Achievement animation + sound ===
+  
 
   const achievement = document.getElementById('achievement');
   const sound = document.getElementById('achievementSound');
@@ -209,7 +209,7 @@ $('#searchInput').on('keyup', function() {
     if (match) anyVisible = true;
   });
 
-  // === ✅ Task 3: Highlight only in game titles ===
+  
   $('.card h3').each(function() {
     const originalText = $(this).text();
     if (input.length > 0) {
@@ -270,4 +270,23 @@ $(document).on('click', function(e) {
   if (!$(e.target).closest('#searchInput, #suggestions').length) {
     $('#suggestions').hide();
   }
+});
+
+
+
+
+
+
+$(window).on("scroll load", function () {
+  $("img.lazy").each(function () {
+    const img = $(this);
+    const windowBottom = $(window).scrollTop() + $(window).height();
+    const imgTop = img.offset().top;
+
+    
+    if (windowBottom > imgTop && !img.hasClass("loaded")) {
+      img.attr("src", img.data("src")); 
+      img.addClass("loaded");
+    }
+  });
 });

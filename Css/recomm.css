@@ -549,3 +549,16 @@ mark.fade-mark {
   from { background-color: transparent; opacity: 0.3; }
   to { background-color: #ffcc00; opacity: 1; }
 }
+
+
+
+
+
+
+.lazy {
+  filter: blur(6px);
+  transition: filter 0.4s ease;
+}
+.lazy.loaded {
+  filter: blur(0);
+}
