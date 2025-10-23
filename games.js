@@ -15,8 +15,40 @@
       }
     }
 
+        const copyBtn = document.getElementById('copyReq');
+
+    function moveCopyButton() {
+      const isMobile = window.innerWidth <= 992;
+      const reqBlock = document.querySelector('.requirements');
+      const rateBtn = document.getElementById('rateBtn');
+      const mainCol = document.querySelector('.col.main');
+
+      if (isMobile) {
+        
+        if (reqBlock && reqBlock.nextSibling !== copyBtn) {
+          reqBlock.after(copyBtn);
+        }
+      } else {
+        
+        if (mainCol && rateBtn && rateBtn.nextSibling !== copyBtn) {
+          rateBtn.after(copyBtn);
+        }
+      }
+    }
+
+    function moveRequirements() {
+      const isMobile = window.innerWidth <= 992;
+      if (isMobile) {
+        if (comments && comments.nextSibling !== req) comments.after(req);
+      } else {
+        if (anchor && anchor.nextSibling !== req) anchor.after(req);
+      }
+      moveCopyButton(); 
+    }
+
     moveRequirements();
     window.addEventListener('resize', moveRequirements);
+
 
     
     function updateClock() {
@@ -123,7 +155,7 @@
     window.addEventListener("click", e => { if (e.target === popup) popup.style.display = "none"; });
 
     
-    const subForm = document.getElementById("subscribeForm");
+const subForm = document.getElementById("subscribeForm");
 const resetBtn = document.getElementById("resetBtn");
 
 subForm.addEventListener("submit", (e) => {
@@ -134,7 +166,7 @@ subForm.addEventListener("submit", (e) => {
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
 
-  // Удаляем старое сообщение
+  
   const oldMsg = document.getElementById("error");
   if (oldMsg) oldMsg.remove();
 
@@ -143,7 +175,7 @@ subForm.addEventListener("submit", (e) => {
   msg.style.marginTop = "10px";
   msg.style.fontWeight = "600";
 
-  // Проверка имени
+  
   if (name.length < 2 || !/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(name)) {
     msg.textContent = "❌ Please enter a valid name (letters only, min 2 chars).";
     msg.style.color = "#ff4444";
@@ -151,7 +183,7 @@ subForm.addEventListener("submit", (e) => {
     return;
   }
 
-  // Проверка email
+  
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
     msg.textContent = "❌ Please enter a valid email address.";
@@ -160,13 +192,13 @@ subForm.addEventListener("submit", (e) => {
     return;
   }
 
-  // Успешно
+  
   msg.textContent = "✅ Subscription successful!";
   msg.style.color = "lightgreen";
   subForm.appendChild(msg);
   subForm.reset();
 
-  // Achievement (анимация + звук)
+  
   const achievement = document.getElementById("achievement");
   const sound = document.getElementById("achievementSound");
   if (achievement && sound) {
@@ -176,11 +208,11 @@ subForm.addEventListener("submit", (e) => {
     setTimeout(() => achievement.classList.remove("show"), 4000);
   }
 
-  // Закрыть popup через 2 сек
+  
   setTimeout(() => popup.style.display = "none", 2000);
 });
 
-// === RESET BUTTON ===
+
 if (resetBtn) {
   resetBtn.addEventListener("click", () => {
     subForm.querySelectorAll("input").forEach(i => i.value = "");
@@ -230,6 +262,31 @@ if (resetBtn) {
 
 
 
+
+
+
+
+
+document.getElementById('copyReq').addEventListener('click', () => {
+  const text = document.querySelector('.requirements').innerText.trim();
+  navigator.clipboard.writeText(text);
+
+  const btn = document.getElementById('copyReq');
+  const oldText = btn.textContent;
+  btn.textContent = '✅ Copied!';
+  btn.disabled = true;
+
+  const tooltip = document.createElement('span');
+  tooltip.className = 'copy-tip';
+  tooltip.textContent = 'Copied to clipboard!';
+  btn.insertAdjacentElement('afterend', tooltip);
+
+  setTimeout(() => {
+    tooltip.remove();
+    btn.textContent = oldText;
+    btn.disabled = false;
+  }, 1500);
+});
 
 
 

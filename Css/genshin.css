@@ -729,3 +729,35 @@ footer {
 
 
 
+#copyReq {
+  background-color: #5c7e10;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+#copyReq:hover {
+  background-color: #4b6b0f;
+  transform: scale(1.03);
+}
+
+.copy-tip {
+  color: #a4de02;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  opacity: 0;
+  animation: fadeInOut 1.4s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-4px); }
+  25% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
