@@ -14,25 +14,90 @@ document.addEventListener("DOMContentLoaded", () => {
   updateClock();
   setInterval(updateClock, 1000);
 
-  const openPopup = document.getElementById("openPopup");
-  const closePopup = document.getElementById("closePopup");
-  const popup = document.getElementById("popup");
+ // === POPUP OPEN/CLOSE ===
+const popup = document.getElementById("popup");
+const closePopup = document.getElementById("closePopup");
+const openPopupButtons = document.getElementsByClassName("openPopup");
 
-  if (openPopup && popup && closePopup) {
-    const open = () => {
-      popup.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    };
-    const close = () => {
-      popup.style.display = "none";
-      document.body.style.overflow = "";
-    };
-    openPopup.addEventListener("click", open);
-    closePopup.addEventListener("click", close);
-    window.addEventListener("click", (e) => {
-      if (e.target === popup) close();
-    });
+Array.from(openPopupButtons).forEach(btn => {
+  btn.addEventListener("click", () => {
+    popup.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+});
+closePopup.addEventListener("click", () => {
+  popup.style.display = "none";
+  document.body.style.overflow = "";
+});
+window.addEventListener("click", e => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+    document.body.style.overflow = "";
   }
+});
+
+// === FORM VALIDATION & SUCCESS ===
+const form = document.getElementById("subscribeForm");
+const nameInput = document.getElementById("subName");
+const emailInput = document.getElementById("subEmail");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const oldMsg = document.getElementById("error");
+  if (oldMsg) oldMsg.remove();
+
+  const msg = document.createElement("p");
+  msg.id = "error";
+  msg.style.marginTop = "10px";
+
+  if (name.length < 2) {
+    msg.textContent = "Please enter a valid name (at least 2 letters).";
+    msg.style.color = "red";
+    form.appendChild(msg);
+    return;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    msg.textContent = "Please enter a valid email address.";
+    msg.style.color = "red";
+    form.appendChild(msg);
+    return;
+  }
+
+  msg.textContent = "Subscription successful!";
+  msg.style.color = "green";
+  form.appendChild(msg);
+  form.reset();
+
+  // === Achievement ===
+  const achievement = document.getElementById("achievement");
+  const sound = document.getElementById("achievementSound");
+  sound.currentTime = 0;
+  sound.play();
+  achievement.classList.add("show");
+  setTimeout(() => achievement.classList.remove("show"), 4000);
+
+  setTimeout(() => popup.style.display = "none", 2000);
+});
+
+// === RESET BUTTON ===
+const resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", () => {
+  document.querySelectorAll("#subscribeForm input").forEach(i => i.value = "");
+  const old = document.getElementById("error");
+  if (old) old.remove();
+
+  const info = document.createElement("p");
+  info.id = "error";
+  info.style.marginTop = "10px";
+  info.textContent = "Form cleared!";
+  info.style.color = "#00bfff";
+  form.appendChild(info);
+});
+
 
   const sideBar = document.getElementById("appSidebar");
   const sideBarOverlay = document.getElementById("sidebarOverlay");
