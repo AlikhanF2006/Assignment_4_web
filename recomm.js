@@ -150,12 +150,6 @@ document.addEventListener("keydown", (e) => {
 
 if (cards.length) updateActiveCard();
 
-
-
-
-
-
-
 const themeManager = {
   isLight: false,
   toggleTheme() {
@@ -176,3 +170,95 @@ document.getElementById("themeSwitch").addEventListener("change", () => {
 
 
 
+$(document).ready(function(){
+  console.log("jQuery is ready!");
+});
+
+
+
+
+const games = [
+  { name: "CS2", genre: "Shooter", link: "CSindex.html" },
+  { name: "PUBG", genre: "Shooter", link: "pubg.html" },
+  { name: "Dying Light", genre: "Horror", link: "DLindex.html" },
+  { name: "Genshin", genre: "Adventure", link: "genshinindex.html" },
+  { name: "The Witcher 3: Wild Hunt", genre: "RPG", link: "notfound.html" },
+  { name: "Hollow Knight: Silksong", genre: "Indie", link: "notfound.html" },
+  { name: "The Elder Scrolls V: Skyrim Special Edition", genre: "Adventure RPG", link: "notfound.html" },
+  { name: "Terraria", genre: "Sandbox", link: "notfound.html" },
+  { name: "Grand Theft Auto V", genre: "Action", link: "notfound.html" },
+  { name: "Stardew Valley", genre: "Life Simulator", link: "notfound.html" },
+  { name: "SILENT HILL f", genre: "Psychological Horror", link: "notfound.html" },
+  { name: "EA SPORTS FC 26", genre: "Sport Simulation", link: "notfound.html" },
+  { name: "Dota 2", genre: "MOBA", link: "notfound.html" }
+];
+
+$('#searchInput').on('keyup', function() {
+  const input = $(this).val().toLowerCase().trim();
+  const suggestions = $('#suggestions');
+  suggestions.empty();
+  let anyVisible = false;
+
+  $('.card').each(function() {
+    const title = $(this).find('h3').text().toLowerCase();
+    const genre = $(this).find('.genre').text().toLowerCase();
+
+    const regex = new RegExp(`\\b${input}`, 'i');
+    const match = regex.test(title) || regex.test(genre);
+
+    $(this).toggle(match);
+    if (match) anyVisible = true;
+  });
+
+  $('.no-cards-msg').remove();
+  if (!anyVisible && input.length > 0) {
+    $('.card').hide();
+  }
+
+  if (input.length === 0) {
+    suggestions.hide();
+    return;
+  }
+
+  const regex = new RegExp(`\\b${input}`, 'i');
+  const matches = games.filter(g => regex.test(g.name.toLowerCase()) || regex.test(g.genre.toLowerCase()));
+
+  if (matches.length === 0) {
+    suggestions.append(`<li class="no-result text-muted text-center py-2">No results found</li>`);
+  } else {
+    matches.forEach(g => {
+      const highlightRegex = new RegExp(`\\b(${input})`, 'gi');
+      const highlighted = g.name.replace(highlightRegex, `<b style="color:#007bff;">$1</b>`);
+      suggestions.append(
+        `<li data-link="${g.link}" class="py-2 px-3" style="cursor:pointer;">${highlighted} <span style="color:#666;">(${g.genre})</span></li>`
+      );
+    });
+  }
+
+  suggestions.show();
+
+  $('.search-suggestions li').on('click', function() {
+    const link = $(this).data('link');
+    if (link) window.location.href = link;
+  });
+});
+
+$('#searchBtn').on('click', function() {
+  const input = $('#searchInput').val().toLowerCase().trim();
+  if (!input) return;
+
+  const regex = new RegExp(`\\b${input}`, 'i');
+  const foundGame = games.find(g => regex.test(g.name.toLowerCase()) || regex.test(g.genre.toLowerCase()));
+
+  if (foundGame) {
+    window.location.href = foundGame.link;
+  } else {
+    alert('No game found for this query.');
+  }
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('#searchInput, #suggestions').length) {
+    $('#suggestions').hide();
+  }
+});

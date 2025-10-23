@@ -421,15 +421,15 @@ footer {
 
 
 
-/* === MOBILE: Theme switch right after SUBSCRIBE === */
+
 @media (max-width: 991.98px) {
   .theme-toggle-item {
-    order: 99; /* идёт после SUBSCRIBE */
+    order: 99;
     width: 100%;
     display: flex !important;
-    justify-content: flex-start; /* выравниваем по левому краю, как пункты меню */
+    justify-content: flex-start;
     align-items: center;
-    margin: 10px 0 12px 1.25rem; /* чтобы совпадало с отступом nav-link */
+    margin: 10px 0 12px 1.25rem;
   }
 
   .theme-toggle-item .switch {
@@ -441,17 +441,97 @@ footer {
     transform: none !important;
   }
 
-  /* убираем надпись Theme: */
+ 
   .theme-toggle-item::before {
     content: none !important;
   }
 }
 
-/* === DESKTOP: keep original top-right placement === */
+
 @media (min-width: 992px) {
   .switch {
     position: absolute !important;
     top: 10px;
     right: 200px;
+  }
+}
+
+
+
+
+
+
+
+
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-suggestions li {
+  padding: 10px 14px;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-suggestions li:hover {
+  background-color: #f2f2f2;
+}
+
+.search-suggestions li.no-result {
+  color: #888;
+  cursor: default;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    line-height: 1.4;
+    padding: 14px 0;      
+    height: auto;         
+    width: 100vw;         
+    margin: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(2, 0, 24);
+    box-sizing: border-box;
+  }
+
+  footer .name {
+    display: block;
+    font-size: 13px;
+  }
+
+  #openPopup {
+    font-size: 15px;
+    margin: 4px 0;
+  }
+
+  #Clock {
+    font-size: 13px;
   }
 }

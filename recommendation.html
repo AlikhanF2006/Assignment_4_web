@@ -56,6 +56,15 @@
       <section class="recommended container text-center px-4 py-3">
         <h1 class="my-3">Recommended Games</h1>
 
+<div class="search-container position-relative mb-4" style="max-width:500px;margin:auto;">
+  <div class="input-group">
+    <input id="searchInput" type="text" class="form-control" placeholder="Search by name or genre...">
+    <button id="searchBtn" class="btn btn-primary" type="button">Search</button>
+  </div>
+  <ul id="suggestions" class="search-suggestions"></ul>
+</div>
+
+
         <div class="btn-group mb-4" role="group" aria-label="Filter by type" style="z-index: 2;">
           <button type="button" class="btn btn-outline-danger" data-filter="All">All</button>
           <button type="button" class="btn btn-outline-danger" data-filter="Solo">Solo</button>
@@ -196,7 +205,7 @@
     <span id="Clock"><span id="clock"></span></span>
   </footer>
 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="recomm.js"></script>
 
