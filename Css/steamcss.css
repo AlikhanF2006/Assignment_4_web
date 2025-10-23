@@ -471,3 +471,53 @@ footer {
   bottom: 50px;
   opacity: 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #1b2838;
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-suggestions li {
+  padding: 10px 14px;
+  color: #000000;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-suggestions li:hover {
+  background-color: #ffffff;
+}
+
+.search-suggestions li.no-result {
+  color: #888;
+  cursor: default;
+}
+

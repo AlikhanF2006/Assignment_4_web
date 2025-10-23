@@ -136,9 +136,6 @@ resetBtn.addEventListener("click", () => {
     });
   }
 
-  if (!openPopup || !popup || !closePopup) {
-    console.log("[INFO] Попап-элементы (popup/closePopup) не найдены — пропускаю инициализацию попапа.");
-  }
   if (!sideBar || !sideBarOverlay || !sideBarToggle || !sideBarCloseBtn) {
     console.warn("[WARN] Sidebar элементы не найдены. Проверь id: appSidebar, sidebarOverlay, sidebarToggle, sidebarCloseBtn.");
   }
@@ -152,3 +149,97 @@ quackBtn.addEventListener("click", () => {
   quackSound.currentTime = 0;
   quackSound.play();
 });
+
+
+//===============================
+
+
+$(document).ready(function() {
+  console.log("jQuery is ready!");
+});
+
+
+
+// === Task 2: Smart Autocomplete Search Suggestions ===
+const games = [
+  { name: "CS2", link: "CSindex.html" },
+  { name: "PUBG", link: "pubg.html" },
+  { name: "Dying Light", link: "DLindex.html" },
+  { name: "Genshin", link: "genshinindex.html" },
+  { name: "The Witcher 3: Wild Hunt", link: "notfound.html" },
+  { name: "Hollow Knight: Silksong", link: "notfound.html" },
+  { name: "The Elder Scrolls V: Skyrim Special Edition", link: "notfound.html" },
+  { name: "Terraria", link: "notfound.html" },
+  { name: "Grand Theft Auto V", link: "notfound.html" },
+  { name: "Stardew Valley", link: "notfound.html" },
+  { name: "SILENT HILL f", link: "notfound.html" },
+  { name: "EA SPORTS FC 26", link: "notfound.html" },
+  { name: "Dota 2", link: "notfound.html" }
+];
+
+$('#q').on('keyup', function () {
+  const input = $(this).val().toLowerCase().trim();
+  const suggestions = $('#suggestions');
+  suggestions.empty();
+
+  if (input.length === 0) {
+    suggestions.removeClass('show');
+    return;
+  }
+
+  // 🔍 Поиск только по началу каждого слова
+  const matches = games.filter(g => 
+    g.name.toLowerCase().split(/\s+/).some(word => word.startsWith(input))
+  );
+
+  if (matches.length === 0) {
+    suggestions.append(`<li class="no-result">No results found</li>`);
+  } else {
+    matches.forEach(g => {
+      const regex = new RegExp(`\\b(${input})`, 'gi'); // выделяем только начало слова
+      const highlighted = g.name.replace(regex, '<b style="color:#66c0f4;">$1</b>');
+      suggestions.append(`<li data-link="${g.link}">${highlighted}</li>`);
+    });
+  }
+
+  suggestions.addClass('show');
+
+  // Клик по подсказке
+  $('.search-suggestions li').on('click', function() {
+    const link = $(this).data('link');
+    if (link) window.location.href = link;
+  });
+});
+
+// Прячем при клике вне
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('#q, #suggestions').length) {
+    $('#suggestions').empty().removeClass('show');
+  }
+});
+
+
+// === Prevent default form submit & redirect properly ===
+$('#filters').on('submit', function (e) {
+  e.preventDefault(); // отменяем стандартный переход на recommendation.html
+
+  const input = $('#q').val().toLowerCase().trim();
+  if (!input) return;
+
+  // ищем точное совпадение по названию игры
+  const foundGame = games.find(g => g.name.toLowerCase() === input);
+
+  if (foundGame) {
+    // если найдено точное совпадение — переходим на соответствующую страницу
+    window.location.href = foundGame.link;
+  } else {
+    // если нет точного совпадения — можно открыть notfound.html или вывести сообщение
+    alert('Game not found. Try selecting from suggestions.');
+  }
+});
+
+
+
+
+
+
