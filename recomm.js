@@ -202,7 +202,6 @@ $('#searchInput').on('keyup', function() {
   $('.card').each(function() {
     const title = $(this).find('h3').text().toLowerCase();
     const genre = $(this).find('.genre').text().toLowerCase();
-
     const regex = new RegExp(`\\b${input}`, 'i');
     const match = regex.test(title) || regex.test(genre);
 
@@ -210,10 +209,20 @@ $('#searchInput').on('keyup', function() {
     if (match) anyVisible = true;
   });
 
+  // === ✅ Task 3: Highlight only in game titles ===
+  $('.card h3').each(function() {
+    const originalText = $(this).text();
+    if (input.length > 0) {
+      const regex = new RegExp(`(${input})`, 'gi');
+      const highlighted = originalText.replace(regex, '<mark class="fade-mark">$1</mark>');
+      $(this).html(highlighted);
+    } else {
+      $(this).html(originalText);
+    }
+  });
+
   $('.no-cards-msg').remove();
-  if (!anyVisible && input.length > 0) {
-    $('.card').hide();
-  }
+  if (!anyVisible && input.length > 0) $('.card').hide();
 
   if (input.length === 0) {
     suggestions.hide();
