@@ -562,3 +562,19 @@ mark.fade-mark {
 .lazy.loaded {
   filter: blur(0);
 }
+
+
+
+
+#progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 0%;
+  background: linear-gradient(90deg, #39ff14, #00ffff, #ff00c8);
+  background-size: 300% 100%;
+  animation: glow 3s linear infinite;
+  box-shadow: 0 0 15px #00ffff;
+  z-index: 9999;
+}
