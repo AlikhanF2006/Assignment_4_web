@@ -1,86 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <title>Steam</title>
-    <link rel="stylesheet" href="Css/notfound.css" />
+  <meta charset="UTF-8">
+  <title>Кря-кнопка</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1b2838;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
 
+    button {
+      background: #ffca28;
+      color: #333;
+      border: none;
+      padding: 15px 25px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+    }
+
+    /* Уведомление как субтитры */
+    #quackToast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    #quackToast.show {
+      opacity: 1;
+    }
+  </style>
 </head>
-
 <body>
 
-    <header>
-        <div class="logo" style="width: 100px;">STEAM</div>
-        <nav class="top-menu">
-            <a href="index.html">STORE</a>
-            <a href="recommendation.html">RECOMENDATIONS</a>
-            <a href="https://steamcommunity.com/">COMMUNITY</a>
-            <a href="https://store.steampowered.com/about/">ABOUT</a>
-            <a href="support.html">SUPPORT</a>
-        </nav>
+  <button id="quackBtn">Quack</button>
 
-        <div class="actions">
-            <button class="install"
-                onclick="location.href='https://store.steampowered.com/about/?snr=1_4_4__global-header'">Install
-                Steam</button>
-            <a href="https://store.steampowered.com/login/?redir=&redir_ssl=1&snr=1_4_4__global-header">login</a>
-        </div>
-    </header>
+  <div id="quackToast">Quack 🦆</div>
+  <audio id="quackSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
-    <div class="page-container">
+  <script>
+    const btn = document.getElementById("quackBtn");
+    const sound = document.getElementById("quackSound");
+    const toast = document.getElementById("quackToast");
 
-        <div class="col side"></div>
+    btn.addEventListener("click", () => {
+      sound.currentTime = 0;
+      sound.play();
 
-        <div class="col main">
-            <h1 id="greatest">This game is still in development!</h1>
-
-            <form id="contactForm">
-                <input type="email" name="email" placeholder="Your email">
-                <textarea name="message" placeholder="Your message"></textarea>
-                <button type="submit">Send</button>
-            </form>
-
-            <p id="status"></p>
-
-            <h2 id="greeting"></h2>
-
-        </div>
-
-        <div class="col info"></div>
-
-        <div class="col side"></div>
-
-    </div>
-
-    <footer>
-        <p>Team members: Safaryan Artyom , Faizrakhman Alikhan</p> <br>
-        <p>SE-2408</p>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("contactForm");
-            const status = document.getElementById("status");
-
-            function showMessage(message, isSuccess = true) {
-                status.textContent = message;
-                status.style.color = isSuccess ? "lightgreen" : "tomato";
-            }
-
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-
-                const formData = new FormData(form);
-                showMessage("Sending...", true);
-
-                setTimeout(() => {
-                    showMessage("Message sent successfully!");
-                    form.reset();
-                }, 1000);
-            });
-        });
-    </script>
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1500);
+    });
+  </script>
 
 </body>
-
 </html>

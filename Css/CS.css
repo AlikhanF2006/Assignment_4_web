@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -17,7 +18,10 @@ header {
   background-color: #171a21;
 }
 
-.logo { font-size: 24px; font-weight: bold; }
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
 
 .install {
   background-color: #5c7e10;
@@ -27,13 +31,24 @@ header {
   border-radius: 3px;
 }
 
-.install:hover { background-color: #4b6b0f; }
+.install:hover {
+  background-color: #4b6b0f;
+}
 
-a { color: #c7d5e0; text-decoration: none; }
-a:hover { color: white; }
+a {
+  color: #c7d5e0;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
 
 
-footer { font-size: 14px; line-height: 0.2; }
+footer {
+  font-size: 14px;
+  line-height: 0.2;
+}
 
 .page-container {
   display: flex;
@@ -44,13 +59,30 @@ footer { font-size: 14px; line-height: 0.2; }
   padding: 0 50px;
 }
 
-.col.side { width: 20%; }
-.col.main { flex: 1; max-width: 38%; }
-.col.info { flex: 1.6;}
+.col.side {
+  width: 20%;
+}
+
+.col.main {
+  flex: 1;
+  max-width: 38%;
+}
+
+.col.info {
+  flex: 1.6;
+}
 
 
-.col img { max-width: 100%; height: auto; display: block; }
-.photo1, .photo2 { box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3); }
+.col img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo1,
+.photo2 {
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.3);
+}
 
 
 .requirements {
@@ -68,11 +100,17 @@ footer { font-size: 14px; line-height: 0.2; }
   gap: 20px;
 }
 
-.req-block h3 { color: #ffcc66; }
-.req-block ul { list-style: none; }
+.req-block h3 {
+  color: #ffcc66;
+}
+
+.req-block ul {
+  list-style: none;
+}
 
 
-.main .btn, .page-container .btn {
+.main .btn,
+.page-container .btn {
   display: inline-block;
   color: white;
   font-size: 15px;
@@ -82,7 +120,9 @@ footer { font-size: 14px; line-height: 0.2; }
   background-color: #5c7e10;
 }
 
-.comments { color: white; }
+.comments {
+  color: white;
+}
 
 .comment img.avatar {
   width: 40px;
@@ -118,60 +158,93 @@ input {
 
 
 @media (max-width: 576px) {
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 1.3rem; }
-  h3 { font-size: 1rem; }
-  p { font-size: 14px; }
-  .btn, .btn2 { font-size: 14px; padding: 6px 10px; }
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .btn,
+  .btn2 {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
 }
 
 
 @media (min-width: 993px) {
-  #genshinCarousel { display: none !important; }
+  #genshinCarousel {
+    display: none !important;
+  }
 }
 
 
 @media (max-width: 992px) {
-  html, body { overflow-x: hidden; }
 
-.page-container {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  max-width: 94%;
-  margin: 0 auto;
-  padding: 0;
-  gap: 0;
-  box-sizing: border-box;
-}
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 94%;
+    margin: 0 auto;
+    padding: 0;
+    gap: 0;
+    box-sizing: border-box;
+  }
 
 
-  .col.side { display: none; }
-  .col.main, .col.info { width: 100%; max-width: 100%; padding: 0; }
+  .col.side {
+    display: none;
+  }
 
- 
+  .col.main,
+  .col.info {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+
   #genshinCarousel {
     width: 100%;
     max-width: 94%;
     margin: 0 auto 8px;
     box-sizing: border-box;
   }
+
   #genshinCarousel .carousel-inner {
     overflow: hidden;
     border-radius: 10px;
   }
+
   #genshinCarousel .carousel-item img {
     display: block;
     width: 100%;
     height: auto;
   }
+
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
     filter: invert(1);
   }
 
- 
+
   .col.info p {
     text-align: justify;
     line-height: 1.55;
@@ -185,7 +258,7 @@ input {
     box-sizing: border-box;
   }
 
- 
+
   .col.info .btn {
     display: block;
     width: 100%;
@@ -195,7 +268,7 @@ input {
     border-radius: 8px;
   }
 
- 
+
   .comments {
     background-color: #1b1b1b;
     border-radius: 10px;
@@ -203,7 +276,7 @@ input {
     margin-top: 20px;
   }
 
- 
+
   .requirements {
     background-color: #2a475e;
     border: 2px solid orange;
@@ -218,11 +291,13 @@ input {
 
 
 @media (max-width: 992px) {
-  html, body {
+
+  html,
+  body {
     overflow-x: hidden;
   }
 
- 
+
   .container,
   .container-fluid {
     padding-left: 0 !important;
@@ -231,7 +306,7 @@ input {
     margin-right: auto;
   }
 
- 
+
   #genshinCarousel,
   .col.info p {
     width: calc(100% - 12px);
@@ -239,12 +314,12 @@ input {
     box-sizing: border-box;
   }
 
- 
+
   #genshinCarousel {
     margin-bottom: 8px;
   }
 
- 
+
   .col.info p {
     text-align: justify;
     line-height: 1.55;
@@ -260,7 +335,7 @@ input {
 
 
 @media (max-width: 992px) {
- 
+
   .col.info p {
     text-align: justify;
     line-height: 1.55;
@@ -276,7 +351,7 @@ input {
 
 
 @media (max-width: 992px) {
- 
+
   #genshinCarousel {
     margin-bottom: 8px !important;
   }
@@ -292,7 +367,7 @@ input {
 
 @media (max-width: 992px) {
   .navbar .container-fluid {
-    padding-left: 16px !important; 
+    padding-left: 16px !important;
     padding-right: 16px !important;
   }
 
@@ -313,8 +388,8 @@ input {
     background-color: #2a475e;
     border: 2px solid orange;
     border-radius: 10px;
-    padding: 10px 12px;      
-    margin-top: 16px;        
+    padding: 10px 12px;
+    margin-top: 16px;
     width: calc(100% - 20px);
     margin-left: auto;
     margin-right: auto;
@@ -331,12 +406,12 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 8px;                
+    gap: 8px;
   }
 
   .req-block {
-    width: 48%;              
-    font-size: 13.5px;       
+    width: 48%;
+    font-size: 13.5px;
     line-height: 1.4;
   }
 
@@ -362,28 +437,28 @@ input {
 
 
 @media (min-width: 993px) {
- 
+
   .comments {
-    width: 100%;               
-    max-width: 350px;          
+    width: 100%;
+    max-width: 350px;
     margin-top: 20px;
-    background-color: #1b1b1b; 
+    background-color: #1b1b1b;
     border-radius: 10px;
     padding: 15px 15px 18px 15px;
     box-sizing: border-box;
   }
 
- 
+
   .col.info .btn {
     display: block;
     width: 100%;
-    max-width: 350px;          
+    max-width: 350px;
     margin: 10px auto;
     text-align: center;
     border-radius: 8px;
   }
 
- 
+
   .btn {
     background-color: #5c7e10;
     color: white;
@@ -438,9 +513,11 @@ input {
 .popup {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -459,11 +536,13 @@ input {
 
 .close {
   position: absolute;
-  right: 15px; top: 10px;
+  right: 15px;
+  top: 10px;
   font-size: 22px;
   cursor: pointer;
   transition: 0.3s;
 }
+
 .close:hover {
   color: #e64545;
   transform: scale(1.1);
@@ -477,10 +556,11 @@ input {
   border: 1px solid #ccc;
   font-size: 16px;
 }
+
 #subscribeForm input:focus {
   outline: none;
   border-color: #2196f3;
-  box-shadow: 0 0 6px rgba(33,150,243,0.6);
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.6);
 }
 
 #subscribeForm button {
@@ -493,13 +573,16 @@ input {
   margin: 8px;
   transition: 0.3s;
 }
+
 #subscribeForm button:hover {
   opacity: 0.9;
   transform: scale(1.05);
 }
+
 #resetBtn {
   background: #ff5252;
 }
+
 #resetBtn:hover {
   background: #e64545;
 }
@@ -518,12 +601,16 @@ input {
   align-items: center;
   gap: 10px;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   opacity: 0;
   transition: all 0.6s ease;
   z-index: 9999;
 }
-.achievement-icon { font-size: 28px; }
+
+.achievement-icon {
+  font-size: 28px;
+}
+
 .achievement.show {
   bottom: 50px;
   opacity: 1;
@@ -587,10 +674,10 @@ footer {
 
 @media (max-width: 768px) {
   footer {
-    flex-direction: column;      
-    text-align: center;          
-    gap: 8px;                    
-    line-height: 1.4;            
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    line-height: 1.4;
     padding: 12px 10px;
   }
 
@@ -638,8 +725,8 @@ footer {
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  cursor: not-allowed;  
-  opacity: 0.6;         
+  cursor: not-allowed;
+  opacity: 0.6;
   transition: all 0.3s ease;
 }
 
@@ -667,8 +754,8 @@ footer {
 
 #contactForm input[type="email"],
 #contactForm textarea {
-  background-color: #1b2838;      
-  border: 1px solid #5c7e10;      
+  background-color: #1b2838;
+  border: 1px solid #5c7e10;
   color: #fff;
   border-radius: 8px;
   padding: 10px 12px;
@@ -679,13 +766,13 @@ footer {
 
 #contactForm input::placeholder,
 #contactForm textarea::placeholder {
-  color: #c7d5e0;                 
+  color: #c7d5e0;
 }
 
 #contactForm input:focus,
 #contactForm textarea:focus {
   outline: none;
-  border-color: #a4de02;          
+  border-color: #a4de02;
   box-shadow: 0 0 6px rgba(164, 222, 2, 0.4);
 }
 
@@ -757,8 +844,29 @@ footer {
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-4px); }
-  25% { opacity: 1; transform: translateY(0); }
-  75% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-4px); }
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.stats {
+  text-align: start;
+  font-size: 24px;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
 }

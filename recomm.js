@@ -1,9 +1,3 @@
-const form = document.getElementById("subscribeForm");
-const nameInput = document.getElementById("subName");
-const emailInput = document.getElementById("subEmail");
-const popup = document.getElementById("popup");
-
-
 function updateClock() {
   const now = new Date();
   let hh = now.getHours();
@@ -22,72 +16,87 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-
-
-
-
+const form = document.getElementById("subscribeForm");
+const nameInput = document.getElementById("subName");
+const emailInput = document.getElementById("subEmail");
+const popup = document.getElementById("popup");
 const openPopupButtons = document.getElementsByClassName("openPopup");
 const closePopup = document.getElementById("closePopup");
+
 
 Array.from(openPopupButtons).forEach((btn) => {
   btn.addEventListener("click", () => {
     popup.style.display = "flex";
   });
 });
-closePopup.addEventListener("click", () => popup.style.display = "none");
+closePopup.addEventListener("click", () => (popup.style.display = "none"));
 window.addEventListener("click", (e) => {
   if (e.target === popup) popup.style.display = "none";
 });
 
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+$(document).ready(function () {
+  $("#subscribeForm").on("submit", function (e) {
+    e.preventDefault();
 
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const oldMsg = document.getElementById("error");
-  if (oldMsg) oldMsg.remove();
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const oldMsg = document.getElementById("error");
+    if (oldMsg) oldMsg.remove();
 
-  const message = document.createElement("p");
-  message.id = "error";
-  message.style.marginTop = "10px";
+    const message = document.createElement("p");
+    message.id = "error";
+    message.style.marginTop = "10px";
 
-  if (name.length < 2) {
-    message.textContent = "Please enter a valid name (at least 2 letters).";
-    message.style.color = "red";
-    form.appendChild(message);
-    return;
-  }
+    if (name.length < 2) {
+      message.textContent = "Please enter a valid name (at least 2 letters).";
+      message.style.color = "red";
+      form.appendChild(message);
+      return;
+    }
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    message.textContent = "Please enter a valid email address.";
-    message.style.color = "red";
-    form.appendChild(message);
-    return;
-  }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      message.textContent = "Please enter a valid email address.";
+      message.style.color = "red";
+      form.appendChild(message);
+      return;
+    }
 
 
-  message.textContent = "Subscription successful!";
-  message.style.color = "green";
-  form.appendChild(message);
-  form.reset();
-  
-  
+    const btn = $("#subscribeForm button[type='submit']");
+    btn.prop("disabled", true);
+    const originalText = btn.text();
+    btn.html(`<span class="spinner"></span> Please wait...`);
 
-  const achievement = document.getElementById('achievement');
-  const sound = document.getElementById('achievementSound');
-  
-  sound.currentTime = 0; 
-  sound.play();
-  
-  achievement.classList.add('show');
-  setTimeout(() => achievement.classList.remove('show'), 4000);
 
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 2000);
+    setTimeout(() => {
+      btn.prop("disabled", false);
+      btn.text(originalText);
+
+
+      message.textContent = "Subscription successful!";
+      message.style.color = "green";
+      form.appendChild(message);
+      form.reset();
+
+
+      const achievement = document.getElementById("achievement");
+      const sound = document.getElementById("achievementSound");
+
+      sound.currentTime = 0;
+      sound.play();
+
+      achievement.classList.add("show");
+      setTimeout(() => achievement.classList.remove("show"), 4000);
+
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 2000);
+    }, 1500);
+  });
 });
+
 
 
 const resetBtn = document.getElementById("resetBtn");
@@ -168,12 +177,9 @@ document.getElementById("themeSwitch").addEventListener("change", () => {
 
 
 
-
-
-$(document).ready(function(){
+$(document).ready(function () {
   console.log("jQuery is ready!");
 });
-
 
 
 
@@ -193,13 +199,13 @@ const games = [
   { name: "Dota 2", genre: "MOBA", link: "notfound.html" }
 ];
 
-$('#searchInput').on('keyup', function() {
+$('#searchInput').on('keyup', function () {
   const input = $(this).val().toLowerCase().trim();
   const suggestions = $('#suggestions');
   suggestions.empty();
   let anyVisible = false;
 
-  $('.card').each(function() {
+  $('.card').each(function () {
     const title = $(this).find('h3').text().toLowerCase();
     const genre = $(this).find('.genre').text().toLowerCase();
     const regex = new RegExp(`\\b${input}`, 'i');
@@ -209,8 +215,8 @@ $('#searchInput').on('keyup', function() {
     if (match) anyVisible = true;
   });
 
-  
-  $('.card h3').each(function() {
+
+  $('.card h3').each(function () {
     const originalText = $(this).text();
     if (input.length > 0) {
       const regex = new RegExp(`(${input})`, 'gi');
@@ -246,13 +252,13 @@ $('#searchInput').on('keyup', function() {
 
   suggestions.show();
 
-  $('.search-suggestions li').on('click', function() {
+  $('.search-suggestions li').on('click', function () {
     const link = $(this).data('link');
     if (link) window.location.href = link;
   });
 });
 
-$('#searchBtn').on('click', function() {
+$('#searchBtn').on('click', function () {
   const input = $('#searchInput').val().toLowerCase().trim();
   if (!input) return;
 
@@ -266,7 +272,7 @@ $('#searchBtn').on('click', function() {
   }
 });
 
-$(document).on('click', function(e) {
+$(document).on('click', function (e) {
   if (!$(e.target).closest('#searchInput, #suggestions').length) {
     $('#suggestions').hide();
   }
@@ -283,14 +289,13 @@ $(window).on("scroll load", function () {
     const windowBottom = $(window).scrollTop() + $(window).height();
     const imgTop = img.offset().top;
 
-    
+
     if (windowBottom > imgTop && !img.hasClass("loaded")) {
-      img.attr("src", img.data("src")); 
+      img.attr("src", img.data("src"));
       img.addClass("loaded");
     }
   });
 });
-
 
 
 
@@ -299,4 +304,73 @@ $(window).on("scroll", function () {
   const docHeight = $(document).height() - $(window).height();
   const scrollPercent = (scrollTop / docHeight) * 100;
   $("#progressBar").css("width", scrollPercent + "%");
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".btn-group .btn");
+  const cards = document.querySelectorAll(".card");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const filter = button.getAttribute("data-filter");
+
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      cards.forEach(card => {
+        const type = card.getAttribute("data-type");
+        if (filter === "All" || type === filter) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+});
+
+
+
+function getGreeting() {
+  const hour = new Date().getHours();
+  let greetingText;
+
+  switch (true) {
+    case hour < 12:
+      greetingText = "Good morning!";
+      break;
+    case hour < 18:
+      greetingText = "Good afternoon!";
+      break;
+    default:
+      greetingText = "Good evening!";
+  }
+
+  return greetingText;
+}
+
+
+
+$(document).ready(function () {
+  const $btn = $("#quackButton");
+  const $toast = $("#quackToast");
+  const quackSound = $("#quackSound")[0];
+
+  $btn.on("click", function () {
+
+    try {
+      quackSound.currentTime = 0;
+      quackSound.play();
+    } catch (err) {
+      console.warn("Audio playback blocked:", err);
+    }
+
+    $toast.addClass("show");
+
+    setTimeout(() => {
+      $toast.removeClass("show");
+    }, 1500);
+  });
 });
