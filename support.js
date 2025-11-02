@@ -13,33 +13,73 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-  const openPopup  = document.getElementById("openPopup");
-  const popup      = document.getElementById("popup");
+const popup = document.getElementById("popup");
   const closePopup = document.getElementById("closePopup");
-  if (openPopup && popup && closePopup) {
-    openPopup.addEventListener("click", () => (popup.style.display = "flex"));
-    closePopup.addEventListener("click", () => (popup.style.display = "none"));
-    window.addEventListener("click", (e) => { if (e.target === popup) popup.style.display = "none"; });
-  }
+  const openPopupButtons = document.getElementsByClassName("openPopup");
 
-  
-  const buttons = document.querySelectorAll(".btn-group .btn");
-  const cards   = document.querySelectorAll(".card");
-  if (buttons.length && cards.length) {
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.getAttribute("data-filter");
-        buttons.forEach((b) => b.classList.remove("active"));
-        button.classList.add("active");
-        cards.forEach((card) => {
-          const type = card.getAttribute("data-type");
-          card.style.display = (filter === "All" || type === filter) ? "block" : "none";
-        });
-      });
+  Array.from(openPopupButtons).forEach(btn => {
+    btn.addEventListener("click", () => {
+      popup.style.display = "flex";
+      document.body.style.overflow = "hidden";
     });
-  }
+  });
+  closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+    document.body.style.overflow = "";
+  });
+  window.addEventListener("click", e => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+
+
+  const form = document.getElementById("subscribeForm");
+  const nameInput = document.getElementById("subName");
+  const emailInput = document.getElementById("subEmail");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const oldMsg = document.getElementById("error");
+    if (oldMsg) oldMsg.remove();
+
+    const msg = document.createElement("p");
+    msg.id = "error";
+    msg.style.marginTop = "10px";
+
+    if (name.length < 2) {
+      msg.textContent = "Please enter a valid name (at least 2 letters).";
+      msg.style.color = "red";
+      form.appendChild(msg);
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      msg.textContent = "Please enter a valid email address.";
+      msg.style.color = "red";
+      form.appendChild(msg);
+      return;
+    }
+
+    msg.textContent = "Subscription successful!";
+    msg.style.color = "green";
+    form.appendChild(msg);
+    form.reset();
+
+
+    const achievement = document.getElementById("achievement");
+    const sound = document.getElementById("achievementSound");
+    sound.currentTime = 0;
+    sound.play();
+    achievement.classList.add("show");
+    setTimeout(() => achievement.classList.remove("show"), 4000);
+
+    setTimeout(() => popup.style.display = "none", 2000);
+  });
 
   
   document.querySelectorAll(".accordion-item").forEach((item) => {
@@ -68,4 +108,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".accordion-item.open .accordion-content")
       .forEach((p) => { p.style.maxHeight = p.scrollHeight + "px"; });
   });
+
+const themeManager = {
+  isLight: false,
+  toggleTheme() {
+    this.isLight = !this.isLight;
+    document.body.classList.toggle("light-theme", this.isLight);
+  },
+  getStatus() {
+    return this.isLight ? "Light Mode" : "Dark Mode";
+  }
+};
+
+document.getElementById("themeSwitch").addEventListener("change", () => {
+  themeManager.toggleTheme();
+  console.log("Current theme:", themeManager.getStatus());
 });
