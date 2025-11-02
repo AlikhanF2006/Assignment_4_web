@@ -7,7 +7,7 @@ body {
   background-color: #1b2838;
   color: #fff;
   font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 main {
@@ -16,14 +16,17 @@ main {
 
 footer {
   display: flex;
-  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 15px;
   background-color: rgb(2, 0, 24);
   border: none;
-  font-size: 16px;
-  line-height: 0.2;
-  padding: 10px 60px;
-  justify-content: space-between;
-  width: 100%;
+  font-size: 14px;
+  color: white;
+  z-index: 1000;
 }
 
 @media (max-width: 768px) {
@@ -32,9 +35,9 @@ footer {
     text-align: center;
     gap: 8px;
     line-height: 1.4;
-    padding: 14px 0;      
-    height: auto;         
-    width: 100vw;         
+    padding: 14px 0;
+    height: auto;
+    width: 100vw;
     margin: 0;
     left: 0;
     right: 0;
@@ -47,19 +50,6 @@ footer {
     font-size: 13px;
   }
 }
-
-#openPopup {
-  color: white;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-#openPopup:hover {
-  text-decoration: underline;
-}
-
 
 .accordion {
   width: 80%;
@@ -137,6 +127,66 @@ footer {
   padding: 1px 19px;
 }
 
+@media (max-width: 576px) {
+
+  .accordion {
+    width: 94%;
+    margin: 16px auto !important;
+    padding: 16px;
+    border-radius: 12px;
+    min-height: auto;
+    box-shadow: 0 0 18px rgba(0, 0, 0, .35);
+  }
+
+
+  .accordion h2 {
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+    letter-spacing: .3px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, .35);
+  }
+
+
+  .accordion-item {
+    margin-bottom: 10px;
+  }
+
+  .accordion-header {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .accordion-content {
+    font-size: 14px;
+  }
+
+  .accordion-item.open .accordion-content {
+    padding: 1px 12px;
+  }
+}
+
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .accordion {
+    width: 90%;
+    padding: 24px;
+  }
+
+  .accordion h2 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+  }
+
+  .accordion-header {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .accordion-item.open .accordion-content {
+    padding: 12px 14px;
+  }
+}
+
 .popup {
   display: none;
   position: fixed;
@@ -147,18 +197,18 @@ footer {
   background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .popup-content {
-  background: #2a475e;
-  color: #fff;
+  background: #90afd5;
+  color: #000;
   padding: 30px;
   border-radius: 10px;
   width: 350px;
   text-align: center;
   position: relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  z-index: 10000;
 }
 
 .close {
@@ -167,50 +217,77 @@ footer {
   top: 10px;
   font-size: 22px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-
-
-@media (max-width: 576px) {
- 
-  .accordion {
-    width: 94%;
-    margin: 16px auto !important;  
-    padding: 16px;                  
-    border-radius: 12px;
-    min-height: auto;               
-    box-shadow: 0 0 18px rgba(0,0,0,.35);
-  }
-
- 
-  .accordion h2 {
-    font-size: 1.35rem;             
-    margin-bottom: 14px;
-    letter-spacing: .3px;
-    text-shadow: 3px 3px 6px rgba(0,0,0,.35);
-  }
-
- 
-  .accordion-item { margin-bottom: 10px; }
-
-  .accordion-header {
-    padding: 10px 12px;             
-    font-size: 14px;                
-  }
-
-  .accordion-content {
-    font-size: 14px;
-  }
-
-  .accordion-item.open .accordion-content {
-    padding: 1px 12px;             
-  }
+.close:hover {
+  color: #e64545;
+  transform: scale(1.1);
 }
 
+#subscribeForm input {
+  width: 80%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
 
-@media (min-width: 577px) and (max-width: 768px) {
-  .accordion { width: 90%; padding: 24px; }
-  .accordion h2 { font-size: 1.6rem; margin-bottom: 18px; }
-  .accordion-header { padding: 12px 14px; font-size: 15px; }
-  .accordion-item.open .accordion-content { padding: 12px 14px; }
+#subscribeForm input:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 6px rgba(33, 150, 243, 0.6);
+}
+
+#subscribeForm button {
+  background: #2196f3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 8px;
+  transition: 0.3s;
+}
+
+#subscribeForm button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+#resetBtn {
+  background: #ff5252;
+}
+
+#resetBtn:hover {
+  background: #e64545;
+}
+
+.achievement {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1e2a3a, #3a5a9a);
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 9999;
+}
+
+.achievement-icon {
+  font-size: 28px;
+}
+
+.achievement.show {
+  bottom: 50px;
+  opacity: 1;
 }

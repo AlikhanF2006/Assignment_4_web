@@ -5,17 +5,6 @@ body {
     color: #fff;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-areas:
-        "header header"
-        "sidebar div"
-        "footer footer";
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-}
-
 header {
     grid-area: header;
     display: flex;
@@ -64,14 +53,16 @@ a:hover {
 }
 
 footer {
-    grid-area: footer;
-    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
     background-color: rgb(2, 0, 24);
     border: none;
     font-size: 14px;
-    line-height: 0.01;
-    margin-top: 40px;
-    /* добавлен верхний отступ */
+    color: white;
+    width: 100%;
+    margin-top: auto;
 }
 
 #greatest {
@@ -98,4 +89,109 @@ footer {
         width: 100%;
         height: auto;
     }
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: #90afd5;
+    color: #000;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 10000;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover {
+    color: #e64545;
+    transform: scale(1.1);
+}
+
+#subscribeForm input {
+    width: 80%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#subscribeForm input:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 6px rgba(33, 150, 243, 0.6);
+}
+
+#subscribeForm button {
+    background: #2196f3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 8px;
+    transition: 0.3s;
+}
+
+#subscribeForm button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+#resetBtn {
+    background: #ff5252;
+}
+
+#resetBtn:hover {
+    background: #e64545;
+}
+
+.achievement {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1e2a3a, #3a5a9a);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 9999;
+}
+
+.achievement-icon {
+    font-size: 28px;
+}
+
+.achievement.show {
+    bottom: 50px;
+    opacity: 1;
 }

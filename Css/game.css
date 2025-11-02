@@ -44,12 +44,6 @@ a:hover {
   color: white;
 }
 
-
-footer {
-  font-size: 14px;
-  line-height: 0.2;
-}
-
 .page-container {
   display: flex;
   justify-content: space-between;
@@ -361,28 +355,6 @@ input {
   }
 }
 
-
-
-
-
-@media (max-width: 992px) {
-  .navbar .container-fluid {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  .navbar-brand {
-    margin-left: 2px;
-  }
-
-  .navbar-toggler {
-    margin-right: 2px;
-  }
-}
-
-
-
-
 @media (max-width: 992px) {
   .requirements {
     background-color: #2a475e;
@@ -471,45 +443,6 @@ input {
   }
 }
 
-
-
-
-.navbar .btn-success {
-  background-color: #009879 !important;
-  color: #fff !important;
-  border: none !important;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 6px 14px;
-  transition: background 0.2s ease-in-out;
-}
-
-.navbar .btn-success:hover {
-  background-color: #00846b !important;
-}
-
-.navbar .btn-outline-light {
-  background-color: #0e141b !important;
-  color: #fff !important;
-  border: 1px solid #8b929a !important;
-  border-radius: 6px;
-  font-weight: 600;
-  padding: 6px 14px;
-  transition: all 0.2s ease-in-out;
-}
-
-.navbar .btn-outline-light:hover {
-  background-color: #1b2838 !important;
-  border-color: #fff !important;
-}
-
-
-
-
-
-
-
-
 .popup {
   display: none;
   position: fixed;
@@ -587,7 +520,6 @@ input {
   background: #e64545;
 }
 
-/* Achievement popup */
 .achievement {
   position: fixed;
   bottom: -100px;
@@ -616,11 +548,6 @@ input {
   opacity: 1;
 }
 
-
-
-
-
-
 #Subscribe {
   background-color: #5c7e10;
   color: #fff;
@@ -647,13 +574,14 @@ input {
 }
 
 footer {
-  background: rgb(2, 0, 24);
-  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 25px;
+  padding: 20px 15px;
+  background-color: rgb(2, 0, 24);
+  border: none;
   font-size: 14px;
+  color: white;
   width: 100%;
   margin-top: auto;
 }
@@ -669,8 +597,6 @@ footer {
 #openPopup:hover {
   text-decoration: underline;
 }
-
-
 
 @media (max-width: 768px) {
   footer {
@@ -696,9 +622,6 @@ footer {
   }
 }
 
-
-
-
 .rating {
   display: flex;
   gap: 6px;
@@ -716,8 +639,6 @@ footer {
   font-weight: bold;
   margin-top: 10px;
 }
-
-
 
 #rateBtn {
   background-color: #5c7e10;
@@ -740,10 +661,6 @@ footer {
   font-weight: 600;
   margin-top: 10px;
 }
-
-
-
-
 
 #contactForm {
   display: flex;
@@ -792,7 +709,6 @@ footer {
   transform: scale(1.03);
 }
 
-
 #status {
   text-align: center;
   margin-top: 10px;
@@ -801,21 +717,9 @@ footer {
   transition: opacity 0.4s ease;
 }
 
-
 #status.show {
   opacity: 1;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 #copyReq {
   background-color: #5c7e10;
