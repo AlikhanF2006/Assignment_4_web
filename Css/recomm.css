@@ -570,3 +570,69 @@ mark.fade-mark {
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body.light-theme .card{
+  background:#ffffff;                
+  color:#0e141b;                     
+  border:1px solid #1b2838;          
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+body.light-theme .card h3{ color:#0e141b; }
+body.light-theme .card p{  color:#334155; }
+
+
+body.light-theme .card .genre{
+  background:#0e141b;                
+  color:#ffcc66;
+  opacity: .95;                      
+}
+
+
+body.light-theme .card:hover,
+body.light-theme .card.active{
+  transform: translateY(-2px);
+  box-shadow:0 0 0 3px rgba(11,94,215,.15), 0 6px 18px rgba(0,0,0,.12);
+}
+
+
+body.light-theme .btn-outline-danger{
+  color:#e55400;
+  border-color:#fe5d00;
+  background:#fff;
+}
+body.light-theme .btn-outline-danger:hover,
+body.light-theme .btn-outline-danger.active{
+  color:#fff;
+  background:#fe5d00;
+  border-color:#fe5d00;
+}
+
+
+body.light-theme .search-suggestions{
+  background:#fff;
+  border-color:#9bb0d3;
+}
+body.light-theme .search-suggestions li{ color:#0e141b; }
+body.light-theme .search-suggestions li:hover{ background:#eef4ff; }
+
+
+body.light-theme h1, 
+body.light-theme h2, 
+body.light-theme h3{ color:#0e141b; }
+
+
+body.light-theme #progressBar{ box-shadow:0 0 10px rgba(0,0,0,.25); }

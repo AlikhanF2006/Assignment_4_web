@@ -953,3 +953,54 @@ footer {
   color: #ffffff;
   font-family: 'Segoe UI', sans-serif;
 }
+
+
+body.light-theme .stats {
+  color: #000;
+}
+
+
+body.light-theme .requirements {
+  background: #dbe9ff;             
+  border: 2px solid #1b2838 !important;
+  color: #0e141b;                  
+}
+
+
+body.light-theme .requirements .req-block h3 {
+  color: #0e141b;
+}
+
+
+body.light-theme .comments {
+  background: #dbe9ff;             
+  border: 1px solid #1b2838;       
+  color: #0e141b;                  
+}
+
+body.light-theme .comments h2 {
+  color: #0e141b;
+}
+
+
+body.light-theme #contactForm input[type="email"],
+body.light-theme #contactForm textarea {
+  background-color: #ffffff;      
+  border: 1px solid #9bb0d3;      
+  color: #0e141b;                 
+  border-radius: 8px;
+}
+
+body.light-theme #contactForm input::placeholder,
+body.light-theme #contactForm textarea::placeholder {
+  color: #5a6b82;                 
+}
+
+body.light-theme #contactForm input:focus,
+body.light-theme #contactForm textarea:focus {
+  outline: none;
+  border-color: #4d8ef7;          
+  box-shadow: 0 0 5px rgba(77, 142, 247, 0.5);
+}
+
+

@@ -11,7 +11,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background:recommendation.html171a21">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#171a21">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="recommendation.html">STEAM</a>
 
@@ -97,7 +97,7 @@
         <main class="col-lg-10 col-12 ps-lg-5 pe-lg-5 py-4">
           <h2 id="store" class="text-center mb-4">Games</h2>
 
-          <form id="filters" class="row g-3 align-items-end mb-3" role="search" aria-label="Game search and filters"
+          <form id="filters" class="row g-3 align-items-end mb-3 justify-content-center" role="search" aria-label="Game search and filters"
             action="recommendation.html" method="get">
             <div class="col-12 col-lg-6">
               <label for="q" class="form-label mb-1">Search</label>
@@ -107,56 +107,6 @@
                   <button type="submit" class="btn btn-primary">Search</button>
                 </div>
                 <ul id="suggestions" class="search-suggestions"></ul>
-              </div>
-            </div>
-
-            <div class="col-6 col-lg-2">
-              <fieldset class="m-0 p-0 border-0">
-                <legend class="form-label mb-1">Price</legend>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="price" id="priceFree" value="free" checked />
-                  <label class="form-check-label" for="priceFree">Free</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="price" id="pricePaid" value="paid" />
-                  <label class="form-check-label" for="pricePaid">Paid</label>
-                </div>
-              </fieldset>
-            </div>
-
-            <div class="col-6 col-lg-4">
-              <label for="genreStrip" class="form-label mb-1">Quick genres</label>
-              <div id="genreStrip" class="genre-strip-compact d-flex flex-nowrap overflow-auto gap-2 py-1" role="group"
-                aria-label="Quick genres">
-                <input type="checkbox" class="btn-check" id="gAction" name="quick_genres[]" value="action"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gAction">Action</label>
-
-                <input type="checkbox" class="btn-check" id="gIndie" name="quick_genres[]" value="indie"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gIndie">Indie</label>
-
-                <input type="checkbox" class="btn-check" id="gRPG" name="quick_genres[]" value="rpg"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gRPG">RPG</label>
-
-                <input type="checkbox" class="btn-check" id="gRacing" name="quick_genres[]" value="racing"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gRacing">Racing</label>
-
-                <input type="checkbox" class="btn-check" id="gStrat" name="quick_genres[]" value="strategy"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gStrat">Strategy</label>
-
-                <input type="checkbox" class="btn-check" id="gSurv" name="quick_genres[]" value="survival"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gSurv">Survival</label>
-
-                <input type="checkbox" class="btn-check" id="gHorror" name="quick_genres[]" value="horror"
-                  autocomplete="off" />
-                <label class="btn btn-sm btn-outline-light flex-shrink-0" for="gHorror">Horror</label>
               </div>
             </div>
           </form>
