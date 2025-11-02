@@ -173,7 +173,7 @@ const themeManager = {
 document.getElementById("themeSwitch").addEventListener("change", () => {
   themeManager.toggleTheme();
   console.log("Current theme:", themeManager.getStatus());
-});
+}); 
 
 
 
