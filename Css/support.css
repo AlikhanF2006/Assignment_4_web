@@ -1,14 +1,199 @@
-html,
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #1b2838;
-  color: #fff;
   font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  min-height: 100vh;
+  background: #1b2838;
+  color: #fff;
+  transition: 0.3s ease;
 }
+
+body.light-theme {
+  background-color: #90afd5;
+  color: #111111;
+}
+
+.switch {
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #444;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  background: #0d6efd;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 9999;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #171a21;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.top-menu a {
+  color: #c7d5e0;
+  text-decoration: none;
+}
+
+.top-menu a:hover {
+  color: #fff;
+}
+
+.install {
+  background: #5c7e10;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.install:hover {
+  background: #4b6b0f;
+}
+
+.actions a {
+  color: #c7d5e0;
+  text-decoration: none;
+}
+
+.actions a:hover {
+  color: #fff;
+}
+
+@media (max-width: 991.98px) {
+  .theme-toggle-item {
+    order: 99;
+    width: 100%;
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0 12px 1.25rem;
+  }
+
+  .theme-toggle-item .switch {
+    position: relative !important;
+    margin: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+
+  .theme-toggle-item::before {
+    content: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .switch {
+    position: absolute !important;
+    top: 10px;
+    right: 200px;
+  }
+}
+
+header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background: #171a21;
+ }
+
+ .logo {
+   font-size: 24px;
+   font-weight: 700;
+ }
+
+ .top-menu a {
+   color: #c7d5e0;
+   text-decoration: none;
+ }
+
+ .top-menu a:hover {
+   color: #fff;
+ }
+
+ .install {
+   background: #5c7e10;
+   color: #fff;
+   border: 0;
+   cursor: pointer;
+   border-radius: 3px;
+ }
+
+ .install:hover {
+   background: #4b6b0f;
+ }
+
+ .actions a {
+   color: #c7d5e0;
+   text-decoration: none;
+ }
+
+ .actions a:hover {
+   color: #fff;
+ }
 
 main {
   flex: 1;
@@ -98,7 +283,6 @@ footer {
   background: #6e94c0;
 }
 
-
 .accordion-header::after {
   content: "▼";
   transition: transform 0.3s ease;
@@ -116,7 +300,6 @@ footer {
   color: #0a0b0c;
   transition: max-height 0.4s ease, padding 0.3s ease;
 }
-
 
 .accordion-content p {
   margin: 0;
@@ -138,14 +321,12 @@ footer {
     box-shadow: 0 0 18px rgba(0, 0, 0, .35);
   }
 
-
   .accordion h2 {
     font-size: 1.35rem;
     margin-bottom: 14px;
     letter-spacing: .3px;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, .35);
   }
-
 
   .accordion-item {
     margin-bottom: 10px;
@@ -164,7 +345,6 @@ footer {
     padding: 1px 12px;
   }
 }
-
 
 @media (min-width: 577px) and (max-width: 768px) {
   .accordion {

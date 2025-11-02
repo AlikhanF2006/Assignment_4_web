@@ -305,3 +305,21 @@ $(document).ready(function () {
     $counter.text(current);
   }, 2000);
 });
+
+
+
+const themeManager = {
+  isLight: false,
+  toggleTheme() {
+    this.isLight = !this.isLight;
+    document.body.classList.toggle("light-theme", this.isLight);
+  },
+  getStatus() {
+    return this.isLight ? "Light Mode" : "Dark Mode";
+  }
+};
+
+document.getElementById("themeSwitch").addEventListener("change", () => {
+  themeManager.toggleTheme();
+  console.log("Current theme:", themeManager.getStatus());
+});

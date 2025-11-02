@@ -20,7 +20,6 @@ body.light-theme {
   height: 34px;
 }
 
-
 .switch input {
   opacity: 0;
   width: 0;
@@ -189,7 +188,6 @@ footer {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(255, 255, 255, .3);
 }
-
 
 .image-container {
   position: relative;
@@ -438,7 +436,6 @@ footer {
   }
 }
 
-
 @media (min-width: 992px) {
   .switch {
     position: absolute !important;
@@ -510,7 +507,6 @@ footer {
     font-size: 13px;
   }
 }
-
 
 mark.fade-mark {
   background-color: #ffcc00;

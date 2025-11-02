@@ -1,3 +1,4 @@
+
 function updateClock() {
   const now = new Date();
   const hh = String(now.getHours()).padStart(2, "0");
@@ -12,127 +13,114 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-const form = document.getElementById("subscribeForm");
-const nameInput = document.getElementById("subName");
-const emailInput = document.getElementById("subEmail");
 const popup = document.getElementById("popup");
-const openPopupButtons = document.getElementsByClassName("openPopup");
-const closePopup = document.getElementById("closePopup");
+  const closePopup = document.getElementById("closePopup");
+  const openPopupButtons = document.getElementsByClassName("openPopup");
 
-
-Array.from(openPopupButtons).forEach((btn) => {
-  btn.addEventListener("click", () => {
-    popup.style.display = "flex";
+  Array.from(openPopupButtons).forEach(btn => {
+    btn.addEventListener("click", () => {
+      popup.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
   });
-});
-closePopup.addEventListener("click", () => (popup.style.display = "none"));
-window.addEventListener("click", (e) => {
-  if (e.target === popup) popup.style.display = "none";
-});
+  closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+    document.body.style.overflow = "";
+  });
+  window.addEventListener("click", e => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
 
 
-$(document).ready(function () {
-  $("#subscribeForm").on("submit", function (e) {
+  const form = document.getElementById("subscribeForm");
+  const nameInput = document.getElementById("subName");
+  const emailInput = document.getElementById("subEmail");
+
+  form.addEventListener("submit", e => {
     e.preventDefault();
-
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const oldMsg = document.getElementById("error");
     if (oldMsg) oldMsg.remove();
 
-    const message = document.createElement("p");
-    message.id = "error";
-    message.style.marginTop = "10px";
+    const msg = document.createElement("p");
+    msg.id = "error";
+    msg.style.marginTop = "10px";
 
     if (name.length < 2) {
-      message.textContent = "Please enter a valid name (at least 2 letters).";
-      message.style.color = "red";
-      form.appendChild(message);
+      msg.textContent = "Please enter a valid name (at least 2 letters).";
+      msg.style.color = "red";
+      form.appendChild(msg);
       return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      message.textContent = "Please enter a valid email address.";
-      message.style.color = "red";
-      form.appendChild(message);
+      msg.textContent = "Please enter a valid email address.";
+      msg.style.color = "red";
+      form.appendChild(msg);
       return;
     }
 
-
-    const btn = $("#subscribeForm button[type='submit']");
-    btn.prop("disabled", true);
-    const originalText = btn.text();
-    btn.html(`<span class="spinner"></span> Please wait...`);
-
-
-    setTimeout(() => {
-      btn.prop("disabled", false);
-      btn.text(originalText);
+    msg.textContent = "Subscription successful!";
+    msg.style.color = "green";
+    form.appendChild(msg);
+    form.reset();
 
 
-      message.textContent = "Subscription successful!";
-      message.style.color = "green";
-      form.appendChild(message);
-      form.reset();
+    const achievement = document.getElementById("achievement");
+    const sound = document.getElementById("achievementSound");
+    sound.currentTime = 0;
+    sound.play();
+    achievement.classList.add("show");
+    setTimeout(() => achievement.classList.remove("show"), 4000);
 
-
-      const achievement = document.getElementById("achievement");
-      const sound = document.getElementById("achievementSound");
-
-      sound.currentTime = 0;
-      sound.play();
-
-      achievement.classList.add("show");
-      setTimeout(() => achievement.classList.remove("show"), 4000);
-
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 2000);
-    }, 1500);
+    setTimeout(() => popup.style.display = "none", 2000);
   });
-});
 
+  
+  document.querySelectorAll(".accordion-item").forEach((item) => {
+    const btn   = item.querySelector(".accordion-header");
+    const panel = item.querySelector(".accordion-content");
+    if (!btn || !panel) return;
 
+    btn.type = "button";
 
-const resetBtn = document.getElementById("resetBtn");
-resetBtn.addEventListener("click", () => {
-  document.querySelectorAll("#subscribeForm input").forEach(input => input.value = "");
-  const error = document.getElementById("error");
-  if (error) error.remove();
+    btn.addEventListener("click", () => {
+      const willOpen = !item.classList.contains("open");
+      item.classList.toggle("open");
 
-  const msg = document.createElement("p");
-  msg.textContent = "Form cleared!";
-  msg.style.color = "#00bfff";
-  msg.style.marginTop = "10px";
-  msg.id = "error";
-  document.getElementById("subscribeForm").appendChild(msg);
-});
-
-
-document.querySelectorAll(".accordion-item").forEach((item) => {
-  const btn = item.querySelector(".accordion-header");
-  const panel = item.querySelector(".accordion-content");
-  if (!btn || !panel) return;
-
-  btn.type = "button";
-
-  btn.addEventListener("click", () => {
-    const willOpen = !item.classList.contains("open");
-    item.classList.toggle("open");
-
-    if (willOpen) {
-
-      panel.style.maxHeight = null;
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } else {
-      panel.style.maxHeight = null;
-    }
+      if (willOpen) {
+        
+        panel.style.maxHeight = null;
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } else {
+        panel.style.maxHeight = null;
+      }
+    });
   });
-});
 
+  
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".accordion-item.open .accordion-content")
+      .forEach((p) => { p.style.maxHeight = p.scrollHeight + "px"; });
+  });
 
-window.addEventListener("resize", () => {
-  document.querySelectorAll(".accordion-item.open .accordion-content")
-    .forEach((p) => { p.style.maxHeight = p.scrollHeight + "px"; });
+const themeManager = {
+  isLight: false,
+  toggleTheme() {
+    this.isLight = !this.isLight;
+    document.body.classList.toggle("light-theme", this.isLight);
+  },
+  getStatus() {
+    return this.isLight ? "Light Mode" : "Dark Mode";
+  }
+};
+
+document.getElementById("themeSwitch").addEventListener("change", () => {
+  themeManager.toggleTheme();
+  console.log("Current theme:", themeManager.getStatus());
 });

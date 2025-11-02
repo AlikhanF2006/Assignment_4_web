@@ -149,6 +149,23 @@ $(document).ready(function () {
 
 
 
+const themeManager = {
+  isLight: false,
+  toggleTheme() {
+    this.isLight = !this.isLight;
+    document.body.classList.toggle("light-theme", this.isLight);
+  },
+  getStatus() {
+    return this.isLight ? "Light Mode" : "Dark Mode";
+  }
+};
+
+document.getElementById("themeSwitch").addEventListener("change", () => {
+  themeManager.toggleTheme();
+  console.log("Current theme:", themeManager.getStatus());
+});
+
+
 
 const games = [
   { name: "CS2", link: "CSindex.html" },
