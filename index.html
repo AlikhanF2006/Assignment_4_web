@@ -28,6 +28,12 @@
           <li class="nav-item"><a class="nav-link" href="notfound.html">ABOUT</a></li>
           <li class="nav-item"><a class="nav-link" href="support.html">SUPPORT</a></li>
           <li class="nav-item"><a class="nav-link openPopup" style="cursor:pointer;">SUBSCRIBE</a></li>
+          <li class="nav-item theme-toggle-item text-center">
+            <label class="switch mb-0">
+              <input type="checkbox" id="themeSwitch">
+              <span class="slider"></span>
+            </label>
+          </li>
         </ul>
 
         <div class="d-flex ms-lg-auto gap-2">
@@ -100,7 +106,7 @@
                   <input id="q" name="q" type="search" class="form-control" placeholder="Search games…" />
                   <button type="submit" class="btn btn-primary">Search</button>
                 </div>
-                  <ul id="suggestions" class="search-suggestions"></ul>
+                <ul id="suggestions" class="search-suggestions"></ul>
               </div>
             </div>
 
@@ -250,26 +256,26 @@
     <script src="script.js"></script>
 
     <div id="popup" class="popup">
-     <div class="popup-content">
-      <span id="closePopup" class="close">&times;</span>
-      <h3>Subscribe to our site</h3>
+      <div class="popup-content">
+        <span id="closePopup" class="close">&times;</span>
+        <h3>Subscribe to our site</h3>
         <form id="subscribeForm">
-        <input id="subName" type="text" placeholder="Your Name" required><br>
-        <input id="subEmail" type="email" placeholder="Your Email" required><br>
-        <button id="subscribe" type="submit">Subscribe</button>
-        <button id="resetBtn" type="button">Reset</button>
-       </form>
+          <input id="subName" type="text" placeholder="Your Name" required><br>
+          <input id="subEmail" type="email" placeholder="Your Email" required><br>
+          <button id="subscribe" type="submit">Subscribe</button>
+          <button id="resetBtn" type="button">Reset</button>
+        </form>
       </div>
     </div>
 
-<div id="achievement" class="achievement">
-  <div class="achievement-icon">🏆</div>
-  <div class="achievement-text">
-    <strong>Achievement Unlocked!</strong><br>
-    You joined the club 
-    <audio id="achievementSound" src="Sounds/3283ff775b4b474.mp3" preload="auto"></audio>
-  </div>
-</div>
+    <div id="achievement" class="achievement">
+      <div class="achievement-icon">🏆</div>
+      <div class="achievement-text">
+        <strong>Achievement Unlocked!</strong><br>
+        You joined the club
+        <audio id="achievementSound" src="Sounds/3283ff775b4b474.mp3" preload="auto"></audio>
+      </div>
+    </div>
 
 </body>
 
