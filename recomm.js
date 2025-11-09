@@ -199,68 +199,58 @@ const games = [
   { name: "Dota 2", genre: "MOBA", link: "notfound.html" }
 ];
 
-$('#searchInput').on('keyup', function () {
-  const input = $(this).val().toLowerCase().trim();
-  const suggestions = $('#suggestions');
-  suggestions.empty();
-  let anyVisible = false;
 
-  $('.card').each(function () {
-    const title = $(this).find('h3').text().toLowerCase();
-    const genre = $(this).find('.genre').text().toLowerCase();
-    const regex = new RegExp(`\\b${input}`, 'i');
-    const match = regex.test(title) || regex.test(genre);
+const LS = {
+  lastSearch: 'steam:lastSearch',
+  recent: 'steam:recentSearches',
+  lastFilter: 'steam:lastFilter'
+};
 
-    $(this).toggle(match);
-    if (match) anyVisible = true;
-  });
+function saveRecent(term) {
+  if (!term) return;
+  let arr = JSON.parse(localStorage.getItem(LS.recent) || '[]');
+  arr = [term, ...arr.filter(t => t !== term)].slice(0, 5); 
+  localStorage.setItem(LS.recent, JSON.stringify(arr));
+}
+
+function getRecent() {
+  return JSON.parse(localStorage.getItem(LS.recent) || '[]');
+}
 
 
-  $('.card h3').each(function () {
-    const originalText = $(this).text();
-    if (input.length > 0) {
-      const regex = new RegExp(`(${input})`, 'gi');
-      const highlighted = originalText.replace(regex, '<mark class="fade-mark">$1</mark>');
-      $(this).html(highlighted);
-    } else {
-      $(this).html(originalText);
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+const prev = localStorage.getItem(LS.lastSearch) || '';
+if (prev) {
+  const $inp = $('#searchInput');
+  $inp.val(prev).trigger('input'); 
 
-  $('.no-cards-msg').remove();
-  if (!anyVisible && input.length > 0) $('.card').hide();
+  
+  const listAll = matchByWordStart(prev, DATA_ALL);
+  const names   = new Set(listAll.map(g => g.name.toLowerCase()));
+  const onlyExisting = DATA_CARDS.filter(g => names.has(g.name.toLowerCase()));
+  updateGrid(prev, onlyExisting);
+} else {
+  updateGrid('', DATA_CARDS);
+}
 
-  if (input.length === 0) {
-    suggestions.hide();
-    return;
+
+  
+  const lastF = localStorage.getItem(LS.lastFilter);
+  if (lastF) {
+    const $btn = $(`.btn-group .btn[data-filter="${lastF}"]`);
+    if ($btn.length) $btn.trigger('click');
   }
-
-  const regex = new RegExp(`\\b${input}`, 'i');
-  const matches = games.filter(g => regex.test(g.name.toLowerCase()) || regex.test(g.genre.toLowerCase()));
-
-  if (matches.length === 0) {
-    suggestions.append(`<li class="no-result text-muted text-center py-2">No results found</li>`);
-  } else {
-    matches.forEach(g => {
-      const highlightRegex = new RegExp(`\\b(${input})`, 'gi');
-      const highlighted = g.name.replace(highlightRegex, `<b style="color:#007bff;">$1</b>`);
-      suggestions.append(
-        `<li data-link="${g.link}" class="py-2 px-3" style="cursor:pointer;">${highlighted} <span style="color:#666;">(${g.genre})</span></li>`
-      );
-    });
-  }
-
-  suggestions.show();
-
-  $('.search-suggestions li').on('click', function () {
-    const link = $(this).data('link');
-    if (link) window.location.href = link;
-  });
 });
+
+
+
 
 $('#searchBtn').on('click', function () {
   const input = $('#searchInput').val().toLowerCase().trim();
   if (!input) return;
+
+  localStorage.setItem(LS.lastSearch, input);
+  saveRecent(input);
 
   const regex = new RegExp(`\\b${input}`, 'i');
   const foundGame = games.find(g => regex.test(g.name.toLowerCase()) || regex.test(g.genre.toLowerCase()));
@@ -279,10 +269,6 @@ $(document).on('click', function (e) {
 });
 
 
-
-
-
-
 $(window).on("scroll load", function () {
   $("img.lazy").each(function () {
     const img = $(this);
@@ -297,6 +283,251 @@ $(window).on("scroll load", function () {
   });
 });
 
+
+
+const $input   = $('#searchInput');
+const $suggest = $('#suggestions');
+
+
+function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+
+const cardsIndex = $('.card-container .card').map(function () {
+  const $c = $(this);
+  return {
+    name:  $c.find('h3').text().trim(),
+    genre: $c.find('.genre').text().trim() || '',
+    link:  $c.attr('href') || '#'
+  };
+}).get();
+
+
+const DATA_ALL   = games;       
+
+const DATA_CARDS = cardsIndex;
+
+
+function matchByWordStart(q, list){
+  const rx = new RegExp(`\\b${escRe(q)}`, 'i');
+  return list.filter(g => rx.test(g.name) || rx.test(g.genre));
+}
+
+
+let filtered    = [];   
+let activeIndex = -1;   
+
+
+function renderRecent() {
+  const arr = getRecent();                 
+  $suggest.empty();
+  if (!arr.length){ $suggest.hide(); activeIndex = -1; return; }
+
+  $suggest.append('<li class="suggest-title">Recent searches</li>');
+  arr.forEach((t, i) => {
+    const li = $(
+      `<li class="recent-item py-2 px-3" data-index="${i}" data-name="${t}" style="cursor:pointer;">${t}</li>`
+    );
+    $suggest.append(li);
+  });
+
+  $suggest.show();
+  activeIndex = 0;
+  updateActiveRow();
+}
+
+function renderSuggestions(list, query = '') {
+  $suggest.empty();
+  if (!list.length) { $suggest.hide(); activeIndex = -1; return; }
+
+  
+  const rx = query ? new RegExp(`\\b(${escRe(query)})`, 'ig') : null;
+
+  list.forEach((g, i) => {
+    const name  = rx ? g.name.replace(rx, '<span class="suggest-hl">$1</span>')  : g.name;
+    const genre = rx ? g.genre.replace(rx,'<span class="suggest-hl">$1</span>') : g.genre;
+
+    const li = $(`
+      <li class="py-2 px-3" data-index="${i}" style="cursor:pointer;">
+        ${name} <span style="color:#666;">(${genre})</span>
+      </li>
+    `);
+    $suggest.append(li);
+  });
+
+  $suggest.show();
+}
+
+
+
+function filterBy(query){
+  const q = query.trim().toLowerCase();
+  if (!q){
+    renderRecent();
+    updateGrid('', DATA_CARDS); 
+    return;
+  }
+
+  
+  filtered = matchByWordStart(q, DATA_ALL);
+  activeIndex = filtered.length ? 0 : -1;
+  renderSuggestions(filtered, q);
+  updateActiveRow();
+
+  
+  const names = new Set(filtered.map(g => g.name.toLowerCase()));
+  const onlyExisting = DATA_CARDS.filter(g => names.has(g.name.toLowerCase()));
+  updateGrid(q, onlyExisting);
+}
+
+
+
+
+function updateActiveRow() {
+  $suggest.find('li').removeClass('is-active');
+
+  
+  let $rows = $suggest.find('li').not('.suggest-title');
+
+  if (activeIndex >= 0 && activeIndex < $rows.length) {
+    const $li = $rows.eq(activeIndex).addClass('is-active');
+
+    
+    const cTop = $suggest.scrollTop();
+    const cBot = cTop + $suggest.innerHeight();
+    const eTop = $li.position().top + cTop;
+    const eBot = eTop + $li.outerHeight();
+    if (eTop < cTop) $suggest.scrollTop(eTop);
+    else if (eBot > cBot) $suggest.scrollTop(eBot - $suggest.innerHeight());
+  }
+}
+
+
+function applySelectionToInput() {
+  
+  const $rows = $suggest.find('li').not('.suggest-title');
+  if (!$rows.length || activeIndex < 0) return;
+
+  const $li = $rows.eq(activeIndex);
+
+  
+  if ($li.hasClass('recent-item')) {
+    $input.val($li.data('name'));
+    return;
+  }
+
+  
+  if (filtered[activeIndex]) {
+    $input.val(filtered[activeIndex].name);
+  }
+}
+
+
+
+
+$input.on('focus', function(){
+  if (!$(this).val().trim()) renderRecent();
+});
+
+
+$input.on('input', function () {
+  filterBy($(this).val());
+});
+
+
+$input.on('keydown', function (e) {
+  if (!$suggest.is(':visible')) return;
+
+  const key = e.key;
+  
+  const $rows = $suggest.find('li').not('.suggest-title');
+  if (!$rows.length) return;
+
+  if (key === 'ArrowDown') {
+    e.preventDefault();
+    activeIndex = (activeIndex + 1) % $rows.length;
+    updateActiveRow();
+    applySelectionToInput();     
+  }
+  else if (key === 'ArrowUp') {
+    e.preventDefault();
+    activeIndex = (activeIndex - 1 + $rows.length) % $rows.length;
+    updateActiveRow();
+    applySelectionToInput();
+  }
+  else if (key === 'Enter') {
+    e.preventDefault();
+
+    const $li = $rows.eq(activeIndex);
+    
+    if ($li.hasClass('recent-item')) {
+      const term = $li.data('name');
+      $input.val(term);
+      $suggest.hide();
+      filterBy(term);
+      return;
+    }
+
+    
+    if (filtered[activeIndex]) {
+      const chosen = filtered[activeIndex];
+      $input.val(chosen.name);
+
+      localStorage.setItem(LS.lastSearch, chosen.name.toLowerCase());
+      saveRecent(chosen.name.toLowerCase());
+
+      $suggest.hide();
+      window.location.href = chosen.link;
+    }
+  }
+  else if (key === 'Escape') {
+    $suggest.hide();
+  }
+});
+
+
+$suggest.on('mouseenter', 'li:not(.suggest-title)', function () {
+  
+  const $rows = $suggest.find('li').not('.suggest-title');
+  activeIndex = $rows.index(this);
+  updateActiveRow();
+});
+
+$suggest.on('mousedown', 'li:not(.suggest-title)', function (e) {
+  e.preventDefault();        
+  applySelectionToInput();   
+  $input.focus();            
+});
+
+
+$suggest.on('click', 'li.recent-item', function(){
+  const term = $(this).data('name');
+  if (!term) return;
+  $input.val(term);
+  $suggest.hide();
+  filterBy(term);
+});
+
+$suggest.on('click', 'li:not(.suggest-title):not(.recent-item)', function () {
+  const $rows = $suggest.find('li').not('.suggest-title');
+  const idx = $rows.index(this);
+  if (filtered[idx]) {
+    const chosen = filtered[idx];
+    $input.val(chosen.name);
+
+    localStorage.setItem(LS.lastSearch, chosen.name.toLowerCase());
+    saveRecent(chosen.name.toLowerCase());
+
+    $suggest.hide();
+    window.location.href = chosen.link;
+  }
+});
+
+
+$(document).on('click', function (e) {
+  if (!$(e.target).closest('#searchInput, #suggestions').length) {
+    $suggest.hide();
+  }
+});
 
 
 $(window).on("scroll", function () {
@@ -315,6 +546,9 @@ document.addEventListener("DOMContentLoaded", function () {
   buttons.forEach(button => {
     button.addEventListener("click", () => {
       const filter = button.getAttribute("data-filter");
+
+      localStorage.setItem(LS.lastFilter, filter);
+
 
       buttons.forEach(btn => btn.classList.remove("active"));
       button.classList.add("active");
@@ -374,3 +608,28 @@ $(document).ready(function () {
     }, 1500);
   });
 });
+
+
+function updateGrid(query, list){
+  const q  = (query || '').trim().toLowerCase();
+  const set = new Set(list.map(g => g.name.toLowerCase()));
+  const rx  = q ? new RegExp(`\\b(${escRe(q)})`, 'ig') : null;
+
+  $('.card-container .card').each(function(){
+    const $card = $(this);
+    const $h3   = $card.find('h3');
+
+    
+    if (!$h3.data('orig')) $h3.data('orig', $h3.text());
+    const orig = $h3.data('orig');
+
+    const show = !q || set.has(orig.toLowerCase());
+    $card.toggle(show);
+
+    if (show && rx){
+      $h3.html(orig.replace(rx, '<mark class="fade-mark">$1</mark>'));
+    } else {
+      $h3.html(orig);
+    }
+  });
+}

@@ -722,3 +722,31 @@ body.light-theme #progressBar{ box-shadow:0 0 10px rgba(0,0,0,.25); }
   }
 }
 
+.search-suggestions li.is-active {
+  background:#e9f0ff;
+}
+
+#suggestions .suggest-title{
+  font-weight:600;
+  font-size:.95rem;
+  color:#98a6b3;
+  cursor:default;
+  padding:8px 12px;
+}
+#suggestions li.is-active{ background:#e9f1ff; }
+
+
+.fade-mark {
+  background: transparent;
+  color: #0d6efd;        
+  font-weight: 700;
+}
+
+
+#suggestions .suggest-hl{
+  color:#2b6fff;         
+  font-weight:700;       
+  background:transparent;
+}
+
+
