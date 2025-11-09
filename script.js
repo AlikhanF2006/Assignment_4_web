@@ -183,39 +183,171 @@ const games = [
   { name: "Dota 2", link: "notfound.html" }
 ];
 
-$('#q').on('keyup', function () {
-  const input = $(this).val().toLowerCase().trim();
-  const suggestions = $('#suggestions');
-  suggestions.empty();
 
-  if (input.length === 0) {
-    suggestions.removeClass('show');
-    return;
+
+(function(){
+  const LS = { last:'search:last', recent:'search:recent' };
+  const $inp  = $('#q');
+  const $list = $('#suggestions');
+
+  function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function saveRecent(term){
+    const t = term.trim().toLowerCase();
+    if(!t) return;
+    let arr = JSON.parse(localStorage.getItem(LS.recent) || '[]');
+    arr = [t, ...arr.filter(x => x!==t)].slice(0,5);
+    localStorage.setItem(LS.recent, JSON.stringify(arr));
+  }
+  function getRecent(){ return JSON.parse(localStorage.getItem(LS.recent)||'[]'); }
+
+  
+  function matchByWordStart(q){
+    const rx = new RegExp(`\\b${escRe(q)}`,'i');
+    return games.filter(g => rx.test(g.name));
   }
 
+  let matches = [];
+  let activeIndex = -1;
 
-  const matches = games.filter(g =>
-    g.name.toLowerCase().split(/\s+/).some(word => word.startsWith(input))
-  );
-
-  if (matches.length === 0) {
-    suggestions.append(`<li class="no-result">No results found</li>`);
-  } else {
-    matches.forEach(g => {
-      const regex = new RegExp(`\\b(${input})`, 'gi');
-      const highlighted = g.name.replace(regex, '<b style="color:#66c0f4;">$1</b>');
-      suggestions.append(`<li data-link="${g.link}">${highlighted}</li>`);
+  function render(list, q=''){
+    $list.empty();
+    if(!list.length){ $list.removeClass('show'); activeIndex=-1; return; }
+    const rx = q ? new RegExp(`\\b(${escRe(q)})`,'ig') : null;
+    list.forEach((g,i)=>{
+      const name = rx ? g.name.replace(rx,'<span class="suggest-hl">$1</span>') : g.name;
+      $list.append(`<li data-index="${i}" data-link="${g.link}" tabindex="-1">${name}</li>`);
     });
+    $list.addClass('show');
+    activeIndex = 0;
+    updateActiveRow();
   }
 
-  suggestions.addClass('show');
+  function renderRecent(){
+    const arr = getRecent();
+    $list.empty();
+    if(!arr.length){ $list.removeClass('show'); activeIndex=-1; return; }
+    $list.append('<li class="suggest-title" tabindex="-1">Recent searches</li>');
+    arr.forEach(t => $list.append(`<li class="recent-item" data-name="${t}" tabindex="-1">${t}</li>`));
+    $list.addClass('show');
+    activeIndex = 1; 
+    updateActiveRow();
+  }
 
+  function updateActiveRow(){
+    const $rows = $list.find('li').not('.suggest-title');
+    $rows.removeClass('is-active');
+    if(activeIndex<0 || activeIndex >= $rows.length) return;
+    $rows.eq(activeIndex).addClass('is-active');
+  }
 
-  $('.search-suggestions li').on('click', function () {
-    const link = $(this).data('link');
-    if (link) window.location.href = link;
+  
+  $inp.on('input', function(){
+    const q = $(this).val().trim().toLowerCase();
+    if(!q){ renderRecent(); return; }
+    matches = matchByWordStart(q);
+    render(matches, q);
   });
-});
+
+  
+  $inp.on('focus', function(){
+    if(!$(this).val().trim()) renderRecent();
+  });
+
+  
+  $inp.on('keydown', function(e){
+    if(!$list.hasClass('show')) return;
+    const $rows = $list.find('li').not('.suggest-title');
+    if(!$rows.length) return;
+
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % $rows.length;
+      updateActiveRow();
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + $rows.length) % $rows.length;
+      updateActiveRow();
+    } else if(e.key === 'Enter'){
+      e.preventDefault();
+      const $li = $rows.eq(activeIndex);
+
+      if($li.hasClass('recent-item')){
+        const term = $li.data('name');
+        $inp.val(term);
+        matches = matchByWordStart(term);
+        render(matches, term);
+        return;
+      }
+
+      const idx = parseInt($li.data('index'),10);
+      const choice = matches[idx];
+      if(choice){
+        localStorage.setItem(LS.last, choice.name.toLowerCase());
+        saveRecent(choice.name);
+        window.location.href = $li.data('link');
+      }
+    } else if(e.key === 'Escape'){
+      $list.removeClass('show').empty();
+    }
+  });
+
+  
+  $list.on('mousedown','li:not(.suggest-title)', e => e.preventDefault());
+  $list.on('click','li.recent-item', function(){
+    const term = $(this).data('name');
+    $inp.val(term);
+    matches = matchByWordStart(term);
+    render(matches, term);
+  });
+  $list.on('click','li:not(.suggest-title):not(.recent-item)', function(){
+    const idx = parseInt($(this).data('index'),10);
+    const choice = matches[idx];
+    if(choice){
+      localStorage.setItem(LS.last, choice.name.toLowerCase());
+      saveRecent(choice.name);
+      const link = $(this).data('link');
+      if(link) window.location.href = link;
+    }
+  });
+
+  
+  $(document).on('click', function(e){
+    if(!$(e.target).closest('#q, #suggestions').length){
+      $list.empty().removeClass('show');
+    }
+  });
+
+  
+  $('#filters').on('submit', function(e){
+    e.preventDefault();
+    const q = $inp.val().trim().toLowerCase();
+    if(!q) return;
+    let found = games.find(g => g.name.toLowerCase() === q);
+    if(!found){
+      const m = matchByWordStart(q);
+      if(m.length) found = m[0];
+    }
+    if(found){
+      localStorage.setItem(LS.last, found.name.toLowerCase());
+      saveRecent(found.name);
+      window.location.href = found.link;
+    } else {
+      alert('Game not found. Try selecting from suggestions.');
+    }
+  });
+
+  
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const prev = localStorage.getItem(LS.last) || '';
+    if(prev){
+      $inp.val(prev);
+      matches = matchByWordStart(prev);
+      render(matches, prev);
+    }
+  });
+})();
+
+
 
 
 $(document).on('click', function (e) {
@@ -226,23 +358,7 @@ $(document).on('click', function (e) {
 
 
 
-$('#filters').on('submit', function (e) {
-  e.preventDefault();
 
-  const input = $('#q').val().toLowerCase().trim();
-  if (!input) return;
-
-
-  const foundGame = games.find(g => g.name.toLowerCase() === input);
-
-  if (foundGame) {
-
-    window.location.href = foundGame.link;
-  } else {
-
-    alert('Game not found. Try selecting from suggestions.');
-  }
-});
 
 
 

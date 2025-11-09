@@ -764,3 +764,6 @@
   }
 }
 
+#suggestions li.is-active{ background: rgba(102,192,244,.15); }
+#suggestions .suggest-hl{ color:#66c0f4; font-weight:700; }
+#suggestions .suggest-title{ font-size:.85rem; color:#777; padding:6px 10px; }
