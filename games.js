@@ -74,42 +74,60 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+const stars        = document.querySelectorAll('.star');
+const ratingValue  = document.getElementById('ratingValue');
+const rateBtn      = document.getElementById('rateBtn');
+const rateMessage  = document.getElementById('rateMessage');
+let selectedRating = 0;
 
-  const stars = document.querySelectorAll('.star');
-  const ratingValue = document.getElementById('ratingValue');
-  const rateBtn = document.getElementById('rateBtn');
-  const rateMessage = document.getElementById('rateMessage');
-  let selectedRating = 0;
+const ratingWrap = document.querySelector('.rating');
+const GAME_ID    = ratingWrap?.dataset.gameId || location.pathname.replace(/\//g,'|') || 'home';
+const RATING_KEY = `rating:${GAME_ID}`;
 
-  stars.forEach((star, index) => {
-    star.addEventListener('click', () => {
-      stars.forEach(s => s.classList.remove('active'));
-      for (let i = 0; i <= index; i++) stars[i].classList.add('active');
-      selectedRating = index + 1;
-      ratingValue.textContent = `Your rating: ${selectedRating} / 5`;
+function paint(n){
+  stars.forEach((s,i)=> s.classList.toggle('active', i < n));
+  selectedRating = n;
+  if (ratingValue) ratingValue.textContent = n ? `Your rating: ${n} / 5` : 'Your rating: 0 / 5';
+}
+
+(function restore(){
+  const saved = Number(localStorage.getItem(RATING_KEY) || 0);
+  if (saved) paint(saved);
+})();
+
+stars.forEach((star, index) => {
+  star.addEventListener('click', () => {
+    const n = index + 1;
+    paint(n);
+    localStorage.setItem(RATING_KEY, String(n));
+    if (rateBtn){
       rateBtn.disabled = false;
       rateBtn.style.opacity = '1';
       rateBtn.style.cursor = 'pointer';
-      rateMessage.textContent = "";
-    });
+    }
+    if (rateMessage) rateMessage.textContent = '';
   });
+});
 
+if (rateBtn){
   rateBtn.addEventListener('click', () => {
-    if (selectedRating === 0) {
-      rateMessage.textContent = "Please select a rating first ";
-      rateMessage.style.color = "#ff4444";
+    if (selectedRating === 0){
+      if (rateMessage){
+        rateMessage.textContent = 'Please select a rating first ';
+        rateMessage.style.color = '#ff4444';
+      }
       return;
     }
-
-    rateMessage.innerHTML = `<b>Rated ${selectedRating}/5! Thanks for your feedback!</b>`;
-    rateMessage.style.color = "#ffcc00";
-    rateMessage.style.opacity = "1";
-
-    rateBtn.textContent = "Rated";
-    rateBtn.disabled = true;
-    rateBtn.style.backgroundColor = "#4b6b0f";
-    rateBtn.style.cursor = "default";
+    localStorage.setItem(RATING_KEY, String(selectedRating));
+    if (rateMessage){
+      rateMessage.innerHTML = `<b>Saved ${selectedRating}/5. You can change it anytime.</b>`;
+      rateMessage.style.color = '#ffcc00';
+      rateMessage.style.opacity = '1';
+    }
+    rateBtn.textContent = 'Save rating';
   });
+}
+
 
 
   const contactForm = document.getElementById("contactForm");
