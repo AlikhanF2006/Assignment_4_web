@@ -199,6 +199,91 @@ const games = [
   { name: "Dota 2", genre: "MOBA", link: "dota2.html" }
 ];
 
+const RAWG_KEY = "6320f0769e644d10a05e65aafb2407c4";  
+const RAWG = {
+  base: "https://api.rawg.io/api",
+  url(path, params = {}) {
+    const u = new URL(this.base + path);
+    Object.entries(params).forEach(([k, v]) => u.searchParams.set(k, v));
+    u.searchParams.set("key", RAWG_KEY);
+    return u.toString();
+  }
+};
+
+function debounce(fn, ms = 300) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+async function fetchApiSuggestions(q) {
+  if (!q) return [];
+  try {
+    const url = RAWG.url("/games", { search: q, page_size: 5 });
+    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    return (data.results || []).map(g => ({
+      name: g.name,
+      link: `https://rawg.io/games/${g.slug}`,
+      origin: "api"
+    }));
+  } catch (e) {
+    console.warn("RAWG error:", e);
+    return [];
+  }
+}
+
+const liveApiSuggest = debounce(async (q) => {
+  const $list = $('#suggestions');
+  if (!q) { $list.hide().empty(); return; }
+
+  const rx = new RegExp(`\\b${escRe(q)}`, 'i');
+  const local = games.filter(g => rx.test(g.name) || rx.test(g.genre || ''));
+
+  $list.show().addClass('show').empty();
+
+if (local.length) {
+  local.forEach(g => {
+    $list.append(`<li class="suggest-item" data-link="${g.link}">${g.name}</li>`);
+  });
+}
+
+const api = await fetchApiSuggestions(q);
+if (api.length) {
+  api.forEach(r => {
+    $list.append(`<li class="suggest-item" data-link="${r.link}">${r.name}</li>`);
+  });
+}
+
+}, 350);
+
+$('#searchInput').on('input', function () {
+  liveApiSuggest($(this).val().trim());
+});
+
+$('#searchInput').on('keydown', function (e) {
+  if (e.key === 'Enter') {
+    e.preventDefault(); 
+
+    const $list = $('#suggestions');
+    const $first = $list.find('li.suggest-item').first();
+
+    if ($list.is(':visible') && $first.length) {
+      $first.trigger('click');
+    } else {
+      $('#searchBtn').trigger('click');
+    }
+  }
+});
+
+
+$('#suggestions').on('click', 'li.suggest-item', function () {
+  const link = $(this).data('link');
+  if (link) window.open(link, '_blank', 'noopener'); 
+});
+
+
+
 
 const LS = {
   lastSearch: 'steam:lastSearch',
@@ -229,28 +314,40 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 
-$('#searchBtn').on('click', function () {
-  const input = $('#searchInput').val().toLowerCase().trim();
-  if (!input) return;
+$('#searchBtn').on('click', async function () {
+  const q = $('#searchInput').val().trim();
+  if (!q) return;
 
-  localStorage.setItem(LS.lastSearch, input);
-  saveRecent(input);
+  const rx = new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+  const found = games.find(g => rx.test(g.name) || rx.test(g.genre || ''));
+  if (found) {
+    window.location.href = found.link;
+    return;
+  }
 
-  const regex = new RegExp(`\\b${input}`, 'i');
-  const foundGame = games.find(g => regex.test(g.name.toLowerCase()) || regex.test(g.genre.toLowerCase()));
+  const results = await fetchApiSuggestions(q);
+  const $list = $('#suggestions');
+  $list.empty();
 
-  if (foundGame) {
-    window.location.href = foundGame.link;
+  if (results.length) {
+    $list.addClass('show').show();
+    $list.append('<li class="suggest-title">From RAWG API</li>');
+    results.forEach(r => {
+      $list.append(`<li class="api-item" data-link="${r.link}">${r.name} <span class="api-pill">API</span></li>`);
+    });
   } else {
-    alert('No game found for this query.');
+    $list.addClass('show').show()
+         .append('<li class="no-result">No results from API</li>');
   }
 });
 
-$(document).on('click', function (e) {
-  if (!$(e.target).closest('#searchInput, #suggestions').length) {
-    $('#suggestions').hide();
-  }
+$('#suggestions').on('click', 'li.api-item', function () {
+  const link = $(this).data('link');
+  if (link) window.open(link, '_blank', 'noopener');
 });
+
+
+
 
 
 $(window).on("scroll load", function () {
@@ -507,11 +604,11 @@ $suggest.on('click', 'li:not(.suggest-title):not(.recent-item)', function () {
 });
 
 
-$(document).on('click', function (e) {
-  if (!$(e.target).closest('#searchInput, #suggestions').length) {
-    $suggest.hide();
-  }
+$(document).on('mousedown', function (e) {
+  if ($(e.target).closest('.search-container, #searchBtn').length) return;
+  $('#suggestions').hide().empty().removeClass('show');
 });
+
 
 
 $(window).on("scroll", function () {
