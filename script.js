@@ -183,12 +183,54 @@ const games = [
   { name: "Dota 2", link: "dota2.html" }
 ];
 
+const RAWG_KEY = "6320f0769e644d10a05e65aafb2407c4"; 
+const RAWG = {
+  base: "https://api.rawg.io/api",
+  url(path, params = {}) {
+    const u = new URL(this.base + path);
+    Object.entries(params).forEach(([k, v]) => u.searchParams.set(k, v));
+    u.searchParams.set("key", RAWG_KEY);
+    return u.toString();
+  }
+};
+
+function debounce(fn, ms = 350) {
+  let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+async function fetchApiSuggestions(q) {
+  if (!q) return [];
+  try {
+    const url = RAWG.url("/games", { search: q, page_size: 5 });
+    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    return (data.results || []).map(g => ({
+      name: g.name,
+      link: `https://rawg.io/games/${g.slug}`
+    }));
+  } catch (e) {
+    console.warn("RAWG error:", e);
+    return [];
+  }
+}
 
 
 (function(){
   const LS = { last:'search:last', recent:'search:recent' };
   const $inp  = $('#q');
   const $list = $('#suggestions');
+
+function renderHeader(title){ return `<li class="suggest-title" tabindex="-1">${title}</li>`; }
+function renderDivider(){ return `<li class="suggest-divider" tabindex="-1"></li>`; }
+function renderItem(label, link){ return `<li class="suggest-item" data-link="${link}" tabindex="-1">${label}</li>`; }
+
+function highlight(txt, q){
+  if(!q) return txt;
+  const rx = new RegExp(`\\b(${escRe(q)})`, 'ig');
+  return txt.replace(rx, '<span class="suggest-hl">$1</span>');
+}
+
 
   function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
   function saveRecent(term){
@@ -209,30 +251,6 @@ const games = [
   let matches = [];
   let activeIndex = -1;
 
-  function render(list, q=''){
-    $list.empty();
-    if(!list.length){ $list.removeClass('show'); activeIndex=-1; return; }
-    const rx = q ? new RegExp(`\\b(${escRe(q)})`,'ig') : null;
-    list.forEach((g,i)=>{
-      const name = rx ? g.name.replace(rx,'<span class="suggest-hl">$1</span>') : g.name;
-      $list.append(`<li data-index="${i}" data-link="${g.link}" tabindex="-1">${name}</li>`);
-    });
-    $list.addClass('show');
-    activeIndex = 0;
-    updateActiveRow();
-  }
-
-  function renderRecent(){
-    const arr = getRecent();
-    $list.empty();
-    if(!arr.length){ $list.removeClass('show'); activeIndex=-1; return; }
-    $list.append('<li class="suggest-title" tabindex="-1">Recent searches</li>');
-    arr.forEach(t => $list.append(`<li class="recent-item" data-name="${t}" tabindex="-1">${t}</li>`));
-    $list.addClass('show');
-    activeIndex = 1; 
-    updateActiveRow();
-  }
-
   function updateActiveRow(){
     const $rows = $list.find('li').not('.suggest-title');
     $rows.removeClass('is-active');
@@ -240,75 +258,107 @@ const games = [
     $rows.eq(activeIndex).addClass('is-active');
   }
 
-  
-  $inp.on('input', function(){
-    const q = $(this).val().trim().toLowerCase();
-    if(!q){ renderRecent(); return; }
-    matches = matchByWordStart(q);
-    render(matches, q);
-  });
+  function renderRecent(){
+  const arr = getRecent();
+  $list.empty();
+  if(!arr.length){ $list.removeClass('show'); activeIndex=-1; return; }
+  $list.append(renderHeader('Recent searches'));
+  arr.forEach(t => $list.append(`<li class="recent-item" data-name="${t}" tabindex="-1">${t}</li>`));
+  $list.addClass('show');
+  activeIndex = 0;
+  updateActiveRow();
+}
+
+const liveSuggest = debounce(async (qRaw) => {
+  const q = qRaw.trim();
+  $list.empty();
+  if (!q) { $list.removeClass('show'); activeIndex = -1; return; }
+
+  const rxStart = new RegExp(`\\b${escRe(q)}`, 'i');
+
+  const local = games
+    .filter(g => rxStart.test(g.name))
+    .map(g => ({ label: highlight(g.name, q), link: g.link }));
+
+  const api = (await fetchApiSuggestions(q))
+    .map(r => ({ label: highlight(r.name, q), link: r.link })); 
+
+  const all = [...local, ...api];
+  if (!all.length) {
+    $list.append('<li class="no-result" tabindex="-1">No results</li>');
+    activeIndex = -1;
+    $list.addClass('show');
+    return;
+  }
+
+  all.forEach(item => $list.append(renderItem(item.label, item.link)));
+
+  $list.addClass('show');
+  const $rows = $list.find('li.suggest-item, li.recent-item');
+  activeIndex = $rows.length ? 0 : -1;
+  updateActiveRow();
+}, 350);
+
+$inp.on('input', function(){ liveSuggest($(this).val()); });
+$inp.on('focus', function(){ if(!$(this).val().trim()) renderRecent(); });
 
   
-  $inp.on('focus', function(){
-    if(!$(this).val().trim()) renderRecent();
-  });
+$inp.on('keydown', function(e){
+  if (!$list.hasClass('show')) return;
 
-  
-  $inp.on('keydown', function(e){
-    if(!$list.hasClass('show')) return;
-    const $rows = $list.find('li').not('.suggest-title');
-    if(!$rows.length) return;
+  const $rows = $list.find('li.suggest-item, li.recent-item');
+  if (!$rows.length) return;
 
-    if(e.key === 'ArrowDown'){
-      e.preventDefault();
-      activeIndex = (activeIndex + 1) % $rows.length;
-      updateActiveRow();
-    } else if(e.key === 'ArrowUp'){
-      e.preventDefault();
-      activeIndex = (activeIndex - 1 + $rows.length) % $rows.length;
-      updateActiveRow();
-    } else if(e.key === 'Enter'){
-      e.preventDefault();
-      const $li = $rows.eq(activeIndex);
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    activeIndex = (activeIndex + 1) % $rows.length;
+    updateActiveRow();
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    activeIndex = (activeIndex - 1 + $rows.length) % $rows.length;
+    updateActiveRow();
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    const $li = $rows.eq(activeIndex);
 
-      if($li.hasClass('recent-item')){
-        const term = $li.data('name');
-        $inp.val(term);
-        matches = matchByWordStart(term);
-        render(matches, term);
-        return;
-      }
-
-      const idx = parseInt($li.data('index'),10);
-      const choice = matches[idx];
-      if(choice){
-        localStorage.setItem(LS.last, choice.name.toLowerCase());
-        saveRecent(choice.name);
-        window.location.href = $li.data('link');
-      }
-    } else if(e.key === 'Escape'){
-      $list.removeClass('show').empty();
+    if ($li.hasClass('recent-item')) {
+      const term = $li.data('name');
+      $inp.val(term);
+      liveSuggest(term);
+      return;
     }
-  });
+
+    const link = $li.data('link');
+    if (link) {
+      if (/^https?:\/\//i.test(link)) window.open(link, '_blank', 'noopener');
+      else window.location.href = link;
+    }
+  } else if (e.key === 'Escape') {
+    $list.removeClass('show').empty();
+  }
+});
+
 
   
-  $list.on('mousedown','li:not(.suggest-title)', e => e.preventDefault());
-  $list.on('click','li.recent-item', function(){
-    const term = $(this).data('name');
+$list.on('mousedown','li', e => e.preventDefault());
+
+$list.on('click','li.recent-item, li.suggest-item', function(){
+  const $li = $(this);
+
+  if ($li.hasClass('recent-item')) {
+    const term = $li.data('name');
     $inp.val(term);
-    matches = matchByWordStart(term);
-    render(matches, term);
-  });
-  $list.on('click','li:not(.suggest-title):not(.recent-item)', function(){
-    const idx = parseInt($(this).data('index'),10);
-    const choice = matches[idx];
-    if(choice){
-      localStorage.setItem(LS.last, choice.name.toLowerCase());
-      saveRecent(choice.name);
-      const link = $(this).data('link');
-      if(link) window.location.href = link;
-    }
-  });
+    liveSuggest(term);
+    return;
+  }
+
+  const link = $li.data('link');
+  if (link) {
+    if (/^https?:\/\//i.test(link)) window.open(link, '_blank', 'noopener');
+    else window.location.href = link;
+  }
+});
+
 
   
   $(document).on('click', function(e){
@@ -324,7 +374,8 @@ const games = [
     if(!q) return;
     let found = games.find(g => g.name.toLowerCase() === q);
     if(!found){
-      const m = matchByWordStart(q);
+      const rxStart = new RegExp(`\\b${escRe(q)}`,'i');
+      const m = games.filter(g => rxStart.test(g.name));
       if(m.length) found = m[0];
     }
     if(found){
@@ -332,32 +383,18 @@ const games = [
       saveRecent(found.name);
       window.location.href = found.link;
     } else {
-      alert('Game not found. Try selecting from suggestions.');
+      liveSuggest(q);
+      setTimeout(() => {
+        const $first = $list.find('li.suggest-item').first();
+        if ($first.length) $first.trigger('click');
+        else alert('Game not found. Try selecting from suggestions.');
+      }, 120);
     }
   });
 
-  
-document.addEventListener('DOMContentLoaded', () => {
   $inp.val('');
   $list.empty().removeClass('show');
-});
-
-})();
-
-
-
-
-$(document).on('click', function (e) {
-  if (!$(e.target).closest('#q, #suggestions').length) {
-    $('#suggestions').empty().removeClass('show');
-  }
-});
-
-
-
-
-
-
+})();   
 
 const btn = document.getElementById("quackButton");
 const sound = document.getElementById("quackSound");
