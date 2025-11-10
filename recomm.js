@@ -188,15 +188,15 @@ const games = [
   { name: "PUBG", genre: "Shooter", link: "pubg.html" },
   { name: "Dying Light", genre: "Horror", link: "DLindex.html" },
   { name: "Genshin", genre: "Adventure", link: "genshinindex.html" },
-  { name: "The Witcher 3: Wild Hunt", genre: "RPG", link: "notfound.html" },
-  { name: "Hollow Knight: Silksong", genre: "Indie", link: "notfound.html" },
-  { name: "The Elder Scrolls V: Skyrim Special Edition", genre: "Adventure RPG", link: "notfound.html" },
-  { name: "Terraria", genre: "Sandbox", link: "notfound.html" },
-  { name: "Grand Theft Auto V", genre: "Action", link: "notfound.html" },
-  { name: "Stardew Valley", genre: "Life Simulator", link: "notfound.html" },
-  { name: "SILENT HILL f", genre: "Psychological Horror", link: "notfound.html" },
-  { name: "EA SPORTS FC 26", genre: "Sport Simulation", link: "notfound.html" },
-  { name: "Dota 2", genre: "MOBA", link: "notfound.html" }
+  { name: "The Witcher 3: Wild Hunt", genre: "RPG", link: "witcher.html" },
+  { name: "Hollow Knight: Silksong", genre: "Indie", link: "hollowknight.html" },
+  { name: "The Elder Scrolls V: Skyrim Special Edition", genre: "Adventure RPG", link: "skyrim.html" },
+  { name: "Terraria", genre: "Sandbox", link: "terraria.html" },
+  { name: "Grand Theft Auto V", genre: "Action", link: "gta.html" },
+  { name: "Stardew Valley", genre: "Life Simulator", link: "stardewvalley.html" },
+  { name: "SILENT HILL f", genre: "Psychological Horror", link: "silenthill.html" },
+  { name: "EA SPORTS FC 26", genre: "Sport Simulation", link: "fifa.html" },
+  { name: "Dota 2", genre: "MOBA", link: "dota2.html" }
 ];
 
 
