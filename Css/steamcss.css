@@ -767,3 +767,78 @@
 #suggestions li.is-active{ background: rgba(102,192,244,.15); }
 #suggestions .suggest-hl{ color:#66c0f4; font-weight:700; }
 #suggestions .suggest-title{ font-size:.85rem; color:#777; padding:6px 10px; }
+
+
+
+
+
+
+
+/* ===== Laptop 992–1200: equal-height колонки + input-group поиск ===== */
+@media (min-width: 992px) and (max-width: 1200px){
+
+  /* колонки одной высоты; без переносов */
+  .container-fluid > .row{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;            /* тянем sidebar до футера */
+  }
+
+  /* фикс ширина сайдбара, контент растягивается */
+  .sidebar{
+    flex: 0 0 220px !important;
+    max-width: 220px !important;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* main получает всё оставшееся; без переполнений по X */
+  main, main.col-lg-10{
+    flex: 1 1 auto !important;
+    max-width: calc(100% - 220px) !important;
+    min-width: 0;                    /* чтобы широкие элементы не раздвигали */
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* === ПОИСК как на скрине: input + button в одной линии === */
+  /* .search-container — «инпут-группа», центрируем и ограничиваем ширину */
+  .search-container{
+    display: flex !important;
+    align-items: stretch;
+    width: 100% !important;
+    max-width: 640px;                /* можно 560–720 по вкусу */
+    margin: 0 auto 8px;              /* по центру */
+    gap: 0;
+  }
+
+  /* инпут растягивается, убираем правые скругления */
+  .search-container .form-control,
+  .search-container input[type="search"]{
+    flex: 1 1 auto;
+    width: auto !important;
+    max-width: none !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  /* кнопка примыкает справа, без левого скругления */
+  .search-container + .btn,
+  .search-container button,
+  .search-container .btn{
+    flex: 0 0 auto;
+    margin-left: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    white-space: nowrap;
+    align-self: stretch;             /* ровно по высоте инпута */
+  }
+
+  /* сетка и карусель — компактнее под 1024 */
+  #gameCarousel .carousel-inner img{ height: 340px; object-fit: cover; }
+  .games-grid{ grid-template-columns: 1fr 1fr; gap: 16px; }
+  .games-grid img{ height: 220px; object-fit: cover; }
+
+  html, body{ overflow-x: hidden; }
+}

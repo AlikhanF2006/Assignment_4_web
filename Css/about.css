@@ -473,7 +473,6 @@ footer {
 }
 
 
-<<<<<<< HEAD
 @media (min-width: 1440px) {
     nav.navbar .navbar-nav {
         display: flex;
@@ -637,7 +636,8 @@ footer {
 
 .text-center h2 {
     color: #fff;
-=======
+}
+
 @media (min-width: 1440px){
   nav.navbar .navbar-nav{ display:flex; align-items:center; gap:24px; }
   nav.navbar .d-flex{ display:flex; align-items:center; gap:10px; }
@@ -734,5 +734,60 @@ footer {
     line-height:1.1;
     white-space:nowrap !important;
   }
->>>>>>> 648f1571e666773a977a32fadeb6fa0b2afd96e4
+}
+
+
+
+@media (max-width: 768px) {
+
+ 
+  p, span, div, .about-site, .accordion-content, .card, .card-body {
+    word-wrap: break-word;       
+    overflow-wrap: anywhere;     
+    white-space: normal;         
+  }
+
+ 
+  .about-site, .about-text, .text-center {
+    max-width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+ 
+  a {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+
+ 
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
+
+
+html, body { height: 100%; }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh; 
+}
+main { flex: 1 0 auto; }  
+footer {
+  position: static !important; 
+  margin-top: auto;            
+}
+
+
+footer {
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100%;
+}
+
+
+@media (max-width: 768px){
+  main { padding-bottom: 16px; }
 }
