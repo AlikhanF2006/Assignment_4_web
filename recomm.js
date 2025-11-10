@@ -159,16 +159,20 @@ document.addEventListener("keydown", (e) => {
 
 if (cards.length) updateActiveCard();
 
+const THEME_KEY = 'steam:theme';
 const themeManager = {
-  isLight: false,
-  toggleTheme() {
+  isLight: localStorage.getItem(THEME_KEY) === 'light',
+  apply(){ document.body.classList.toggle('light-theme', this.isLight); },
+  toggle(){
     this.isLight = !this.isLight;
-    document.body.classList.toggle("light-theme", this.isLight);
-  },
-  getStatus() {
-    return this.isLight ? "Light Mode" : "Dark Mode";
+    this.apply();
+    localStorage.setItem(THEME_KEY, this.isLight ? 'light' : 'dark');
   }
 };
+themeManager.apply();
+document.getElementById("themeSwitch").checked = themeManager.isLight;
+document.getElementById("themeSwitch").addEventListener("change", () => themeManager.toggle());
+
 
 document.getElementById("themeSwitch").addEventListener("change", () => {
   themeManager.toggleTheme();
@@ -279,8 +283,12 @@ $('#searchInput').on('keydown', function (e) {
 
 $('#suggestions').on('click', 'li.suggest-item', function () {
   const link = $(this).data('link');
-  if (link) window.open(link, '_blank', 'noopener'); 
+  const term = $(this).text().trim().toLowerCase();
+  saveRecent(term);
+  localStorage.setItem(LS.lastSearch, term);
+  if (link) window.open(link, '_blank', 'noopener');
 });
+
 
 
 
@@ -321,10 +329,14 @@ $('#searchBtn').on('click', async function () {
   const rx = new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
   const found = games.find(g => rx.test(g.name) || rx.test(g.genre || ''));
   if (found) {
+    // сохраняем историю
+    saveRecent(found.name.toLowerCase());
+    localStorage.setItem(LS.lastSearch, found.name.toLowerCase());
     window.location.href = found.link;
     return;
   }
 
+  // если локально не нашли — показываем API-результаты (как у тебя было)
   const results = await fetchApiSuggestions(q);
   const $list = $('#suggestions');
   $list.empty();
@@ -336,16 +348,18 @@ $('#searchBtn').on('click', async function () {
       $list.append(`<li class="api-item" data-link="${r.link}">${r.name} <span class="api-pill">API</span></li>`);
     });
   } else {
-    $list.addClass('show').show()
-         .append('<li class="no-result">No results from API</li>');
+    $list.addClass('show').show().append('<li class="no-result">No results from API</li>');
   }
 });
 
+
 $('#suggestions').on('click', 'li.api-item', function () {
   const link = $(this).data('link');
+  const term = $(this).text().trim().toLowerCase();
+  saveRecent(term);
+  localStorage.setItem(LS.lastSearch, term);
   if (link) window.open(link, '_blank', 'noopener');
 });
-
 
 
 
@@ -714,3 +728,5 @@ function updateGrid(query, list){
     }
   });
 }
+
+

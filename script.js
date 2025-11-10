@@ -217,7 +217,10 @@ async function fetchApiSuggestions(q) {
 
 
 (function(){
-  const LS = { last:'search:last', recent:'search:recent' };
+const LS = {
+  last:   'steam:lastSearch',
+  recent: 'steam:recentSearches'
+};
   const $inp  = $('#q');
   const $list = $('#suggestions');
 
@@ -240,7 +243,10 @@ function highlight(txt, q){
     arr = [t, ...arr.filter(x => x!==t)].slice(0,5);
     localStorage.setItem(LS.recent, JSON.stringify(arr));
   }
-  function getRecent(){ return JSON.parse(localStorage.getItem(LS.recent)||'[]'); }
+  function getRecent(){
+  try { return JSON.parse(localStorage.getItem(LS.recent) || '[]'); }
+  catch { return []; }
+}
 
   
   function matchByWordStart(q){
@@ -302,6 +308,9 @@ const liveSuggest = debounce(async (qRaw) => {
 $inp.on('input', function(){ liveSuggest($(this).val()); });
 $inp.on('focus', function(){ if(!$(this).val().trim()) renderRecent(); });
 
+if (!$inp.val().trim()) {
+  renderRecent();
+}
   
 $inp.on('keydown', function(e){
   if (!$list.hasClass('show')) return;
@@ -337,18 +346,23 @@ $inp.on('keydown', function(e){
     $list.removeClass('show').empty();
   }
 });
-
-
   
 $list.on('mousedown','li', e => e.preventDefault());
 
 $list.on('click','li.recent-item, li.suggest-item', function(){
   const $li = $(this);
 
+  const term = ($li.data('name') || $li.text() || '').trim().toLowerCase();
+  if (term) {
+    let arr = JSON.parse(localStorage.getItem(LS.recent) || '[]');
+    arr = [term, ...arr.filter(t => t !== term)].slice(0,5);
+    localStorage.setItem(LS.recent, JSON.stringify(arr));
+    localStorage.setItem(LS.last, term);
+  }
+
   if ($li.hasClass('recent-item')) {
-    const term = $li.data('name');
-    $inp.val(term);
-    liveSuggest(term);
+    $inp.val($li.data('name'));
+    liveSuggest($li.data('name'));
     return;
   }
 
@@ -358,8 +372,6 @@ $list.on('click','li.recent-item, li.suggest-item', function(){
     else window.location.href = link;
   }
 });
-
-
   
   $(document).on('click', function(e){
     if(!$(e.target).closest('#q, #suggestions').length){
@@ -368,29 +380,39 @@ $list.on('click','li.recent-item, li.suggest-item', function(){
   });
 
   
-  $('#filters').on('submit', function(e){
-    e.preventDefault();
-    const q = $inp.val().trim().toLowerCase();
-    if(!q) return;
-    let found = games.find(g => g.name.toLowerCase() === q);
-    if(!found){
-      const rxStart = new RegExp(`\\b${escRe(q)}`,'i');
-      const m = games.filter(g => rxStart.test(g.name));
-      if(m.length) found = m[0];
-    }
-    if(found){
-      localStorage.setItem(LS.last, found.name.toLowerCase());
-      saveRecent(found.name);
-      window.location.href = found.link;
-    } else {
-      liveSuggest(q);
-      setTimeout(() => {
-        const $first = $list.find('li.suggest-item').first();
-        if ($first.length) $first.trigger('click');
-        else alert('Game not found. Try selecting from suggestions.');
-      }, 120);
-    }
-  });
+$('#filters').on('submit', function(e){
+  e.preventDefault();
+
+  const q = $inp.val().trim();
+  if (!q) return;
+
+  const term = q.toLowerCase();
+
+  let found = games.find(g => g.name.toLowerCase() === term);
+  if (!found) {
+    const rxStart = new RegExp(`\\b${escRe(term)}`, 'i');
+    const m = games.filter(g => rxStart.test(g.name));
+    if (m.length) found = m[0];
+  }
+
+  let arr = JSON.parse(localStorage.getItem(LS.recent) || '[]');
+  arr = [term, ...arr.filter(t => t !== term)].slice(0, 5);
+  localStorage.setItem(LS.recent, JSON.stringify(arr));
+  localStorage.setItem(LS.last, term);
+
+  if (found) {
+    window.location.href = found.link;
+    return;
+  }
+
+  liveSuggest(q);
+  setTimeout(() => {
+    const $first = $list.find('li.suggest-item').first();
+    if ($first.length) $first.trigger('click');
+    else alert('Game not found. Try selecting from suggestions.');
+  }, 120);
+});
+
 
   $inp.val('');
   $list.empty().removeClass('show');
