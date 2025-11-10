@@ -337,14 +337,11 @@ const games = [
   });
 
   
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const prev = localStorage.getItem(LS.last) || '';
-    if(prev){
-      $inp.val(prev);
-      matches = matchByWordStart(prev);
-      render(matches, prev);
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  $inp.val('');
+  $list.empty().removeClass('show');
+});
+
 })();
 
 

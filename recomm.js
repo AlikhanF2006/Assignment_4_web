@@ -217,32 +217,16 @@ function getRecent() {
   return JSON.parse(localStorage.getItem(LS.recent) || '[]');
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-const prev = localStorage.getItem(LS.lastSearch) || '';
-if (prev) {
-  const $inp = $('#searchInput');
-  $inp.val(prev).trigger('input'); 
-
-  
-  const listAll = matchByWordStart(prev, DATA_ALL);
-  const names   = new Set(listAll.map(g => g.name.toLowerCase()));
-  const onlyExisting = DATA_CARDS.filter(g => names.has(g.name.toLowerCase()));
-  updateGrid(prev, onlyExisting);
-} else {
   updateGrid('', DATA_CARDS);
-}
+  $('#searchInput').val(''); 
 
-
-  
   const lastF = localStorage.getItem(LS.lastFilter);
   if (lastF) {
     const $btn = $(`.btn-group .btn[data-filter="${lastF}"]`);
     if ($btn.length) $btn.trigger('click');
   }
-});
-
-
+}); 
 
 
 $('#searchBtn').on('click', function () {
