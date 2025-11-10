@@ -172,15 +172,15 @@ const games = [
   { name: "PUBG", link: "pubg.html" },
   { name: "Dying Light", link: "DLindex.html" },
   { name: "Genshin", link: "genshinindex.html" },
-  { name: "The Witcher 3: Wild Hunt", link: "notfound.html" },
-  { name: "Hollow Knight: Silksong", link: "notfound.html" },
-  { name: "The Elder Scrolls V: Skyrim Special Edition", link: "notfound.html" },
-  { name: "Terraria", link: "notfound.html" },
-  { name: "Grand Theft Auto V", link: "notfound.html" },
-  { name: "Stardew Valley", link: "notfound.html" },
-  { name: "SILENT HILL f", link: "notfound.html" },
-  { name: "EA SPORTS FC 26", link: "notfound.html" },
-  { name: "Dota 2", link: "notfound.html" }
+  { name: "The Witcher 3: Wild Hunt", link: "witcher.html" },
+  { name: "Hollow Knight: Silksong", link: "hollowknight.html" },
+  { name: "The Elder Scrolls V: Skyrim Special Edition", link: "skyrim.html" },
+  { name: "Terraria", link: "terraria.html" },
+  { name: "Grand Theft Auto V", link: "gta.html" },
+  { name: "Stardew Valley", link: "stardewvalley.html" },
+  { name: "SILENT HILL f", link: "silenthill.html" },
+  { name: "EA SPORTS FC 26", link: "fifa.html" },
+  { name: "Dota 2", link: "dota2.html" }
 ];
 
 

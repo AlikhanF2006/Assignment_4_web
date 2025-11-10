@@ -1,0 +1,529 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #1b2838;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.switch {
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #444;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    background: #0d6efd;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 9999;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #171a21;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.top-menu a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+.top-menu a:hover {
+    color: #fff;
+}
+
+.install {
+    background: #5c7e10;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.install:hover {
+    background: #4b6b0f;
+}
+
+.actions a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+.actions a:hover {
+    color: #fff;
+}
+
+@media (max-width: 991.98px) {
+    .theme-toggle-item {
+        order: 99;
+        width: 100%;
+        display: flex !important;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 0 12px 1.25rem;
+    }
+
+    .theme-toggle-item .switch {
+        position: relative !important;
+        margin: 0 !important;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        transform: none !important;
+    }
+
+
+    .theme-toggle-item::before {
+        content: none !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .switch {
+        position: absolute !important;
+        top: 10px;
+        right: 200px;
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #171a21;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.top-menu a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+.top-menu a:hover {
+    color: #fff;
+}
+
+.install {
+    background: #5c7e10;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.install:hover {
+    background: #4b6b0f;
+}
+
+.actions a {
+    color: #c7d5e0;
+    text-decoration: none;
+}
+
+.actions a:hover {
+    color: #fff;
+}
+
+
+main {
+    grid-area: main;
+    padding: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    background-color: rgb(2, 0, 24);
+    border: none;
+    font-size: 14px;
+    color: white;
+    width: 100%;
+    margin-top: auto;
+}
+
+#greatest {
+    text-align: center;
+    margin: 250px 0px 350px;
+    font-size: 5rem;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-areas:
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: #90afd5;
+    color: #000;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 10000;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover {
+    color: #e64545;
+    transform: scale(1.1);
+}
+
+#subscribeForm input {
+    width: 80%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#subscribeForm input:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 6px rgba(33, 150, 243, 0.6);
+}
+
+#subscribeForm button {
+    background: #2196f3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 8px;
+    transition: 0.3s;
+}
+
+#subscribeForm button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+#resetBtn {
+    background: #ff5252;
+}
+
+#resetBtn:hover {
+    background: #e64545;
+}
+
+.achievement {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1e2a3a, #3a5a9a);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 9999;
+}
+
+.achievement-icon {
+    font-size: 28px;
+}
+
+.achievement.show {
+    bottom: 50px;
+    opacity: 1;
+}
+
+:root {
+    --bg-light: #e1e1f4;
+    --text-light: #1a1a1a;
+    --header-light: #8a8aec;
+    --game-light: #323249;
+
+    --bg-dark: #1b1b1f;
+    --text-dark: #dcdcdc;
+    --header-dark: #2b2b31;
+    --game-dark: #222227;
+
+    --like: #198754;
+    --like-hover: #2ecc71;
+    --dislike: #c0392b;
+    --dislike-hover: #e74c3c;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    max-width: 1300px;
+    justify-self: center;
+    margin-top: 40px;
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    min-height: 320px;
+}
+
+body.dark .card {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.card-header {
+    background-color: var(--header-light);
+    padding: 10px 14px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex: 0 0 10%;
+}
+
+body.dark .card-header {
+    background-color: var(--header-dark);
+}
+
+.card-game {
+    background-color: var(--game-light);
+    padding: 6px 14px;
+    font-size: 0.95rem;
+    color: #aaa;
+    flex: 0 0 7%;
+}
+
+body.dark .card-game {
+    background-color: var(--game-dark);
+}
+
+.card-content {
+    padding: 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.card-buttons button {
+    flex: 1;
+    height: 45px;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s ease;
+}
+
+.btn-like {
+    background-color: var(--like);
+}
+
+.btn-like:hover {
+    background-color: var(--like-hover);
+}
+
+.btn-dislike {
+    background-color: var(--dislike);
+}
+
+.btn-dislike:hover {
+    background-color: var(--dislike-hover);
+}
+
+
+.btn-like.active {
+    background-color: #27ae60;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.btn-dislike.active {
+    background-color: #e84141;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+
+@media (max-width: 1200px) {
+    .community-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .community-grid {
+        grid-template-columns: 1fr;
+        gap: 15px 10px;
+    }
+
+    .card {
+        min-height: 280px;
+    }
+}
+
+body.dark-theme {
+    margin: 0;
+    font-family: 'San Francisco', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #1b2838;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.card {
+    background-color: #e1e1f4;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+body.light-theme {
+    background-color: #90afd5;
+    color: #111111;
+}
+
+body.light-theme .card {
+    background-color: #1b1b1f;
+    color: #dcdcdc;
+}
+
+.card-header {
+    background-color: #8a8aec;
+    transition: background 0.3s ease;
+}
+
+body.light-theme .card-header {
+    background-color: #2b2b31;
+}
+
+.card-game {
+    background-color: #323249;
+    transition: background 0.3s ease;
+}
+
+body.light-theme .card-game {
+    background-color: #222227;
+}
