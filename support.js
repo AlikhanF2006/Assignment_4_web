@@ -109,20 +109,23 @@ const popup = document.getElementById("popup");
       .forEach((p) => { p.style.maxHeight = p.scrollHeight + "px"; });
   });
 
+const THEME_KEY = 'steam:theme';
 const themeManager = {
-  isLight: false,
-  toggleTheme() {
+  isLight: localStorage.getItem(THEME_KEY) === 'light',
+  apply(){ document.body.classList.toggle('light-theme', this.isLight); },
+  toggle(){
     this.isLight = !this.isLight;
-    document.body.classList.toggle("light-theme", this.isLight);
-  },
-  getStatus() {
-    return this.isLight ? "Light Mode" : "Dark Mode";
+    this.apply();
+    localStorage.setItem(THEME_KEY, this.isLight ? 'light' : 'dark');
   }
 };
+themeManager.apply();
+document.getElementById("themeSwitch").checked = themeManager.isLight;
+document.getElementById("themeSwitch").addEventListener("change", () => themeManager.toggle());
 
-document.getElementById("themeSwitch").addEventListener("change", () => {
-  themeManager.toggleTheme();
-  console.log("Current theme:", themeManager.getStatus());
+
+$(document).ready(function () {
+  console.log("jQuery is ready!");
 });
 
 

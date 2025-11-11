@@ -1,26 +1,16 @@
+const THEME_KEY = 'steam:theme';
 const themeManager = {
-  isLight: false, // по умолчанию тёмная тема страницы
-
-  init() {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light") {
-      this.isLight = true;
-      document.body.classList.add("light-theme");
-      document.body.classList.remove("dark-theme");
-      document.getElementById("themeSwitch").checked = true;
-    } else {
-      document.body.classList.add("dark-theme");
-      document.body.classList.remove("light-theme");
-    }
-  },
-
-  toggleTheme() {
+  isLight: localStorage.getItem(THEME_KEY) === 'light',
+  apply(){ document.body.classList.toggle('light-theme', this.isLight); },
+  toggle(){
     this.isLight = !this.isLight;
-    document.body.classList.toggle("light-theme", this.isLight);
-    document.body.classList.toggle("dark-theme", !this.isLight);
-    localStorage.setItem("theme", this.isLight ? "light" : "dark");
+    this.apply();
+    localStorage.setItem(THEME_KEY, this.isLight ? 'light' : 'dark');
   }
 };
+themeManager.apply();
+document.getElementById("themeSwitch").checked = themeManager.isLight;
+document.getElementById("themeSwitch").addEventListener("change", () => themeManager.toggle());
 
 document.addEventListener("DOMContentLoaded", () => {
   themeManager.init();

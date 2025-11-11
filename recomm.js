@@ -15,14 +15,12 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-
 const form = document.getElementById("subscribeForm");
 const nameInput = document.getElementById("subName");
 const emailInput = document.getElementById("subEmail");
 const popup = document.getElementById("popup");
 const openPopupButtons = document.getElementsByClassName("openPopup");
 const closePopup = document.getElementById("closePopup");
-
 
 Array.from(openPopupButtons).forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -33,7 +31,6 @@ closePopup.addEventListener("click", () => (popup.style.display = "none"));
 window.addEventListener("click", (e) => {
   if (e.target === popup) popup.style.display = "none";
 });
-
 
 $(document).ready(function () {
   $("#subscribeForm").on("submit", function (e) {
@@ -172,13 +169,6 @@ const themeManager = {
 themeManager.apply();
 document.getElementById("themeSwitch").checked = themeManager.isLight;
 document.getElementById("themeSwitch").addEventListener("change", () => themeManager.toggle());
-
-
-document.getElementById("themeSwitch").addEventListener("change", () => {
-  themeManager.toggleTheme();
-  console.log("Current theme:", themeManager.getStatus());
-}); 
-
 
 
 $(document).ready(function () {
