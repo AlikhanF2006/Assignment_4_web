@@ -54,11 +54,9 @@ Redirect to user profile after login.
 
 
 ## 🔹 Support Page (support.html)
-Contact form with validation (name, email, message).
-
-On successful submission, popup confirmation appears.
-
-Validation powered by support.js.
+The Support page features a Frequently Asked Questions (FAQ) section with collapsible answers.
+Users can click each question to expand and read the answer.
+The design includes a rounded container with a dark Steam-style theme and smooth transitions.
 
 
 ## 🔹 Additional Functionalities
@@ -154,7 +152,7 @@ Built with Bootstrap 5.3.3, flexbox, and custom media queries for smooth layout 
 
 ## 🔹 Hosting
 The website is hosted on GitHub Pages.
-https://alikhanf2006.github.io/Assignment_4_web/
+https://alikhanf2006.github.io/Assignment_4_web/.
 
 
 ## 🔹 4. Design Quality
