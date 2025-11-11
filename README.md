@@ -1,17 +1,97 @@
 ## 🔹 Steam-Style Game Website
 Overview
 
-This project is a Steam-style multi-page gaming website created as part of the Web Development Assignment 4.
-It includes multiple HTML pages, custom CSS styles, and JavaScript functionality for interactivity and responsiveness.
+This project is a multi-page gaming website inspired by Steam, created as part of the Web Development course assignment.
+The site demonstrates advanced HTML, CSS, and JavaScript skills, featuring interactive UI elements, theme switching, authentication logic, local storage usage, and dynamic content updates.
 
 
-- index.html — main page with featured games and navigation  
-- about.html — information about the platform  
-- community.html — community section with posts  
-- recommendation.html — recommended games page  
-- support.html — contact and feedback form  
-- notfound.html — 404 error page  
-- [game pages] — individual pages for each game (PUBG, Dota 2, Genshin Impact, etc.)
+## 🔹 Key Features
+
+## 🔹 Homepage (index.html)
+Responsive navigation bar built with Bootstrap 5.3.3.
+
+Interactive clock showing current time and date.
+
+Dark/Light theme switcher saved to Local Storage for persistence.
+
+Carousel and cards with featured games.
+
+
+## 🔹 Individual Game Pages
+Each game (e.g., gta.html, fifa.html, witcher.html) has:
+
+Game description, screenshots, and system requirements.
+
+Rating system using stars (stored in Local Storage).
+
+“Buy” or “Add to Library” buttons with hover effects.
+
+
+## 🔹 Community Page (community.html)
+Users can explore or post game reviews.
+
+JavaScript adds interactivity (filtering, likes, etc.).
+
+Connected to community.js for dynamic DOM manipulation.
+
+
+## 🔹 Recommendation Page (recommendation.html)
+Suggests games based on user interests.
+
+Includes search and filter system (stored in Local Storage).
+
+Uses recomm.js for logic and recomm.css for styling.
+
+
+## 🔹 Authentication System (in JS)
+Sign Up / Log In popups.
+
+Validation for email, password, and required fields.
+
+Session and user data saved in Local Storage under keys like steam:user and steam:session.
+
+Redirect to user profile after login.
+
+
+## 🔹 Support Page (support.html)
+Contact form with validation (name, email, message).
+
+On successful submission, popup confirmation appears.
+
+Validation powered by support.js.
+
+
+## 🔹 Additional Functionalities
+Theme Persistence: remembers user’s theme across pages.
+
+Responsive Design: works on desktop, laptop, and mobile.
+
+404 Page (notfound.html): custom “Page Not Found” design.
+
+Sound Effects: button clicks and notifications use audio from /Sounds/.
+
+Dynamic Navigation: consistent header and footer across all pages.
+
+```
+| Key              | Description                                  |
+| ---------------- | -------------------------------------------- |
+| `steam:theme`    | Saves user’s light/dark theme preference     |
+| `steam:user`     | Stores registered user info                  |
+| `steam:session`  | Tracks logged-in user’s email                |
+| `steam:ratings`  | Saves user ratings per game                  |
+| `steam:searches` | Keeps recent searches on recommendation page |
+```
+
+## 🔹 How to Run
+Clone or download this project.
+
+Open index.html in your browser.
+
+Navigate through the navbar to explore all pages.
+
+Test user authentication and theme switcher.
+
+Use recommendation.html to try search and filter functions
 
 
 ## 🔹 Features
@@ -146,4 +226,4 @@ POCHINKI Team
 
 Developed by:
 
-Faizrakhman Alikhan, Safaryan Artyom
+Safaryan Artyom, Faizrakhman Alikhan
