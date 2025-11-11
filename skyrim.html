@@ -38,8 +38,8 @@
 
         <div class="d-flex ms-lg-auto gap-2">
           <a class="btn btn-success btn-sm" href="https://store.steampowered.com/about/">Install Steam</a>
-          <a class="btn btn-outline-light btn-sm" href="signup.html">Sign Up</a>
-          <a class="btn btn-outline-light btn-sm" href="https://store.steampowered.com/login/">Login</a>
+            <a class="btn btn-outline-light btn-sm openSignup" href="#">Sign Up</a>
+            <a class="btn btn-outline-light btn-sm openLogin"  href="#">Login</a>
         </div>
       </div>
     </div>
@@ -185,6 +185,50 @@
       </form>
     </div>
   </div>
+
+  
+        <!-- === AUTH POPUPS ===================================================== -->
+<!-- SIGN UP -->
+<div id="signupPopup" class="popup" style="display:none">
+  <div class="popup-content">
+    <span class="close" data-close="#signupPopup">&times;</span>
+    <h3>Create account</h3>
+    <form id="signupForm" class="auth-form" autocomplete="off">
+      <input id="suName"  type="text"     placeholder="Full name" required><br>
+      <input id="suEmail" type="email"    placeholder="Email"     required><br>
+      <input id="suPass"  type="password" placeholder="Password (min 6 chars)" required><br>
+      <button type="submit" class="btn btn-primary btn-sm">Create</button>
+      <button type="button" id="toLoginFromSignup" class="btn btn-outline-secondary btn-sm">I have an account</button>
+      <p id="signupMsg" style="margin-top:10px"></p>
+    </form>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginPopup" class="popup" style="display:none">
+  <div class="popup-content">
+    <span class="close" data-close="#loginPopup">&times;</span>
+    <h3>Welcome back</h3>
+    <form id="loginForm" class="auth-form" autocomplete="off">
+      <input id="liEmail" type="email"    placeholder="Email"    required><br>
+      <input id="liPass"  type="password" placeholder="Password" required><br>
+      <button type="submit" class="btn btn-primary btn-sm">Log in</button>
+      <button type="button" id="toSignupFromLogin" class="btn btn-outline-secondary btn-sm">Create account</button>
+      <p id="loginMsg" style="margin-top:10px"></p>
+    </form>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="profilePopup" class="popup" style="display:none">
+  <div class="popup-content">
+    <span class="close" data-close="#profilePopup">&times;</span>
+    <h3>Profile</h3>
+    <div id="profileInfo" style="margin:10px 0 16px 0; text-align:left"></div>
+    <button id="logoutBtn" type="button" class="btn btn-outline-danger btn-sm">Log out</button>
+  </div>
+</div>
+<!-- ==================================================================== -->
 
   <!-- ACHIEVEMENT -->
   <div id="achievement" class="achievement">
