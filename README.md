@@ -1,4 +1,4 @@
-Steam-Style Game Website
+## 🔹 Steam-Style Game Website
 Overview
 
 This project is a Steam-style multi-page gaming website created as part of the Web Development Assignment 4.
@@ -14,7 +14,7 @@ It includes multiple HTML pages, custom CSS styles, and JavaScript functionality
 - [game pages] — individual pages for each game (PUBG, Dota 2, Genshin Impact, etc.)
 
 
-Features
+## 🔹 Features
 
 Fully responsive design (desktop, tablet, mobile)
 
@@ -29,6 +29,7 @@ Dynamic clock and UI effects using JavaScript
 Custom error page (notfound.html)
 
 Separate CSS and JS files for each section
+
 
 ```STEAM PROJECT
 │
@@ -67,21 +68,24 @@ Separate CSS and JS files for each section
 └── community.js
 ```
 
+## 🔹 Responsive Design
+The website adapts to all screen sizes — desktop, tablet, and mobile.  
+Built with Bootstrap 5.3.3, flexbox, and custom media queries for smooth layout transitions.
 
-Hosting
+## 🔹 Hosting
 
 The website is hosted on GitHub Pages.
 https://alikhanf2006.github.io/Assignment_4_web/
 
 
-External API Integration
+## 🔹 External API Integration
 
 This project uses the RAWG Video Games Database API to display real game data such as titles, genres, release dates, and ratings.
 The integration is done via JavaScript using fetch() requests to the RAWG API https://rawg.io/
 The data is dynamically rendered on the website to make the game pages more realistic and informative.
 
 
-Authors
+## 🔹 Authors
 POCHINKI Team
 Developed by:
 Faizrakhman Alikhan, Safaryan Artyom
