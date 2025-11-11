@@ -64,7 +64,8 @@ Separate CSS and JS files for each section
 ├── recomm.js
 ├── support.js
 ├── script.js
-└── community.js```
+└── community.js
+```
 
 
 Hosting
