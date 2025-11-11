@@ -87,5 +87,7 @@ The data is dynamically rendered on the website to make the game pages more real
 
 ## 🔹 Authors
 POCHINKI Team
+
 Developed by:
+
 Faizrakhman Alikhan, Safaryan Artyom
