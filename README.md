@@ -30,9 +30,7 @@ Custom error page (notfound.html)
 
 Separate CSS and JS files for each section
 
-
-File Structure
-STEAM PROJECT
+```STEAM PROJECT
 │
 ├── Css/
 │   ├── about.css
@@ -66,7 +64,8 @@ STEAM PROJECT
 ├── recomm.js
 ├── support.js
 ├── script.js
-└── community.js
+└── community.js```
+
 
 Hosting
 
